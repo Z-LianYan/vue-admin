@@ -1,13 +1,11 @@
-// import { getToken, setToken, removeToken } from '@/utils/auth'
-
-import { resetRouter } from '@/router'
-import * as RequstTools from "@/utils/request";
-import * as AipUrl from "@/common/api";
-import { promises } from 'fs';
+import * as requstTools from "@/utils/request";
+import * as aipUrl from "@/common/api";
+import { setToken,getToken,removeToken } from "@/common/tools";
+import { Message,Loading } from 'element-ui'
 
 const state = {
-  token: '',
-  name: '',
+  token: getToken(),
+  name: '哈哈哈哈',
   avatar: ''
 }
 
@@ -18,13 +16,32 @@ const mutations = {
 }
 
 const actions = {
-  // user login
-  login({ commit,state }, requestParams) {
+  doLogin({ commit,state }, requestParams) {
     return new Promise((resolve,reject)=>{
-      RequstTools.post(AipUrl.test_post,requestParams,{isLoading:false,hint:"获取数据中..."}).then(res => {
-        commit('SET_TOKEN', res.message)
+      requstTools.post(aipUrl.DO_LOGIN,requestParams,{isLoading:true}).then(res => {
         console.log("store被触发，我就呵呵了",res)
-        resolve(res.data)
+        if(res.error == 0){
+          commit('SET_TOKEN', res.token)
+          setToken(res.token);
+          resolve(res.data);
+          Message.success(res.message);
+        }
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
+
+  doLogout({ commit,state }, requestParams) {
+    return new Promise((resolve,reject)=>{
+      requstTools.post(aipUrl.DO_LOGOUT,requestParams).then(res => {
+        console.log("res",res);
+        
+        if(res.error == 0){
+          resolve(res);
+          removeToken();
+          Message.success(res.message);
+        }
       }).catch(error => {
         reject(error)
       })

@@ -13,6 +13,8 @@ export default {
     ...mapGetters([
       'name'
     ])
+  },
+  methods:{
   }
 }
 </script>
