@@ -1,7 +1,7 @@
 import * as requstTools from "@/utils/request";
 import * as aipUrl from "@/common/api";
 import { setToken,getToken,removeToken } from "@/common/tools";
-import { Message,Loading } from 'element-ui'
+import { Message,Loading } from 'element-ui';
 
 const state = {
   token: getToken(),
@@ -19,12 +19,11 @@ const actions = {
   doLogin({ commit,state }, requestParams) {
     return new Promise((resolve,reject)=>{
       requstTools.post(aipUrl.DO_LOGIN,requestParams,{isLoading:true}).then(res => {
-        console.log("store被触发，我就呵呵了",res)
-        if(res.error == 0){
-          commit('SET_TOKEN', res.token)
+        Message.success(res.message);
+        resolve(res);
+        if(res.error==0){
+          commit('SET_TOKEN', res.token);
           setToken(res.token);
-          resolve(res.data);
-          Message.success(res.message);
         }
       }).catch(error => {
         reject(error)

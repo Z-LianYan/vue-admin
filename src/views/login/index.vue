@@ -40,7 +40,7 @@
           name="password"
           tabindex="2"
           auto-complete="on"
-          @keyup.enter.native="handleLogin"
+          @keyup.enter.native="doLogin"
         />
         <span class="show-pwd" @click="showPwd">
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
@@ -51,7 +51,7 @@
         :loading="loading"
         type="primary"
         style="width:100%;margin-bottom:30px;"
-        @click.native.prevent="handleLogin"
+        @click.native.prevent="doLogin"
       >Login</el-button>
     </el-form>
   </div>
@@ -119,20 +119,18 @@ export default {
         this.$refs.password.focus();
       });
     },
-    handleLogin() {
+    doLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true;
-          this.$store
-            .dispatch("user/doLogin", this.loginForm)
-            .then(res => {
-              console.log("res", res);
-              this.$router.push({ path: this.redirect || "/" });
-              this.loading = false;
-            })
-            .catch(() => {
-              this.loading = false;
-            });
+          this.$store.dispatch("user/doLogin", this.loginForm).then(res => {
+            this.loading = false;
+            if(res.error==0){
+              this.$router.push({ path:"/" });
+            }
+          }).catch(() => {
+            this.loading = false;
+          });
         } else {
           console.log("error submit!!");
           return false;
