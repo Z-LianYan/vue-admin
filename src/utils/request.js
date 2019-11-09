@@ -38,10 +38,10 @@ service.interceptors.response.use(
   }
 )
 
-// let loadingState
+let loadingState
 export function post(url,data,{isLoading=false,text="加载中..."}={}){
   return new Promise((resolve,reject)=>{
-    // isLoading? loadingState = Loading.service({text:text}):"";
+    isLoading? loadingState = Loading.service({text:text}):"";
     service({
       url:url,
       method:'POST',
@@ -49,7 +49,7 @@ export function post(url,data,{isLoading=false,text="加载中..."}={}){
       headers:{}
     }).then((res)=>{
       resolve(res.data);
-      // loadingState && loadingState.close();
+      loadingState && loadingState.close();
     }).catch(err=>{
       reject(err);
       Message.warning(err.message);
@@ -59,7 +59,7 @@ export function post(url,data,{isLoading=false,text="加载中..."}={}){
 
 export function get(url,requestParams,{isLoading=false,text="加载中..."}={}){
   return new Promise((resolve,reject)=>{
-    // isLoading? loadingState = Loading.service({text:text}):"";
+    isLoading? loadingState = Loading.service({text:text}):"";
     service({
       url:url,
       method:'GET',
@@ -67,7 +67,7 @@ export function get(url,requestParams,{isLoading=false,text="加载中..."}={}){
       headers:{}      
     }).then((res)=>{
       resolve(res.data);
-      // loadingState && loadingState.close();
+      loadingState && loadingState.close();
     }).catch(err=>{
       reject(err);
       Message.warning(err.message);

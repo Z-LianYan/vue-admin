@@ -18,7 +18,7 @@ const mutations = {
 const actions = {
   doLogin({ commit, state }, requestParams) {
     return new Promise((resolve, reject) => {
-      requstTools.post(aipUrl.DO_LOGIN, requestParams, { isLoading: true }).then(res => {
+      requstTools.post(aipUrl.DO_LOGIN, requestParams).then(res => {
         Message.success(res.message);
         resolve(res);
         if (res.error == 0) {
