@@ -1,7 +1,7 @@
 import * as requstTools from "@/utils/request";
 import * as aipUrl from "@/common/api";
-import { setToken,getToken,removeToken } from "@/common/tools";
-import { Message,Loading } from 'element-ui';
+import { setToken, getToken, removeToken } from "@/common/tools";
+import { Message, Loading } from 'element-ui';
 
 const state = {
   token: getToken(),
@@ -16,12 +16,12 @@ const mutations = {
 }
 
 const actions = {
-  doLogin({ commit,state }, requestParams) {
-    return new Promise((resolve,reject)=>{
-      requstTools.post(aipUrl.DO_LOGIN,requestParams,{isLoading:true}).then(res => {
+  doLogin({ commit, state }, requestParams) {
+    return new Promise((resolve, reject) => {
+      requstTools.post(aipUrl.DO_LOGIN, requestParams, { isLoading: true }).then(res => {
         Message.success(res.message);
         resolve(res);
-        if(res.error==0){
+        if (res.error == 0) {
           commit('SET_TOKEN', res.token);
           setToken(res.token);
         }
@@ -31,12 +31,12 @@ const actions = {
     })
   },
 
-  doLogout({ commit,state }, requestParams) {
-    return new Promise((resolve,reject)=>{
-      requstTools.post(aipUrl.DO_LOGOUT,requestParams).then(res => {
-        console.log("res",res);
-        
-        if(res.error == 0){
+  doLogout({ commit, state }, requestParams) {
+    return new Promise((resolve, reject) => {
+      requstTools.post(aipUrl.DO_LOGOUT, requestParams).then(res => {
+        console.log("res", res);
+
+        if (res.error == 0) {
           resolve(res);
           removeToken();
           Message.success(res.message);
