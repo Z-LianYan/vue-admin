@@ -16,7 +16,7 @@
 
       <el-table-column label="操作" width="100">
         <template slot-scope="scope">
-          <el-button type="text" size="small" @click="edit(scope.row)">修改</el-button>
+          <el-button type="text" size="small" @click="doEdit(scope.row)">修改</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -36,12 +36,7 @@ export default {
     this.getData();
   },
   watch: {
-    $route: {
-      handler: function(route) {
-        this.redirect = route.query && route.query.redirect;
-      },
-      immediate: true
-    }
+    
   },
   methods: {
     getData() {
@@ -50,8 +45,8 @@ export default {
         console.log("res", res);
       });
     },
-    edit(rows){
-
+    doEdit(rows){
+      this.$router.push({path:"/system/manager/edit"})
     }
   }
 };

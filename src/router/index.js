@@ -6,7 +6,11 @@ Vue.use(Router)
 import Login from '@/views/login/index';
 import Error_404 from '@/views/404';
 import Dashboard from '@/views/dashboard/index';
+
+//管理员
 import Manager from '@/views/manager/index';
+import ManagerAdd from '@/views/manager/add';
+import ManagerEdit from '@/views/manager/edit';
 
 /* Layout */
 import Layout from '@/layout'
@@ -21,8 +25,9 @@ export const constantRoutes = [
   },
   {
     path: '/system', component: Layout, redirect: '/system/manager', meta: { title: '系统设置', icon: 'nested' }, children: [
-      { path: 'manager', name: 'manager', component: Manager, meta: { title: '管理员列表', icon: 'dashboard' } },
-      { path: 'managers', name: 'manager', component: Manager, meta: { title: '呵呵呵', icon: 'dashboard' } },
+      { path: 'manager', name: 'manager', component: Manager, meta: { title: '管理员列表', icon: 'dashboard' } },//管理员
+      { path: 'manager/add', name: 'managerAdd', component: ManagerAdd, meta: { title: '添加管理员', icon: 'dashboard' },hidden: true},//添加管理员
+      { path: 'manager/edit', name: 'managerEdit', component: ManagerEdit, meta: { title: '添加管理员', icon: 'dashboard' },hidden: true},//编辑管理员
     ]
   },
 
