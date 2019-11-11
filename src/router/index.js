@@ -27,7 +27,7 @@ export const constantRoutes = [
     path: '/system', component: Layout, redirect: '/system/manager', meta: { title: '系统设置', icon: 'nested' }, children: [
       { path: 'manager', name: 'manager', component: Manager, meta: { title: '管理员列表', icon: 'dashboard' } },//管理员
       { path: 'manager/add', name: 'managerAdd', component: ManagerAdd, meta: { title: '添加管理员', icon: 'dashboard' },hidden: true},//添加管理员
-      { path: 'manager/edit', name: 'managerEdit', component: ManagerEdit, meta: { title: '添加管理员', icon: 'dashboard' },hidden: true},//编辑管理员
+      { path: 'manager/edit/:id', name: 'managerEdit', component: ManagerEdit, meta: { title: '编辑管理员', icon: 'dashboard' },hidden: true},//编辑管理员
     ]
   },
 

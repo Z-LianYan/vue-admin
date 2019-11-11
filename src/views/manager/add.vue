@@ -47,13 +47,13 @@
 
       <el-form-item label="状态" prop="status">
         <el-radio-group v-model="ruleForm.status">
-          <el-radio label="1">启用</el-radio>
-          <el-radio label="2">禁用</el-radio>
+          <el-radio :label=1 checked="true">启用</el-radio>
+          <el-radio :label=2>禁用</el-radio>
         </el-radio-group>
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
+        <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
         <el-button @click="resetForm('ruleForm')">重置</el-button>
       </el-form-item>
     </el-form>
@@ -70,7 +70,7 @@ export default {
         mobile: "",
         email: "",
         role_id: "",
-        status:""
+        status:1,
       },
       roleList: [],
       rules: {
@@ -92,9 +92,6 @@ export default {
           }
         ],
         role_id: [{ required: true, message: "请选择角色", trigger: "change" }],
-        status: [
-          { required: true, message: '请选择状态', trigger: 'change' }
-        ],
       }
     };
   },
@@ -105,8 +102,6 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          alert("submit!");
-          console.log("00", this.ruleForm);
           this.$store.dispatch("manager/doAdd", this.ruleForm).then(() => {
             this.resetForm("ruleForm");
           });
