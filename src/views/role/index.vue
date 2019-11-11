@@ -2,10 +2,8 @@
   <el-card class="box-card">
     <div>管理员列表</div>
     <el-table :data="tableData" border style="width: 100%">
-      <el-table-column prop="username" label="管理员名称" width="180"></el-table-column>
-      <el-table-column prop="mobile" label="电话" width="180"></el-table-column>
-      <el-table-column prop="email" label="邮箱"></el-table-column>
-      <el-table-column prop="role_id" label="角色"></el-table-column>
+      <el-table-column prop="title" label="角色名称" width="180"></el-table-column>
+      <el-table-column prop="description" label="描述" width="180"></el-table-column>
       <el-table-column prop="status" label="状态">
         <template slot-scope="scope">
           <img src="@/assets/images/yes.gif" v-if="scope.row.status==1" alt />
@@ -43,7 +41,7 @@ export default {
   watch: {},
   methods: {
     getData() {
-      this.$store.dispatch("manager/list").then(res => {
+      this.$store.dispatch("role/list").then(res => {
         this.tableData = res;
         console.log("res", res);
       });

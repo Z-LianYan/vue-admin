@@ -78,6 +78,19 @@ const actions = {
         reject(error)
       })
     })
+  },
+  //删除
+  doDelete({ commit, state }, requestParams){
+    return new Promise((resolve, reject) => {
+      requstTools.post(aipUrl.MANAGER_DELETE, requestParams).then(res => {
+        Message.success(res.message);
+        if (res.error == 0) {
+          resolve();
+        }
+      }).catch(error => {
+        reject(error)
+      })
+    })
   }
 
 }

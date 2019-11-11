@@ -9,6 +9,9 @@
     <breadcrumb class="breadcrumb-container"/>
 
     <div class="right-menu">
+
+      <el-color-picker size="mini" v-model="color"></el-color-picker>
+
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
           <img src="https://www.baidu.com/img/baidu_jgylogo3.gif" class="user-avatar">
@@ -33,6 +36,11 @@ import Breadcrumb from "./Breadcrumb";
 import Hamburger from "./Hamburger";
 
 export default {
+  data(){
+    return {
+      color:'#58bc58'
+    }
+  },
   components: {
     Breadcrumb,
     Hamburger
