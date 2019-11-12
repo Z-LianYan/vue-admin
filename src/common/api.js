@@ -10,3 +10,7 @@ export const MANAGER_DELETE = '/API/admin/manager/doDelete';//删除管理员
 
 //角色
 export const ROLE_LIST = '/API/admin/role/list';
+export const ROLE_ADD = '/API/admin/role/add';
+export const ROLE_EDIT = '/API/admin/role/edit';
+export const ROLE_DEL = '/API/admin/role/del';
+export const ROLE_GET_SINGLE = '/API/admin/role/getSingle';

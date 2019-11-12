@@ -1,6 +1,9 @@
 <template>
   <el-card class="box-card">
-    <div>添加管理员</div>
+    <div slot="header" style="text-align:center;" class="clearfix">
+      <el-page-header @back="goBack" title="返回" content="添加管理员" center></el-page-header>
+    </div>
+
     <el-form
       :model="ruleForm"
       :rules="rules"
@@ -47,8 +50,8 @@
 
       <el-form-item label="状态" prop="status">
         <el-radio-group v-model="ruleForm.status">
-          <el-radio :label=1 checked="true">启用</el-radio>
-          <el-radio :label=0>禁用</el-radio>
+          <el-radio :label="1" checked="true">启用</el-radio>
+          <el-radio :label="0">禁用</el-radio>
         </el-radio-group>
       </el-form-item>
 
@@ -70,7 +73,7 @@ export default {
         mobile: "",
         email: "",
         role_id: "",
-        status:1,
+        status: 1
       },
       roleList: [],
       rules: {
@@ -91,7 +94,7 @@ export default {
             trigger: "blur"
           }
         ],
-        role_id: [{ required: true, message: "请选择角色", trigger: "change" }],
+        role_id: [{ required: true, message: "请选择角色", trigger: "change" }]
       }
     };
   },
@@ -103,6 +106,7 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           this.$store.dispatch("manager/doAdd", this.ruleForm).then(() => {
+            console.log("000")
             this.resetForm("ruleForm");
           });
         } else {
@@ -119,6 +123,9 @@ export default {
         this.roleList = data;
         console.log("data", data);
       });
+    },
+    goBack() {
+      history.go(-1);
     }
   }
 };

@@ -42,9 +42,12 @@ const actions = {
   doAdd({ commit, state }, requestParams) {
     return new Promise((resolve, reject) => {
       requstTools.post(aipUrl.MANAGER_ADD, requestParams).then(res => {
-        Message.success(res.message);
+        
         if (res.error == 0) {
-          resolve(res.data);
+          Message.success(res.message);
+          resolve();
+        }else{
+          Message.error(res.message);
         }
       }).catch(error => {
         reject(error)
@@ -65,14 +68,15 @@ const actions = {
       })
     })
   },
-  //编辑管理员你
+  //编辑管理员
   doEdit({ commit, state }, requestParams){
     return new Promise((resolve, reject) => {
       requstTools.post(aipUrl.GET_MANAGER_EDIT, requestParams).then(res => {
         if (res.error == 0) {
-          resolve(res.data);
-        } else {
           Message.success(res.message);
+          resolve();
+        } else {
+          Message.error(res.message);
         }
       }).catch(error => {
         reject(error)
@@ -83,9 +87,11 @@ const actions = {
   doDelete({ commit, state }, requestParams){
     return new Promise((resolve, reject) => {
       requstTools.post(aipUrl.MANAGER_DELETE, requestParams).then(res => {
-        Message.success(res.message);
         if (res.error == 0) {
           resolve();
+          Message.success(res.message);
+        }else{
+          Message.error(res.message);
         }
       }).catch(error => {
         reject(error)

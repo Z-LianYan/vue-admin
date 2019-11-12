@@ -1,6 +1,9 @@
 <template>
   <el-card class="box-card">
-    <div>编辑管理员</div>
+    <div slot="header" style="text-align:center;" class="clearfix">
+      <el-page-header @back="goBack" title="返回" content="编辑管理员" center></el-page-header>
+    </div>
+
     <el-form
       :model="ruleForm"
       :rules="rules"
@@ -97,9 +100,7 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           console.log("00", this.ruleForm);
-          this.$store.dispatch("manager/doEdit", this.ruleForm).then(() => {
-            this.resetForm("ruleForm");
-          });
+          this.$store.dispatch("manager/doEdit", this.ruleForm);
         } else {
           console.log("error submit!!");
           return false;
@@ -125,6 +126,9 @@ export default {
         this.ruleForm = data;
       });
     },
+    goBack() {
+      history.go(-1);
+    }
   }
 };
 </script>
