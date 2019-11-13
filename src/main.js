@@ -4,7 +4,11 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import locale from 'element-ui/lib/locale/lang/en' // lang i18n
+
+import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
+
+
+
 
 import '@/styles/index.scss' // global css
 
@@ -32,9 +36,16 @@ console.log("environment",process.env.NODE_ENV)
 // }
 
 // set ElementUI lang to EN
-Vue.use(ElementUI, { locale })
+Vue.use(ElementUI, { zhLocale })
 // 如果想要中文版 element-ui，按如下方式声明
 // Vue.use(ElementUI)
+
+
+// Vue.component("e-pagination",ElPagination);
+
+
+
+
 
 Vue.config.productionTip = false
 

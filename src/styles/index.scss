@@ -64,9 +64,15 @@ div:focus {
   padding: 20px;
 }
 
+
 .float-left{
   float: left;
 }
 .float-right{
   float: right;
+}
+
+
+body .el-table th.gutter {//修复elementui window 系统出现的表头分割线不对齐 
+  display: table-cell !important
 }

@@ -25,8 +25,8 @@
 
       <el-table-column prop="status" label="状态">
         <template slot-scope="scope">
-          <img src="@/assets/images/yes.gif" v-if="scope.row.status==1" alt />
-          <img src="@/assets/images/no.gif" v-if="scope.row.status==0" alt />
+          <img src="@/assets/images/yes.gif" v-if="scope.row.status==1" alt>
+          <img src="@/assets/images/no.gif" v-if="scope.row.status==0" alt>
         </template>
       </el-table-column>
 
@@ -39,6 +39,23 @@
         </template>
       </el-table-column>
     </el-table>
+
+    <br>
+    <el-row>
+      <el-pagination
+        style="text-align:center"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="fetchOptions.page"
+        :page-sizes="limitOptions"
+        :page-size="fetchOptions.limit"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+      ></el-pagination>
+    </el-row>
+
+
+
   </el-card>
 </template>
 
@@ -48,7 +65,14 @@ export default {
   name: "manager",
   data() {
     return {
-      tableData: []
+      loading: false,
+      tableData: [],
+      fetchOptions: {
+        page: 1,
+        limit: 20
+      },
+      limitOptions: [20, 30, 50, 100],
+      total: 0,
     };
   },
   computed: {},
@@ -61,9 +85,12 @@ export default {
       this.$router.push({ path: "/system/access/add" });
     },
     getData() {
-      this.$store.dispatch("access/list").then(res => {
-        this.tableData = res;
+      this.loading = true;
+      this.$store.dispatch("access/list",this.fetchOptions).then(res => {
+        this.tableData = res.data;
+        this.total = res.count;
         console.log("res", res);
+        this.loading = false;
       });
     },
     doEdit(rows) {
@@ -88,7 +115,19 @@ export default {
           });
         });
     },
-    setAccredit() {}
+    setAccredit() {},
+
+    handleSizeChange(limit) {
+      this.fetchOptions.limit = limit;
+      this.getData();
+    },
+
+    handleCurrentChange(page) {
+      this.fetchOptions.page = page;
+      this.getData();
+    }
+
+
   }
 };
 </script>
