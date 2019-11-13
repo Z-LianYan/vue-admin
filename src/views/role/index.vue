@@ -1,15 +1,12 @@
 <template>
   <el-card class="box-card">
     <div slot="header" style="text-align:center;" class="clearfix">
-      <span>管理员列表</span>
-      <el-button type="text" @click="doAdd" class="float-right">添加管理员</el-button>
+      <span>角色列表</span>
+      <el-button type="text" @click="doAdd" class="float-right">添加角色</el-button>
     </div>
-
     <el-table :data="tableData" highlight-current-row border style="width: 100%">
-      <el-table-column prop="username" label="管理员名称"></el-table-column>
-      <el-table-column prop="mobile" label="电话"></el-table-column>
-      <el-table-column prop="email" label="邮箱"></el-table-column>
-      <el-table-column prop="role_id" label="角色"></el-table-column>
+      <el-table-column prop="title" label="角色名称" width="180"></el-table-column>
+      <el-table-column prop="description" label="描述" width="180"></el-table-column>
       <el-table-column prop="status" label="状态">
         <template slot-scope="scope">
           <img src="@/assets/images/yes.gif" v-if="scope.row.status==1" alt>
@@ -20,8 +17,9 @@
         <template slot-scope="scope">{{scope.row.add_time|formatDate}}</template>
       </el-table-column>
 
-      <el-table-column label="操作">
+      <el-table-column label="操作" width="100">
         <template slot-scope="scope">
+          <el-button type="text" size="small" @click="setAccredit(scope.row)">授权</el-button>
           <el-button type="text" size="small" @click="doEdit(scope.row)">编辑</el-button>
           <el-button type="text" size="small" @click="doDelete(scope.row)">删除</el-button>
         </template>
@@ -45,17 +43,17 @@ export default {
   },
   watch: {},
   methods: {
-    doAdd(){
-      this.$router.push({path:"/system/manager/add"})
+    doAdd() {
+      this.$router.push({ path: "/system/role/add" });
     },
     getData() {
-      this.$store.dispatch("manager/list").then(res => {
+      this.$store.dispatch("role/list").then(res => {
         this.tableData = res;
         console.log("res", res);
       });
     },
     doEdit(rows) {
-      this.$router.push({ path: "/system/manager/edit/" + rows._id });
+      this.$router.push({ path: "/system/role/edit/" + rows._id });
     },
     doDelete(rows) {
       const { _id } = rows;
@@ -65,7 +63,7 @@ export default {
         type: "warning"
       })
         .then(() => {
-          this.$store.dispatch("manager/doDelete", { _id }).then(() => {
+          this.$store.dispatch("role/doDel", { _id: rows._id }).then(() => {
             this.getData();
           });
         })
@@ -75,6 +73,9 @@ export default {
             message: "已取消删除"
           });
         });
+    },
+    setAccredit(){
+      
     }
   }
 };

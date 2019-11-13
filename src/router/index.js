@@ -12,6 +12,12 @@ import Manager from '@/views/manager/index';
 import ManagerAdd from '@/views/manager/add';
 import ManagerEdit from '@/views/manager/edit';
 
+//角色
+import RoleList from '@/views/role/index';
+import RoleAdd from '@/views/role/add';
+import RoleEdit from '@/views/role/edit';
+
+
 /* Layout */
 import Layout from '@/layout'
 
@@ -28,6 +34,9 @@ export const constantRoutes = [
       { path: 'manager', name: 'manager', component: Manager, meta: { title: '管理员列表', icon: 'dashboard' } },//管理员
       { path: 'manager/add', name: 'managerAdd', component: ManagerAdd, meta: { title: '添加管理员', icon: 'dashboard' },hidden: true},//添加管理员
       { path: 'manager/edit/:id', name: 'managerEdit', component: ManagerEdit, meta: { title: '编辑管理员', icon: 'dashboard' },hidden: true},//编辑管理员
+      { path: 'role', name: 'role', component: RoleList, meta: { title: '角色列表', icon: 'dashboard' }},
+      { path: 'role/add', name: 'roleAdd', component: RoleAdd, meta: { title: '添加角色', icon: 'dashboard' },hidden: true},
+      { path: 'role/edit/:id', name: 'roleEdit', component: RoleEdit, meta: { title: '编辑角色', icon: 'dashboard' },hidden: true},
     ]
   },
 
