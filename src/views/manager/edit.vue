@@ -121,7 +121,6 @@ export default {
       const { id } = this.$route.params;
       this.$store.dispatch("manager/getSingleData", { _id: id }).then(data => {
         console.log("data---", data);
-
         this.ruleForm = data;
       });
     },
