@@ -12,9 +12,20 @@
       label-width="100px"
       class="demo-ruleForm"
     >
-      <el-form-item label="管理员名称" prop="username">
+
+      <el-form-item label="节点类型" prop="type">
+        <el-select v-model="ruleForm.role_id" placeholder="请选择角色">
+          <el-option label="模块" :value="1"></el-option>
+          <el-option label="菜单" :value="2"></el-option>
+          <el-option label="操作" :value="3"></el-option>
+        </el-select>
+      </el-form-item>
+
+
+      <el-form-item label="模块名称" prop="username">
         <el-input v-model="ruleForm.username"></el-input>
       </el-form-item>
+      
       <el-form-item label="密码" prop="password">
         <el-input v-model="ruleForm.password"></el-input>
       </el-form-item>
@@ -75,11 +86,8 @@ export default {
 
     return {
       ruleForm: {
-        username: "",
-        password: "",
-        mobile: "",
-        email: "",
-        role_id: "",
+        type:1,
+        
         status: 1
       },
       roleList: [],
