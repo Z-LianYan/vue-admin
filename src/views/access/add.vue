@@ -1,7 +1,7 @@
 <template>
   <el-card class="box-card">
     <div slot="header" style="text-align:center;" class="clearfix">
-      <el-page-header @back="goBack" title="返回" content="添加管理员" center></el-page-header>
+      <el-page-header @back="goBack" title="返回" content="添加菜单" center></el-page-header>
     </div>
 
     <el-form
@@ -14,7 +14,7 @@
     >
 
       <el-form-item label="节点类型" prop="type">
-        <el-select v-model="ruleForm.role_id" placeholder="请选择角色">
+        <el-select @change="selectChange" v-model="ruleForm.type" placeholder="请选择类型">
           <el-option label="模块" :value="1"></el-option>
           <el-option label="菜单" :value="2"></el-option>
           <el-option label="操作" :value="3"></el-option>
@@ -23,7 +23,7 @@
 
 
       <el-form-item label="模块名称" prop="username">
-        <el-input v-model="ruleForm.username"></el-input>
+        <el-input v-model="ruleForm.module_name"></el-input>
       </el-form-item>
       
       <el-form-item label="密码" prop="password">
@@ -87,7 +87,7 @@ export default {
     return {
       ruleForm: {
         type:1,
-        
+        module_name:'',
         status: 1
       },
       roleList: [],
@@ -136,6 +136,9 @@ export default {
     },
     goBack() {
       history.go(-1);
+    },
+    selectChange(){
+      console.log("000")
     }
   }
 };

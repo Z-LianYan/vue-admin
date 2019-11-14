@@ -5,20 +5,38 @@
       <el-button type="text" @click="doAdd" class="float-right">添加管理员</el-button>
     </div>
 
-    <el-table 
-    v-loading="loading" 
-    :data="tableData" 
-    highlight-current-row 
-    border 
-    style="width: 100%">
+    <el-form label-width="90px">
+      <el-form-item label="关键字搜索">
+        <el-input
+          v-model="fetchOptions.keywords"
+          width="200px"
+          @keyup.enter.native="getData()"
+          placeholder="请输入关键字"
+        ></el-input>
+      </el-form-item>
+      <el-form-item label="开始时间" style="display:inline-block">
+        <el-date-picker @change="getData()" v-model="fetchOptions.start_time" type="date" placeholder="选择日期"></el-date-picker>
+      </el-form-item>
+      <el-form-item label="结束时间" style="display:inline-block">
+        <el-date-picker @change="getData()" v-model="fetchOptions.end_time" type="date" placeholder="选择日期"></el-date-picker>
+      </el-form-item>
+    </el-form>
+
+    <el-table
+      v-loading="loading"
+      :data="tableData"
+      highlight-current-row
+      border
+      style="width: 100%"
+    >
       <el-table-column prop="username" label="管理员名称"></el-table-column>
       <el-table-column prop="mobile" label="电话"></el-table-column>
       <el-table-column prop="email" label="邮箱"></el-table-column>
-      <el-table-column prop="role_id" label="角色"></el-table-column>
+      <el-table-column prop="title" label="角色"></el-table-column>
       <el-table-column prop="status" label="状态">
         <template slot-scope="scope">
-          <img src="@/assets/images/yes.gif" v-if="scope.row.status==1" alt>
-          <img src="@/assets/images/no.gif" v-if="scope.row.status==0" alt>
+          <img src="@/assets/images/yes.gif" v-if="scope.row.status==1" alt />
+          <img src="@/assets/images/no.gif" v-if="scope.row.status==0" alt />
         </template>
       </el-table-column>
       <el-table-column prop="add_time" label="添加时间">
@@ -33,9 +51,9 @@
       </el-table-column>
     </el-table>
 
-    <br>
+    <br />
     <el-row>
-      <el-pagination
+      <!-- <el-pagination
         style="text-align:center"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
@@ -44,16 +62,18 @@
         :page-size="fetchOptions.limit"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
-      ></el-pagination>
+      ></el-pagination> -->
+
+
+      <pagination :fetchData="getData" :total="total"/>
+
 
     </el-row>
-
-
   </el-card>
 </template>
 
 <script>
-import dayjs from "dayjs";
+import Pagination from "@/components/pagination/index"
 export default {
   name: "manager",
   data() {
@@ -62,11 +82,17 @@ export default {
       tableData: [],
       fetchOptions: {
         page: 1,
-        limit: 20
+        limit: 20,
+        keywords: "",
+        start_time: "",
+        end_time: ""
       },
       limitOptions: [20, 30, 50, 100],
-      total: 0,
+      total: 0
     };
+  },
+  components:{
+    Pagination
   },
   computed: {},
   mounted() {
@@ -110,17 +136,16 @@ export default {
     },
 
     handleSizeChange(limit) {
-      console.log("size")
+      console.log("size");
       this.fetchOptions.limit = limit;
       this.getData();
     },
 
     handleCurrentChange(page) {
-      console.log("Current")
+      console.log("Current");
       this.fetchOptions.page = page;
       this.getData();
     }
-
   }
 };
 </script>
