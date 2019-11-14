@@ -6,8 +6,8 @@
     </div>
 
     <el-table
+      v-loading="loading"
       row-key="_id"
-      default-expand-all
       :data="tableData"
       highlight-current-row
       border
@@ -40,18 +40,15 @@
       </el-table-column>
     </el-table>
 
-    <br>
+    <br />
     <el-row>
-      <el-pagination
-        style="text-align:center"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="fetchOptions.page"
-        :page-sizes="limitOptions"
-        :page-size="fetchOptions.limit"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
-      ></el-pagination>
+      <mine-pagination 
+      :total="total"
+      @sizeChange="handleSizeChange"
+      @currentChange="handleCurrentChange"
+      :pageSize="fetchOptions.limit"
+      :currentPage="fetchOptions.page"
+      />
     </el-row>
 
 
@@ -71,7 +68,6 @@ export default {
         page: 1,
         limit: 20
       },
-      limitOptions: [20, 30, 50, 100],
       total: 0,
     };
   },
@@ -126,8 +122,6 @@ export default {
       this.fetchOptions.page = page;
       this.getData();
     }
-
-
   }
 };
 </script>

@@ -1,12 +1,11 @@
 <template>
   <el-card class="box-card">
     <div slot="header" style="text-align:center;" class="clearfix">
-      <el-page-header @back="goBack" title="返回" content="添加菜单" center></el-page-header>
+      <el-page-header @back="goBack" title="返回" content="添加权限" center></el-page-header>
     </div>
 
     <el-form
       :model="ruleForm"
-      :rules="rules"
       status-icon
       ref="ruleForm"
       label-width="100px"
@@ -14,7 +13,7 @@
     >
 
       <el-form-item label="节点类型" prop="type">
-        <el-select @change="selectChange" v-model="ruleForm.type" placeholder="请选择类型">
+        <el-select @change="selectChangeType" v-model="ruleForm.type" placeholder="请选择类型">
           <el-option label="模块" :value="1"></el-option>
           <el-option label="菜单" :value="2"></el-option>
           <el-option label="操作" :value="3"></el-option>
@@ -25,26 +24,20 @@
       <el-form-item label="模块名称" prop="username">
         <el-input v-model="ruleForm.module_name"></el-input>
       </el-form-item>
+
+      <el-form-item label="操作名称" prop="username">
+        <el-input v-model="ruleForm.action_name"></el-input>
+      </el-form-item>
+
+      <el-form-item label="操作地址" prop="url">
+        <el-input v-model="ruleForm.url"></el-input>
+      </el-form-item>
       
-      <el-form-item label="密码" prop="password">
-        <el-input v-model="ruleForm.password"></el-input>
-      </el-form-item>
-
-      <el-form-item label="手机号" prop="mobile">
-        <el-input v-model="ruleForm.mobile"></el-input>
-      </el-form-item>
-      <el-form-item label="邮箱" prop="email">
-        <el-input v-model="ruleForm.email"></el-input>
-      </el-form-item>
-
-      <el-form-item label="管理员角色" prop="role_id">
-        <el-select v-model="ruleForm.role_id" placeholder="请选择角色">
-          <el-option
-            v-for="(item,idx) in roleList"
-            :key="idx"
-            :label="item.title"
-            :value="item._id"
-          ></el-option>
+      <el-form-item label="所属模块" prop="module_id">
+        <el-select @change="selectChangeModule" v-model="ruleForm.module_id" placeholder="请选择模块">
+          <el-option label="模块" :value="1"></el-option>
+          <el-option label="菜单" :value="2"></el-option>
+          <el-option label="操作" :value="3"></el-option>
         </el-select>
       </el-form-item>
 
@@ -55,6 +48,10 @@
         </el-radio-group>
       </el-form-item>
 
+      <el-form-item label="描述" prop="description">
+        <el-input type="textarea" v-model="ruleForm.description"></el-input>
+      </el-form-item>
+      
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
         <el-button @click="resetForm('ruleForm')">重置</el-button>
@@ -66,46 +63,17 @@
 <script>
 export default {
   data() {
-    let validateMobile = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请输入手机号"));
-      } else if (!/^1[34578]\d{9}$/.test(value)) {
-        callback(new Error("请输入正确的手机号码!"));
-      } else {
-        callback();
-      }
-    };
-    let validateEmail = (rule, value, callback) => {
-      let reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
-      if (value) {
-        reg.test(value) ? callback() : callback(new Error("请输入正确的邮箱"));
-      } else {
-        callback();
-      }
-    };
-
     return {
       ruleForm: {
         type:1,
         module_name:'',
+        action_name:'',
+        url:'',
+        module_id:'',
+        description:'',
         status: 1
       },
       roleList: [],
-      rules: {
-        username: [
-          { required: true, message: "请输入管理员名称", trigger: "blur" },
-          { min: 3, message: "长度在 3 个字符以上", trigger: "blur" }
-        ],
-        password: [
-          { required: true, message: "请输入密码", trigger: "blur" },
-          { min: 6, message: "长度在 6 个字符以上的密码", trigger: "blur" }
-        ],
-        email: [{ validator: validateEmail, trigger: "blur" }],
-        mobile: [
-          { required: true, validator: validateMobile, trigger: "blur" }
-        ],
-        role_id: [{ required: true, message: "请选择角色", trigger: "change" }]
-      }
     };
   },
   mounted() {
@@ -137,8 +105,11 @@ export default {
     goBack() {
       history.go(-1);
     },
-    selectChange(){
+    selectChangeType(){
       console.log("000")
+    },
+    selectChangeModule(){
+
     }
   }
 };

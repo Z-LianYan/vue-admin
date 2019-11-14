@@ -53,27 +53,18 @@
 
     <br />
     <el-row>
-      <!-- <el-pagination
-        style="text-align:center"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="fetchOptions.page"
-        :page-sizes="limitOptions"
-        :page-size="fetchOptions.limit"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
-      ></el-pagination> -->
-
-
-      <pagination :fetchData="getData" :total="total"/>
-
-
+      <mine-pagination 
+      :total="total"
+      @sizeChange="handleSizeChange"
+      @currentChange="handleCurrentChange"
+      :pageSize="fetchOptions.limit"
+      :currentPage="fetchOptions.page"
+      />
     </el-row>
   </el-card>
 </template>
 
 <script>
-import Pagination from "@/components/pagination/index"
 export default {
   name: "manager",
   data() {
@@ -87,13 +78,10 @@ export default {
         start_time: "",
         end_time: ""
       },
-      limitOptions: [20, 30, 50, 100],
       total: 0
     };
   },
-  components:{
-    Pagination
-  },
+  components:{},
   computed: {},
   mounted() {
     this.getData();
@@ -136,13 +124,13 @@ export default {
     },
 
     handleSizeChange(limit) {
-      console.log("size");
+      console.log("limit",limit)
       this.fetchOptions.limit = limit;
       this.getData();
     },
 
     handleCurrentChange(page) {
-      console.log("Current");
+      console.log("page",page)
       this.fetchOptions.page = page;
       this.getData();
     }

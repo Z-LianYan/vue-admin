@@ -1,6 +1,6 @@
 <template>
   <el-pagination
-    style="text-align:center"
+    style="text-align:right"
     @size-change="handleSizeChange"
     @current-change="handleCurrentChange"
     :current-page="currentPage"
@@ -23,12 +23,12 @@ export default {
 
     pageSize: {
       type: Number,
-      // required: true,
+      required: true,
       default: 20
     },
     currentPage: {
       type: Number,
-      // required: true,
+      required: true,
       default: 1
     },
 
@@ -39,23 +39,14 @@ export default {
         return [20, 30, 50, 100]
       }
     },
-
-    fetchData:{
-      type: Function,
-      required: true,
-    }
   },
   computed: {},
   methods: {
     handleSizeChange(pageSize) {
-      console.log("pageSize",pageSize);
-      // this.$parent.fetchOptions.limit = pageSize;
-      this.fetchData();
+      this.$emit("sizeChange",pageSize)
     },
-
     handleCurrentChange(currentPage) {
-      this.props.currentPage = currentPage;
-      this.fetchData()
+      this.$emit("currentChange",currentPage)
     }
   }
 };

@@ -10,7 +10,6 @@ const mutations = {
 
 const actions = {
   list({ commit, state }, requestParams) {
-    console.log("storehahahha ")
     return new Promise((resolve, reject) => {
       requstTools.get(aipUrl.ACCESS_LIST, requestParams).then(res => {
         if (res.error == 0) {
