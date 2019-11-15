@@ -74,8 +74,9 @@ export default {
           });
         });
     },
-    setAccredit(){
-      
+    setAccredit(rows){
+      const { _id } = rows;
+      this.$router.push({path:'/system/authorization',query:{_id}})
     }
   }
 };

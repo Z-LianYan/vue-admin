@@ -121,7 +121,6 @@ export default {
     },
     //获取单个管理员信息
     getSingleManager() {
-      console.log("router", this.$route.params);
       const { id } = this.$route.params;
       this.$store.dispatch("manager/getSingleData", { _id: id }).then(data => {
         console.log("data---", data);

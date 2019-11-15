@@ -22,9 +22,15 @@ import AccessList from '@/views/access/index';
 import AccessAdd from '@/views/access/add';
 import AccessEdit from '@/views/access/edit';
 
+//角色授权
+import Authorization from '@/views/authorization/index';
+
 
 /* Layout */
 import Layout from '@/layout'
+
+console.log("我是路由页哈")
+
 
 export const constantRoutes = [
   { path: '/login', component: Login, hidden: true },
@@ -68,6 +74,9 @@ export const constantRoutes = [
       { path: 'access', name: 'access', component: AccessList, meta: { title: '权限管理', icon: 'dashboard' }},
       { path: 'access/add', name: 'accessAdd', component: AccessAdd, meta: { title: '添加权限', icon: 'dashboard' },hidden: true},
       { path: 'access/edit/:id', name: 'accessEdit', component: AccessEdit, meta: { title: '编辑权限', icon: 'dashboard' },hidden: true},
+      
+      //角色授权
+      { path: 'authorization', name: 'authorization', component: Authorization, meta: { title: '角色授权', icon: 'dashboard' },hidden: true},
 
     ]
   },

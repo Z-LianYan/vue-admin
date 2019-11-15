@@ -14,7 +14,7 @@
       style="width: 100%"
     >
       <el-table-column prop="module_name" label="模块名称"></el-table-column>
-      <el-table-column prop="type" label="节点类型">
+      <el-table-column prop="type" label="类型">
         <template slot-scope="scope">
           <span>{{scope.row.type==1? '模块':(scope.row.type==2? "菜单":"操作")}}</span>
         </template>
@@ -93,14 +93,14 @@ export default {
       this.$router.push({ path: "/system/access/edit/" + rows._id });
     },
     doDelete(rows) {
-      const { _id } = rows;
+      const { _id,module_id } = rows;
       this.$confirm("此操作将永久删除该记录, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
       })
         .then(() => {
-          this.$store.dispatch("access/doDel", { _id: rows._id }).then(() => {
+          this.$store.dispatch("access/doDel", { _id,module_id }).then(() => {
             this.getData();
           });
         })
