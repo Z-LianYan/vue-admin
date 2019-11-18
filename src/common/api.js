@@ -21,3 +21,9 @@ export const ACCESS_ADD = '/API/admin/access/add';
 export const ACCESS_EDIT = '/API/admin/access/edit';
 export const ACCESS_DEL = '/API/admin/access/del';
 export const ACCESS_GET_SINGLE = '/API/admin/access/getSingle';
+
+//角色授权
+export const AUTHORIZATION_ROLE_AUTH = '/API/admin/authorization/roleAuth';
+export const AUTHORIZATION_EDIT = '/API/admin/authorization/edit';
+
+

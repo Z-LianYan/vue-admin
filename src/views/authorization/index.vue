@@ -29,6 +29,8 @@
         >{{itm.action_name}}</el-checkbox>
       </div>
     </el-checkbox-group>
+
+    <el-button type="primary" @click="authorizationSubmit" size="small">提交</el-button>
   </el-card>
 </template>
 
@@ -40,7 +42,8 @@ export default {
       activeName: "",
       roleData: [],
       accessData: [],
-      checkedAccess: []
+      checkedAccess: [],
+      roleId: ""
     };
   },
   computed: {},
@@ -61,16 +64,41 @@ export default {
     getAccessData() {
       this.$store.dispatch("access/list").then(res => {
         this.accessData = res.data;
+        this.roleAuth();
       });
     },
 
-    handleClick(tab, event) {
+    roleAuth(roleId) {
       const { _id } = this.$route.query;
-      // console.log(tab.name,_id);
+      this.roleId = roleId ? roleId : _id;
+      this.$store
+        .dispatch("authorization/roleAuth", { role_id: this.roleId })
+        .then(res => {
+          let accessIdArr = res.map(item => item.access_id);
+          this.checkedAccess = accessIdArr;
+          // console.log("checkedAccess",this.checkedAccess);
+          // console.log("res",res);
+        });
+    },
+
+    handleClick(tab, event) {
+      // const { _id } = this.$route.query;
+      // console.log(tab.name);
+      this.roleAuth(tab.name);
     },
 
     handleCheckedCitiesChange(value) {
       console.log("0000", value, this.checkedCities);
+    },
+
+    authorizationSubmit() {
+      console.log("哈哈哈");
+      this.$store.dispatch("authorization/roleAuthorizationEdit", {
+        checkedAccess: this.checkedAccess,
+        role_id: this.roleId
+      }).then(res => {
+        console.log("res",res);
+      });
     }
   }
 };
