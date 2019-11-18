@@ -7,3 +7,13 @@ export function getToken(){
 export function removeToken(){
     delete localStorage.token;
 }
+
+export  function setUserInfo(userInfo){
+    localStorage.userInfo = userInfo;
+}
+export function getUserInfo(){
+    return localStorage.userInfo;
+}
+export function removeUserInfo(){
+    delete localStorage.userInfo;
+}

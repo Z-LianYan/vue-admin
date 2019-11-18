@@ -16,7 +16,7 @@ const actions = {
         if (res.error == 0) {
           resolve(res.data);
         } else {
-          Message.success(res.message);
+          Message.error(res.message);
         }
       }).catch(error => {
         reject(error)
@@ -30,7 +30,7 @@ const actions = {
         if (res.error == 0) {
           resolve(res.data);
         } else {
-          Message.success(res.message);
+          Message.error(res.message);
         }
       }).catch(error => {
         reject(error)
@@ -60,7 +60,7 @@ const actions = {
         if (res.error == 0) {
           resolve(res.data);
         } else {
-          Message.success(res.message);
+          Message.error(res.message);
         }
       }).catch(error => {
         reject(error)

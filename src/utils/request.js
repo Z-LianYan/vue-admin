@@ -25,7 +25,7 @@ service.interceptors.request.use(config => {
 
 service.interceptors.response.use(
   response => {
-    if(response.data.error==433){
+    if(response.data.error==403){
       router.currentRoute.path!='/login'?router.replace({path:"/login",query:{redirect:router.currentRoute.fullPath}}):null;//去登录; 
       response.data.data={};
       return response;

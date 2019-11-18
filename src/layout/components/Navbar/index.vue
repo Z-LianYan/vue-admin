@@ -59,10 +59,8 @@ export default {
         type: "warning"
       })
         .then(() => {
-          this.$store.dispatch("user/doLogout").then(res => {
-            if (res.error == 0) {
-              this.$router.replace(`/login`);
-            }
+          this.$store.dispatch("user/doLogout").then(() => {
+              // this.$router.replace('/login');
           });
         })
         .catch(() => {

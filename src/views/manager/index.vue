@@ -2,7 +2,9 @@
   <el-card class="box-card">
     <div slot="header" style="text-align:center;" class="clearfix">
       <span>管理员列表</span>
-      <el-button type="text" @click="doAdd" class="float-right">添加管理员</el-button>
+      <el-button type="text" @click="doAdd" class="float-right">
+        <i class="el-icon-edit"></i>添加管理员
+      </el-button>
     </div>
 
     <el-form label-width="90px">
@@ -15,10 +17,20 @@
         ></el-input>
       </el-form-item>
       <el-form-item label="开始时间" style="display:inline-block">
-        <el-date-picker @change="getData()" v-model="fetchOptions.start_time" type="date" placeholder="选择日期"></el-date-picker>
+        <el-date-picker
+          @change="getData()"
+          v-model="fetchOptions.start_time"
+          type="date"
+          placeholder="选择日期"
+        ></el-date-picker>
       </el-form-item>
       <el-form-item label="结束时间" style="display:inline-block">
-        <el-date-picker @change="getData()" v-model="fetchOptions.end_time" type="date" placeholder="选择日期"></el-date-picker>
+        <el-date-picker
+          @change="getData()"
+          v-model="fetchOptions.end_time"
+          type="date"
+          placeholder="选择日期"
+        ></el-date-picker>
       </el-form-item>
     </el-form>
 
@@ -35,8 +47,8 @@
       <el-table-column prop="title" label="角色"></el-table-column>
       <el-table-column prop="status" label="状态">
         <template slot-scope="scope">
-          <img src="@/assets/images/yes.gif" v-if="scope.row.status==1" alt />
-          <img src="@/assets/images/no.gif" v-if="scope.row.status==0" alt />
+          <img src="@/assets/images/yes.gif" v-if="scope.row.status==1" alt>
+          <img src="@/assets/images/no.gif" v-if="scope.row.status==0" alt>
         </template>
       </el-table-column>
       <el-table-column prop="add_time" label="添加时间">
@@ -45,20 +57,24 @@
 
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button type="text" size="small" @click="doEdit(scope.row)">编辑</el-button>
-          <el-button type="text" size="small" @click="doDelete(scope.row)">删除</el-button>
+          <el-button type="text" size="small" @click="doEdit(scope.row)">
+            <i class="el-icon-edit"></i>编辑
+          </el-button>
+          <el-button type="text" size="small" @click="doDelete(scope.row)">
+            <i class="el-icon-delete"></i>删除
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
 
-    <br />
+    <br>
     <el-row>
-      <mine-pagination 
-      :total="total"
-      @sizeChange="handleSizeChange"
-      @currentChange="handleCurrentChange"
-      :pageSize="fetchOptions.limit"
-      :currentPage="fetchOptions.page"
+      <mine-pagination
+        :total="total"
+        @sizeChange="handleSizeChange"
+        @currentChange="handleCurrentChange"
+        :pageSize="fetchOptions.limit"
+        :currentPage="fetchOptions.page"
       />
     </el-row>
   </el-card>
@@ -81,7 +97,7 @@ export default {
       total: 0
     };
   },
-  components:{},
+  components: {},
   computed: {},
   mounted() {
     this.getData();
@@ -124,13 +140,13 @@ export default {
     },
 
     handleSizeChange(limit) {
-      console.log("limit",limit)
+      console.log("limit", limit);
       this.fetchOptions.limit = limit;
       this.getData();
     },
 
     handleCurrentChange(page) {
-      console.log("page",page)
+      console.log("page", page);
       this.fetchOptions.page = page;
       this.getData();
     }

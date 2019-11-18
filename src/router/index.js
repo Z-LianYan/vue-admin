@@ -58,25 +58,25 @@ export const constantRoutes = [
   },
 
   {
-    path: '/system', component: Layout, redirect: '/system/manager', meta: { title: '系统设置', icon: 'nested' }, children: [
+    path: '/system', component: Layout, redirect: '/system/manager', meta: { title: '系统设置', icon: 'dashboard' }, children: [
       
       //管理员
       { path: 'manager', name: 'manager', component: Manager, meta: { title: '管理员管理', icon: 'dashboard' } },//管理员
-      { path: 'manager/add', name: 'managerAdd', component: ManagerAdd, meta: { title: '添加管理员', icon: 'dashboard' },hidden: true},//添加管理员
+      { path: 'manager/add', name: 'managerAdd', component: ManagerAdd, meta: { title: '添加管理员'},hidden: true},//添加管理员
       { path: 'manager/edit/:id', name: 'managerEdit', component: ManagerEdit, meta: { title: '编辑管理员', icon: 'dashboard' },hidden: true},//编辑管理员
       
       //角色管理
       { path: 'role', name: 'role', component: RoleList, meta: { title: '角色管理', icon: 'dashboard' }},
-      { path: 'role/add', name: 'roleAdd', component: RoleAdd, meta: { title: '添加角色', icon: 'dashboard' },hidden: true},
+      { path: 'role/add', name: 'roleAdd', component: RoleAdd, meta: { title: '添加角色' },hidden: true},
       { path: 'role/edit/:id', name: 'roleEdit', component: RoleEdit, meta: { title: '编辑角色', icon: 'dashboard' },hidden: true},
     
       //权限管理
       { path: 'access', name: 'access', component: AccessList, meta: { title: '权限管理', icon: 'dashboard' }},
-      { path: 'access/add', name: 'accessAdd', component: AccessAdd, meta: { title: '添加权限', icon: 'dashboard' },hidden: true},
-      { path: 'access/edit/:id', name: 'accessEdit', component: AccessEdit, meta: { title: '编辑权限', icon: 'dashboard' },hidden: true},
+      { path: 'access/add', name: 'accessAdd', component: AccessAdd, meta: { title: '添加权限'},hidden: true},
+      { path: 'access/edit/:id', name: 'accessEdit', component: AccessEdit, meta: { title: '编辑权限'},hidden: true},
       
       //角色授权
-      { path: 'authorization', name: 'authorization', component: Authorization, meta: { title: '角色授权', icon: 'dashboard' },hidden: true},
+      { path: 'authorization', name: 'authorization', component: Authorization, meta: { title: '角色授权' },hidden: true},
 
     ]
   },
