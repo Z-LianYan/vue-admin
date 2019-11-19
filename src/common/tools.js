@@ -9,7 +9,7 @@ export function removeToken(){
 }
 
 export  function setUserInfo(userInfo){
-    localStorage.userInfo = userInfo;
+    localStorage.userInfo = JSON.stringify(userInfo);
 }
 export function getUserInfo(){
     return localStorage.userInfo;

@@ -52,7 +52,7 @@
         type="primary"
         style="width:100%;margin-bottom:30px;"
         @click.native.prevent="doLogin"
-      >Login</el-button>
+      >登录</el-button>
     </el-form>
   </div>
 </template>
@@ -123,7 +123,7 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true;
-          this.$store.dispatch("user/doLogin", this.loginForm).then(res => {
+          this.$store.dispatch("user/doLogin", this.loginForm).then((res) => {
             this.loading = false;
             if(res.error==0){
               this.$router.push({ path:"/" });
