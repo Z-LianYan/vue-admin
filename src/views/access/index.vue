@@ -59,7 +59,7 @@
 <script>
 import dayjs from "dayjs";
 export default {
-  name: "manager",
+  name: "access",
   data() {
     return {
       loading: false,

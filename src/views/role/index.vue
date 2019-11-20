@@ -31,7 +31,7 @@
 <script>
 import dayjs from "dayjs";
 export default {
-  name: "manager",
+  name: "role",
   data() {
     return {
       tableData: []
