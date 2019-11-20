@@ -2,26 +2,32 @@
   <el-card class="box-card">
     <div slot="header" style="text-align:center;" class="clearfix">
       <span>角色列表</span>
-      <el-button type="text" @click="doAdd" class="float-right">添加角色</el-button>
+      <el-button type="text" @click="doAdd" class="float-right">
+        <i class="el-icon-plus"></i>添加角色
+      </el-button>
     </div>
     <el-table :data="tableData" highlight-current-row border style="width: 100%">
       <el-table-column prop="title" label="角色名称" width="180"></el-table-column>
       <el-table-column prop="description" label="描述" width="180"></el-table-column>
       <el-table-column prop="status" label="状态">
         <template slot-scope="scope">
-          <img src="@/assets/images/yes.gif" v-if="scope.row.status==1" alt>
-          <img src="@/assets/images/no.gif" v-if="scope.row.status==0" alt>
+          <img src="@/assets/images/yes.gif" v-if="scope.row.status==1" alt />
+          <img src="@/assets/images/no.gif" v-if="scope.row.status==0" alt />
         </template>
       </el-table-column>
       <el-table-column prop="add_time" label="添加时间">
         <template slot-scope="scope">{{scope.row.add_time|formatDate}}</template>
       </el-table-column>
 
-      <el-table-column label="操作" width="100">
+      <el-table-column label="操作" width="180">
         <template slot-scope="scope">
           <el-button type="text" size="small" @click="setAccredit(scope.row)">授权</el-button>
-          <el-button type="text" size="small" @click="doEdit(scope.row)">编辑</el-button>
-          <el-button type="text" size="small" @click="doDelete(scope.row)">删除</el-button>
+          <el-button type="text" size="small" @click="doEdit(scope.row)">
+            <i class="el-icon-edit"></i>编辑
+          </el-button>
+          <el-button type="text" size="small" @click="doDelete(scope.row)">
+            <i class="el-icon-delete"></i>删除
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -74,9 +80,9 @@ export default {
           });
         });
     },
-    setAccredit(rows){
+    setAccredit(rows) {
       const { _id } = rows;
-      this.$router.push({path:'/system/authorization',query:{_id}})
+      this.$router.push({ path: "/system/authorization", query: { _id } });
     }
   }
 };

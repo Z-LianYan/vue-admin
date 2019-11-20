@@ -37,17 +37,17 @@ export const constantRoutes = [
   { path: '/404', component: Error_404, hidden: true },
   {
     path: '/', component: Layout, redirect: '/dashboard', children: [
-      { path: 'dashboard', name: 'Dashboard', component: Dashboard, meta: { title: '首页', icon: 'dashboard' } }
+      { path: 'dashboard', name: 'Dashboard', component: Dashboard, meta: { title: '首页', icon: 'el-icon-s-home' } }
     ]
   },
   {
-    path: '/nested', component: Layout, redirect: '/nested/menu1', name: 'Nested', meta: { title: 'Nested', icon: 'nested' }, children: [{
-      path: 'menu1', component: () => import('@/views/nested/menu1/index'), name: 'Menu1', meta: { title: 'Menu1' }, children: [
+    path: '/nested', component: Layout, redirect: '/nested/menu1', name: 'Nested', meta: { title: 'Nested', icon: 'el-icon-eleme' }, children: [{
+      path: 'menu1', component: () => import('@/views/nested/menu1/index'), name: 'Menu1', meta: { title: 'Menu1', icon: 'el-icon-eleme' }, children: [
         { path: 'menu1-1', component: () => import('@/views/nested/menu1/menu1-1'), name: 'Menu1-1', meta: { title: 'Menu1-1' } },
         {
-          path: 'menu1-2', component: () => import('@/views/nested/menu1/menu1-2'), name: 'Menu1-2', meta: { title: 'Menu1-2' }, children: [
-            { path: 'menu1-2-1', component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'), name: 'Menu1-2-1', meta: { title: 'Menu1-2-1' } },
-            { path: 'menu1-2-2', component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'), name: 'Menu1-2-2', meta: { title: 'Menu1-2-2' } }
+          path: 'menu1-2', component: () => import('@/views/nested/menu1/menu1-2'), name: 'Menu1-2', meta: { title: 'Menu1-2', icon: 'el-icon-eleme' }, children: [
+            { path: 'menu1-2-1', component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'), name: 'Menu1-2-1', meta: { title: 'Menu1-2-1', icon: 'el-icon-eleme' } },
+            { path: 'menu1-2-2', component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'), name: 'Menu1-2-2', meta: { title: 'Menu1-2-2', icon: 'el-icon-eleme' } }
           ]
         },
         { path: 'menu1-3', component: () => import('@/views/nested/menu1/menu1-3'), name: 'Menu1-3', meta: { title: 'Menu1-3' } }
@@ -58,25 +58,25 @@ export const constantRoutes = [
   },
 
   {
-    path: '/system', component: Layout, redirect: '/system/manager', meta: { title: '系统设置', icon: 'dashboard' }, children: [
-      
+    path: '/system', component: Layout, redirect: '/system/manager', meta: { title: '系统设置', icon: 'el-icon-s-tools' }, children: [
+
       //管理员
-      { path: 'manager', name: 'manager', component: Manager, meta: { title: '管理员管理', icon: 'dashboard' } },//管理员
-      { path: 'manager/add', name: 'managerAdd', component: ManagerAdd, meta: { title: '添加管理员'},hidden: true},//添加管理员
-      { path: 'manager/edit/:id', name: 'managerEdit', component: ManagerEdit, meta: { title: '编辑管理员', icon: 'dashboard' },hidden: true},//编辑管理员
-      
+      { path: 'manager', name: 'manager', component: Manager, meta: { title: '管理员管理', icon: 'el-icon-s-management' } },//管理员
+      { path: 'manager/add', name: 'managerAdd', component: ManagerAdd, meta: { title: '添加管理员' }, hidden: true },//添加管理员
+      { path: 'manager/edit/:id', name: 'managerEdit', component: ManagerEdit, meta: { title: '编辑管理员', icon: 'dashboard' }, hidden: true },//编辑管理员
+
       //角色管理
-      { path: 'role', name: 'role', component: RoleList, meta: { title: '角色管理', icon: 'dashboard' }},
-      { path: 'role/add', name: 'roleAdd', component: RoleAdd, meta: { title: '添加角色' },hidden: true},
-      { path: 'role/edit/:id', name: 'roleEdit', component: RoleEdit, meta: { title: '编辑角色', icon: 'dashboard' },hidden: true},
-    
+      { path: 'role', name: 'role', component: RoleList, meta: { title: '角色管理', icon: 'el-icon-user' } },
+      { path: 'role/add', name: 'roleAdd', component: RoleAdd, meta: { title: '添加角色' }, hidden: true },
+      { path: 'role/edit/:id', name: 'roleEdit', component: RoleEdit, meta: { title: '编辑角色' }, hidden: true },
+
       //权限管理
-      { path: 'access', name: 'access', component: AccessList, meta: { title: '权限管理', icon: 'dashboard' }},
-      { path: 'access/add', name: 'accessAdd', component: AccessAdd, meta: { title: '添加权限'},hidden: true},
-      { path: 'access/edit/:id', name: 'accessEdit', component: AccessEdit, meta: { title: '编辑权限'},hidden: true},
-      
+      { path: 'access', name: 'access', component: AccessList, meta: { title: '权限管理', icon: 'el-icon-key' } },
+      { path: 'access/add', name: 'accessAdd', component: AccessAdd, meta: { title: '添加权限' }, hidden: true },
+      { path: 'access/edit/:id', name: 'accessEdit', component: AccessEdit, meta: { title: '编辑权限' }, hidden: true },
+
       //角色授权
-      { path: 'authorization', name: 'authorization', component: Authorization, meta: { title: '角色授权' },hidden: true},
+      { path: 'authorization', name: 'authorization', component: Authorization, meta: { title: '角色授权' }, hidden: true },
 
     ]
   },

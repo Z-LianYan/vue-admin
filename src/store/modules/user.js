@@ -23,17 +23,13 @@ const actions = {
   doLogin({ commit, state }, requestParams) {
     return new Promise((resolve, reject) => {
       requstTools.post(aipUrl.DO_LOGIN, requestParams).then(res => {
-        console.log("res---login", res);
         resolve(res);
         if (res.error == 0) {
           commit('SET_TOKEN', res.token);
           setToken(res.token);
-
           commit('SET_USERINFO', res.data);
-          setUserInfo(JSON.stringify(res.data));
-
+          setUserInfo(res.data);
           Message.success(res.message);
-
         } else {
           Message.error(res.message);
         }
@@ -49,8 +45,6 @@ const actions = {
         if (res.error == 0) {
           removeToken();
           removeUserInfo();
-          // resolve();
-          console.log("res---logout", res);
           router.replace({path:"/login",query:{redirect:router.currentRoute.fullPath}})
           Message.success(res.message);
         }else{

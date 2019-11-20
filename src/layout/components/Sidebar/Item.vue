@@ -1,29 +1,36 @@
 <script>
+import { Divider } from 'element-ui';
+import store from '@/store'
 export default {
-  name: 'MenuItem',
+  name: "MenuItem",
   functional: true,
   props: {
     icon: {
       type: String,
-      default: ''
+      default: ""
     },
     title: {
       type: String,
-      default: ''
+      default: ""
     }
   },
   render(h, context) {
-    const { icon, title } = context.props
-    const vnodes = []
+    console.log("h-----", h,"context----", context);
+    const { icon, title } = context.props;
+    const vnodes = [];
 
     if (icon) {
-      vnodes.push(<svg-icon icon-class={icon}/>)
+      const { opened }=store.state.app.sidebar
+      vnodes.push(<i class={icon} style={opened? '':'margin:0 12px 0 18px'}></i>);
     }
 
     if (title) {
-      vnodes.push(<span slot='title'>{(title)}</span>)
+      vnodes.push(<span slot="title">{title}</span>);
     }
-    return vnodes
+
+    console.log("vnodes-----",vnodes);
+    console.log("store-----",store.state.app.sidebar.opened);
+    return vnodes;
   }
-}
+};
 </script>

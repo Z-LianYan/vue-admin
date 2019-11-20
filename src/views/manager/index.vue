@@ -3,7 +3,7 @@
     <div slot="header" style="text-align:center;" class="clearfix">
       <span>管理员列表</span>
       <el-button type="text" @click="doAdd" class="float-right">
-        <i class="el-icon-edit"></i>添加管理员
+        <i class="el-icon-plus"></i>添加管理员
       </el-button>
     </div>
 
