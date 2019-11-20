@@ -15,7 +15,6 @@ export default {
     }
   },
   render(h, context) {
-    console.log("h-----", h,"context----", context);
     const { icon, title } = context.props;
     const vnodes = [];
 
@@ -27,9 +26,7 @@ export default {
     if (title) {
       vnodes.push(<span slot="title">{title}</span>);
     }
-
-    console.log("vnodes-----",vnodes);
-    console.log("store-----",store.state.app.sidebar.opened);
+    
     return vnodes;
   }
 };

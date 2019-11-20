@@ -7,7 +7,7 @@
     <el-form
       :model="ruleForm"
       :rules="rules"
-      status-icon
+      :status-icon="false"
       ref="ruleForm"
       label-width="100px"
       class="demo-ruleForm"
@@ -42,6 +42,31 @@
         </el-radio-group>
       </el-form-item>
 
+      <el-collapse>
+        <el-collapse-item title="修改密码">
+          <el-form-item label="原密码" prop="oldPassword">
+            <el-input :type="oldPasswordType" ref="oldPassword" v-model="ruleForm.oldPassword"></el-input>
+            <span class="show-pwd" @click="showOldPwd">
+              <svg-icon :icon-class="oldPasswordType === 'password' ? 'eye' : 'eye-open'"/>
+            </span>
+          </el-form-item>
+
+          <el-form-item label="新密码" prop="password">
+            <el-input :type="newPasswordType" ref="newPassword" v-model="ruleForm.password"></el-input>
+            <span class="show-pwd" @click="showPwd">
+              <svg-icon :icon-class="newPasswordType === 'password' ? 'eye' : 'eye-open'"/>
+            </span>
+          </el-form-item>
+
+          <el-form-item label="确认新密码" prop="confirmPassword">
+            <el-input :type="newPasswordType" ref="newPassword" v-model="ruleForm.confirmPassword"></el-input>
+            <span class="show-pwd" @click="showPwd">
+              <svg-icon :icon-class="newPasswordType === 'password' ? 'eye' : 'eye-open'"/>
+            </span>
+          </el-form-item>
+        </el-collapse-item>
+      </el-collapse>
+
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
         <el-button @click="resetForm('ruleForm')">重置</el-button>
@@ -71,9 +96,34 @@ export default {
       }
     };
 
+    let validatePassword = (rule, value, callback) => {
+      if (value) {
+        value.length < 6 ? callback(new Error("请输入6位以上的字符")) : callback();;
+      } else {
+        callback();
+      }
+    };
+
+    let validateConfirmPassword = (rule, value, callback) => {
+      if (value) {
+        if (value.length < 6) {
+          callback(new Error("请输入6位以上的字符"));
+        } else if (value !== this.ruleForm.password) {
+          callback(new Error("两次输入密码不一致!"));
+        }else{
+          callback();
+        }
+      } else {
+        callback();
+      }
+    };
     return {
       ruleForm: {
+        _id:'',
         username: "",
+        oldPassword: "",
+        password: "",
+        confirmPassword: "",
         mobile: "",
         email: "",
         role_id: "",
@@ -89,8 +139,12 @@ export default {
         mobile: [
           { required: true, validator: validateMobile, trigger: "blur" }
         ],
-        role_id: [{ required: true, message: "请选择角色", trigger: "change" }]
-      }
+        role_id: [{ required: true, message: "请选择角色", trigger: "change" }],
+        password: { validator: validatePassword, trigger: "blur" },
+        confirmPassword: { validator: validateConfirmPassword, trigger: "blur" }
+      },
+      oldPasswordType: "password",
+      newPasswordType: "password"
     };
   },
   mounted() {
@@ -103,6 +157,7 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           console.log("00", this.ruleForm);
+
           this.$store.dispatch("manager/doEdit", this.ruleForm);
         } else {
           console.log("error submit!!");
@@ -129,10 +184,41 @@ export default {
     },
     goBack() {
       history.go(-1);
+    },
+    showOldPwd() {
+      if (this.oldPasswordType === "password") {
+        this.oldPasswordType = "";
+      } else {
+        this.oldPasswordType = "password";
+      }
+      this.$nextTick(() => {
+        this.$refs.oldPassword.focus();
+      });
+    },
+    showPwd() {
+      if (this.newPasswordType === "password") {
+        this.newPasswordType = "";
+      } else {
+        this.newPasswordType = "password";
+      }
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+$dark_gray: #889aa4;
+.show-pwd {
+  position: absolute;
+  right: 10px;
+  top: 2px;
+  font-size: 16px;
+  color: $dark_gray;
+  cursor: pointer;
+  user-select: none;
+}
+.el-collapse {
+  border-top: 1px solid transparent;
+  margin-bottom: 30px;
+}
 </style>
