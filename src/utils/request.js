@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Message,Loading } from 'element-ui'
 import router from '@/router/index';
-import { getToken } from '@/common/tools';
+import { getToken,removeToken } from '@/common/tools';
 
 axios.defaults.withCredentials=true;
 const service = axios.create({
@@ -26,6 +26,7 @@ service.interceptors.request.use(config => {
 service.interceptors.response.use(
   response => {
     if(response.data.error==403){
+      removeToken();
       router.currentRoute.path!='/login'?router.replace({path:"/login",query:{redirect:router.currentRoute.fullPath}}):null;//去登录; 
       response.data.data={};
       return response;

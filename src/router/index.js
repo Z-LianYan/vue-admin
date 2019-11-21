@@ -3,34 +3,30 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-import Login from '@/views/login/index';
-import Error_404 from '@/views/404';
+import Login from '@/views/system/login';
+import Error_404 from '@/views/system/404';
 import Dashboard from '@/views/dashboard/index';
 
 //管理员
-import Manager from '@/views/manager/index';
-import ManagerAdd from '@/views/manager/add';
-import ManagerEdit from '@/views/manager/edit';
+import Manager from '@/views/system/manager/index';
+import ManagerAdd from '@/views/system/manager/add';
+import ManagerEdit from '@/views/system/manager/edit';
 
 //角色
-import RoleList from '@/views/role/index';
-import RoleAdd from '@/views/role/add';
-import RoleEdit from '@/views/role/edit';
+import RoleList from '@/views/system/role/index';
+import RoleAdd from '@/views/system/role/add';
+import RoleEdit from '@/views/system/role/edit';
 
 //权限
-import AccessList from '@/views/access/index';
-import AccessAdd from '@/views/access/add';
-import AccessEdit from '@/views/access/edit';
+import AccessList from '@/views/system/access/index';
+import AccessAdd from '@/views/system/access/add';
+import AccessEdit from '@/views/system/access/edit';
 
 //角色授权
-import Authorization from '@/views/authorization/index';
-
+import Authorization from '@/views/system/authorization/index';
 
 /* Layout */
 import Layout from '@/layout'
-
-console.log("我是路由页哈")
-
 
 export const constantRoutes = [
   { path: '/login', component: Login, hidden: true },
@@ -38,22 +34,6 @@ export const constantRoutes = [
   {
     path: '/', component: Layout, redirect: '/dashboard', children: [
       { path: 'dashboard', name: 'Dashboard', component: Dashboard, meta: { title: '首页', icon: 'el-icon-s-home' } }
-    ]
-  },
-  {
-    path: '/nested', component: Layout, redirect: '/nested/menu1', name: 'Nested', meta: { title: 'Nested', icon: 'el-icon-eleme' }, children: [{
-      path: 'menu1', component: () => import('@/views/nested/menu1/index'), name: 'Menu1', meta: { title: 'Menu1', icon: 'el-icon-eleme' }, children: [
-        { path: 'menu1-1', component: () => import('@/views/nested/menu1/menu1-1'), name: 'Menu1-1', meta: { title: 'Menu1-1' } },
-        {
-          path: 'menu1-2', component: () => import('@/views/nested/menu1/menu1-2'), name: 'Menu1-2', meta: { title: 'Menu1-2', icon: 'el-icon-eleme' }, children: [
-            { path: 'menu1-2-1', component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'), name: 'Menu1-2-1', meta: { title: 'Menu1-2-1', icon: 'el-icon-eleme' } },
-            { path: 'menu1-2-2', component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'), name: 'Menu1-2-2', meta: { title: 'Menu1-2-2', icon: 'el-icon-eleme' } }
-          ]
-        },
-        { path: 'menu1-3', component: () => import('@/views/nested/menu1/menu1-3'), name: 'Menu1-3', meta: { title: 'Menu1-3' } }
-      ]
-    },
-    { path: 'menu2', component: () => import('@/views/nested/menu2/index'), meta: { title: 'menu2' } }
     ]
   },
 
@@ -80,13 +60,6 @@ export const constantRoutes = [
 
     ]
   },
-
-
-
-
-
-
-
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
