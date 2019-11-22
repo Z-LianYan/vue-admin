@@ -11,7 +11,7 @@
       label-width="100px"
       class="demo-ruleForm"
     >
-      <el-form-item label="管理员名称" prop="title">
+      <el-form-item label="管理员名称" prop="title" required>
         <el-input v-model="ruleForm.title"></el-input>
       </el-form-item>
 
@@ -41,22 +41,21 @@ export default {
       ruleForm: {
         title: "",
         description: "",
-        status:1
+        status: 1
       },
       rules: {
-        title: [{ required: true, message: "请输入角色名称", trigger: "blur" },]
+        title: [{ required: true, message: "请输入角色名称", trigger: "blur" }]
       }
     };
   },
   mounted() {
+    this.getSingleRoleData();
   },
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.$store.dispatch("role/doAdd", this.ruleForm).then(() => {
-            this.resetForm("ruleForm");
-          });
+          this.$store.dispatch("role/doEdit", this.ruleForm);
         } else {
           console.log("error submit!!");
           return false;
@@ -65,6 +64,12 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
+    },
+    getSingleRoleData() {
+      const { id } = this.$route.params;
+      this.$store.dispatch("role/getSingleData", { _id: id }).then(data => {
+        this.ruleForm = data;
+      });
     },
     goBack() {
       history.go(-1);

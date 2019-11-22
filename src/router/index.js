@@ -22,6 +22,14 @@ import AccessList from '@/views/system/access/index';
 import AccessAdd from '@/views/system/access/add';
 import AccessEdit from '@/views/system/access/edit';
 
+//权限
+import MenuList from '@/views/system/menu/index';
+import MenuAdd from '@/views/system/menu/add';
+import MenuEdit from '@/views/system/menu/edit';
+
+
+
+
 //角色授权
 import Authorization from '@/views/system/authorization/index';
 
@@ -41,22 +49,27 @@ export const constantRoutes = [
     path: '/system', component: Layout, redirect: '/system/manager', meta: { title: '系统设置', icon: 'el-icon-s-tools' }, children: [
 
       //管理员
-      { path: 'manager', name: 'manager', component: Manager, meta: { title: '管理员管理', icon: 'el-icon-s-management' } },//管理员
-      { path: 'manager/add', name: 'managerAdd', component: ManagerAdd, meta: { title: '添加管理员' }, hidden: true },//添加管理员
-      { path: 'manager/edit/:id', name: 'managerEdit', component: ManagerEdit, meta: { title: '编辑管理员', icon: 'dashboard' }, hidden: true },//编辑管理员
+      { path: 'manager', component: Manager, meta: { title: '管理员管理', icon: 'el-icon-s-management' } },//管理员
+      { path: 'manager/add',component: ManagerAdd, meta: { title: '添加管理员' }, hidden: true },//添加管理员
+      { path: 'manager/edit/:id', component: ManagerEdit, meta: { title: '编辑管理员', icon: 'dashboard' }, hidden: true },//编辑管理员
 
       //角色管理
-      { path: 'role', name: 'role', component: RoleList, meta: { title: '角色管理', icon: 'el-icon-user' } },
-      { path: 'role/add', name: 'roleAdd', component: RoleAdd, meta: { title: '添加角色' }, hidden: true },
-      { path: 'role/edit/:id', name: 'roleEdit', component: RoleEdit, meta: { title: '编辑角色' }, hidden: true },
+      { path: 'role', component: RoleList, meta: { title: '角色管理', icon: 'el-icon-user' } },
+      { path: 'role/add', component: RoleAdd, meta: { title: '添加角色' }, hidden: true },
+      { path: 'role/edit/:id', component: RoleEdit, meta: { title: '编辑角色' }, hidden: true },
 
       //权限管理
-      { path: 'access', name: 'access', component: AccessList, meta: { title: '权限管理', icon: 'el-icon-key' } },
-      { path: 'access/add', name: 'accessAdd', component: AccessAdd, meta: { title: '添加权限' }, hidden: true },
-      { path: 'access/edit/:id', name: 'accessEdit', component: AccessEdit, meta: { title: '编辑权限' }, hidden: true },
+      { path: 'access', component: AccessList, meta: { title: '权限管理', icon: 'el-icon-key' } },
+      { path: 'access/add', component: AccessAdd, meta: { title: '添加权限' }, hidden: true },
+      { path: 'access/edit/:id', component: AccessEdit, meta: { title: '编辑权限' }, hidden: true },
+
+      //权限管理
+      { path: 'menu', component: MenuList, meta: { title: '菜单管理', icon: 'el-icon-key' } },
+      { path: 'menu/add', component: MenuAdd, meta: { title: '添加菜单' }, hidden: true },
+      { path: 'menu/edit/:id', component: MenuEdit, meta: { title: '编辑菜单' }, hidden: true },
 
       //角色授权
-      { path: 'authorization', name: 'authorization', component: Authorization, meta: { title: '角色授权' }, hidden: true },
+      { path: 'authorization', component: Authorization, meta: { title: '角色授权' }, hidden: true },
 
     ]
   },
