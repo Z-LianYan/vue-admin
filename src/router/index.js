@@ -23,9 +23,9 @@ import AccessAdd from '@/views/system/access/add';
 import AccessEdit from '@/views/system/access/edit';
 
 //权限
-import MenuList from '@/views/system/menu/index';
-import MenuAdd from '@/views/system/menu/add';
-import MenuEdit from '@/views/system/menu/edit';
+import MenuList from '@/views/system/accessMenu/index';
+import MenuAdd from '@/views/system/accessMenu/add';
+import MenuEdit from '@/views/system/accessMenu/edit';
 
 
 
@@ -64,9 +64,9 @@ export const constantRoutes = [
       { path: 'access/edit/:id', component: AccessEdit, meta: { title: '编辑权限' }, hidden: true },
 
       //权限管理
-      { path: 'menu', component: MenuList, meta: { title: '菜单管理', icon: 'el-icon-key' } },
-      { path: 'menu/add', component: MenuAdd, meta: { title: '添加菜单' }, hidden: true },
-      { path: 'menu/edit/:id', component: MenuEdit, meta: { title: '编辑菜单' }, hidden: true },
+      { path: 'accessMenu', component: MenuList, meta: { title: '菜单管理', icon: 'el-icon-key' } },
+      { path: 'accessMenu/add', component: MenuAdd, meta: { title: '添加菜单' }, hidden: true },
+      { path: 'accessMenu/edit/:id', component: MenuEdit, meta: { title: '编辑菜单' }, hidden: true },
 
       //角色授权
       { path: 'authorization', component: Authorization, meta: { title: '角色授权' }, hidden: true },

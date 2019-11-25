@@ -50,7 +50,7 @@ export default {
   watch: {},
   methods: {
     doAdd() {
-      this.$router.push({ path: "/system/menu/add" });
+      this.$router.push({ path: "/system/accessMenu/add" });
     },
     getData() {
       this.$store.dispatch("role/list").then(res => {
@@ -59,7 +59,7 @@ export default {
       });
     },
     doEdit(rows) {
-      this.$router.push({ path: "/system/menu/edit/" + rows._id });
+      this.$router.push({ path: "/system/accessMenu/edit/" + rows._id });
     },
     doDelete(rows) {
       const { _id } = rows;
@@ -69,7 +69,7 @@ export default {
         type: "warning"
       })
         .then(() => {
-          this.$store.dispatch("menu/doDel", { _id: rows._id }).then(() => {
+          this.$store.dispatch("accessMenu/doDel", { _id: rows._id }).then(() => {
             this.getData();
           });
         })
