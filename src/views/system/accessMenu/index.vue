@@ -6,22 +6,27 @@
         <i class="el-icon-plus"></i>添加权限
       </el-button>
     </div>
-    <el-table :data="tableData" highlight-current-row border style="width: 100%">
-      <el-table-column prop="title" label="角色名称" width="180"></el-table-column>
-      <el-table-column prop="description" label="描述" width="180"></el-table-column>
-      <el-table-column prop="status" label="状态">
+    <el-table
+      v-loading="loading"
+      :data="tableData"
+      highlight-current-row
+      border
+      style="width: 100%"
+    >
+      <el-table-column prop="path" label="路由"></el-table-column>
+      <el-table-column prop="component" label="组件"></el-table-column>
+      <el-table-column prop="redirect" label="重定向"></el-table-column>
+      <el-table-column prop="title" label="菜单名称"></el-table-column>
+      <el-table-column prop="icon" label="图标"></el-table-column>
+      <el-table-column prop="hidden" label="状态">
         <template slot-scope="scope">
-          <img src="@/assets/images/yes.gif" v-if="scope.row.status==1" alt />
-          <img src="@/assets/images/no.gif" v-if="scope.row.status==0" alt />
+          <img src="@/assets/images/yes.gif" v-if="scope.row.hidden==1" alt />
+          <img src="@/assets/images/no.gif" v-if="scope.row.hidden==0" alt />
         </template>
       </el-table-column>
-      <el-table-column prop="add_time" label="添加时间">
-        <template slot-scope="scope">{{scope.row.add_time|formatDate}}</template>
-      </el-table-column>
 
-      <el-table-column label="操作" width="180">
+      <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button type="text" size="small" @click="setAccredit(scope.row)">授权</el-button>
           <el-button type="text" size="small" @click="doEdit(scope.row)">
             <i class="el-icon-edit"></i>编辑
           </el-button>
@@ -31,16 +36,34 @@
         </template>
       </el-table-column>
     </el-table>
+    <br />
+    <el-row>
+      <mine-pagination
+        :total="total"
+        @sizeChange="handleSizeChange"
+        @currentChange="handleCurrentChange"
+        :pageSize="fetchOptions.limit"
+        :currentPage="fetchOptions.page"
+      />
+    </el-row>
+
+
   </el-card>
 </template>
 
 <script>
 import dayjs from "dayjs";
 export default {
-  name: "role",
+  name: "accessMenu",
   data() {
     return {
-      tableData: []
+      loading: false,
+      tableData: [],
+      fetchOptions: {
+        page: 1,
+        limit: 20
+      },
+      total: 0
     };
   },
   computed: {},
@@ -53,8 +76,11 @@ export default {
       this.$router.push({ path: "/system/accessMenu/add" });
     },
     getData() {
-      this.$store.dispatch("role/list").then(res => {
-        this.tableData = res;
+      this.loading = true;
+      this.$store.dispatch("accessMenu/list",this.fetchOptions).then(res => {
+        this.tableData = res.data;
+        this.total = res.count;
+        this.loading = false;
         console.log("res", res);
       });
     },
@@ -69,9 +95,11 @@ export default {
         type: "warning"
       })
         .then(() => {
-          this.$store.dispatch("accessMenu/doDel", { _id: rows._id }).then(() => {
-            this.getData();
-          });
+          this.$store
+            .dispatch("accessMenu/doDel", { _id: rows._id })
+            .then(() => {
+              this.getData();
+            });
         })
         .catch(() => {
           this.$message({
@@ -80,9 +108,14 @@ export default {
           });
         });
     },
-    setAccredit(rows) {
-      const { _id } = rows;
-      this.$router.push({ path: "/system/authorization", query: { _id } });
+    handleSizeChange(limit) {
+      this.fetchOptions.limit = limit;
+      this.getData();
+    },
+
+    handleCurrentChange(page) {
+      this.fetchOptions.page = page;
+      this.getData();
     }
   }
 };

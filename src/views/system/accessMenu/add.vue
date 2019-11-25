@@ -42,12 +42,12 @@
       <el-form-item label="所属模块" prop="children">
         <el-select v-model="ruleForm.children" placeholder="请选择模块">
           <el-option label="顶级模块" value="0"></el-option>
-          <!-- <el-option
-            v-for="(item,idx) in accessData"
-            :label="item.module_name"
+          <el-option
+            v-for="(item,idx) in accessMenulist"
+            :label="item.title"
             :value="item._id"
             :key="idx"
-          ></el-option> -->
+          ></el-option>
         </el-select>
       </el-form-item>
 
@@ -93,10 +93,19 @@ export default {
       },
       rules: {
         // title: [{ required: true, message: "请输入角色名称", trigger: "blur" },]
-      }
+      },
+      accessMenulist:[]
     };
   },
-  mounted() {},
+  mounted() {
+      this.$store.dispatch("accessMenu/list",{
+        page: 1,
+        limit: 20000
+      }).then(res => {
+        this.accessMenulist = res.data;
+        console.log("res", res);
+      });
+  },
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
