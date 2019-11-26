@@ -11,6 +11,7 @@
       :data="tableData"
       highlight-current-row
       border
+      row-key="_id"
       style="width: 100%"
     >
       <el-table-column prop="path" label="路由"></el-table-column>

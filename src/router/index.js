@@ -3,6 +3,8 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
+
+
 import Login from '@/views/system/login';
 import Error_404 from '@/views/system/404';
 import Dashboard from '@/views/dashboard/index';
@@ -36,6 +38,7 @@ import Authorization from '@/views/system/authorization/index';
 /* Layout */
 import Layout from '@/layout'
 
+
 export const constantRoutes = [
   { path: '/login', component: Login, hidden: true },
   { path: '/404', component: Error_404, hidden: true },
@@ -63,7 +66,7 @@ export const constantRoutes = [
       { path: 'access/add', component: AccessAdd, meta: { title: '添加权限' }, hidden: true },
       { path: 'access/edit/:id', component: AccessEdit, meta: { title: '编辑权限' }, hidden: true },
 
-      //权限管理
+      //菜单管理
       { path: 'accessMenu', component: MenuList, meta: { title: '菜单管理', icon: 'el-icon-key' } },
       { path: 'accessMenu/add', component: MenuAdd, meta: { title: '添加菜单' }, hidden: true },
       { path: 'accessMenu/edit/:id', component: MenuEdit, meta: { title: '编辑菜单' }, hidden: true },
