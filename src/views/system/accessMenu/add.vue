@@ -40,7 +40,7 @@
       </el-form-item> -->
 
       <el-form-item label="所属模块" prop="children">
-        <el-select v-model="ruleForm.children" placeholder="请选择模块">
+        <el-select v-model="ruleForm.child" placeholder="请选择模块">
           <el-option label="顶级模块" value="0"></el-option>
           <el-option
             v-for="(item,idx) in accessMenulist"

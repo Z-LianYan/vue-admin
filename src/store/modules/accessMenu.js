@@ -3,9 +3,13 @@ import * as aipUrl from "@/common/api";
 import { Message, Loading } from 'element-ui';
 
 const state = {
+  menuRouter:[]
 }
 
 const mutations = {
+  MENU_ROUTER:(state,data)=>{
+    state.menuRouter = data
+  }
 }
 
 const actions = {
@@ -14,6 +18,7 @@ const actions = {
       requstTools.get(aipUrl.ACCESS_MENU_LIST, requestParams).then(res => {
         if (res.error == 0) {
           resolve(res.data);
+          commit("MENU_ROUTER",res.data);
         } else {
           Message.error(res.message);
         }
