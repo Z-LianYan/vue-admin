@@ -54,7 +54,7 @@ export const constantRoutes = [
   //     //管理员
   //     { path: 'manager', component: Manager, meta: { title: '管理员管理', icon: 'el-icon-s-management' } },//管理员
   //     { path: 'manager/add',component: ManagerAdd, meta: { title: '添加管理员' }, hidden: true },//添加管理员
-  //     { path: 'manager/edit/:id', component: ManagerEdit, meta: { title: '编辑管理员', icon: 'dashboard' }, hidden: true },//编辑管理员
+  //     { path: 'manager/edit/:id', component: ManagerEdit, meta: { title: '编辑管理员' }, hidden: true },//编辑管理员
 
   //     //角色管理
   //     { path: 'role', component: RoleList, meta: { title: '角色管理', icon: 'el-icon-user' } },

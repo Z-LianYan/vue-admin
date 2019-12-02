@@ -13,56 +13,56 @@ NProgress.configure({ showSpinner: false }) // NProgress Configuration
 const whiteList = ['/login'] // no redirect whitelist
 
 
-let routerMenu = [
-  {
-    path: "/system",
-    component: () => import('@/layout'),
-    redirect: "/system/manager",
-    meta: { title: "系统设置", icon: "el-icon-s-tools" },
-    children: [
-      //管理员
-      {
-        path: "manager",
-        component: () => import('@/views/system/manager/index'),
-        meta: { title: "管理员管理", icon: "el-icon-s-management" }
-      }, //管理员
-      {
-        path: "manager/add",
-        component: () => import('@/views/system/manager/add'),
-        meta: { title: "添加管理员" },
-        hidden: true
-      }, //添加管理员
-      {
-        path: "manager/edit/:id",
-        component: () => import('@/views/system/manager/edit'),
-        meta: { title: "编辑管理员", icon: "dashboard" },
-        hidden: true
-      }, //编辑管理员
+// let routerMenu = [
+//   {
+//     path: "/system",
+//     component: () => import('@/layout'),
+//     redirect: "/system/manager",
+//     meta: { title: "系统设置", icon: "el-icon-s-tools" },
+//     children: [
+//       //管理员
+//       {
+//         path: "manager",
+//         component: () => import('@/views/system/manager/index'),
+//         meta: { title: "管理员管理", icon: "el-icon-s-management" }
+//       }, //管理员
+//       {
+//         path: "manager/add",
+//         component: () => import('@/views/system/manager/add'),
+//         meta: { title: "添加管理员" },
+//         hidden: true
+//       }, //添加管理员
+//       {
+//         path: "manager/edit/:id",
+//         component: () => import('@/views/system/manager/edit'),
+//         meta: { title: "编辑管理员", icon: "dashboard" },
+//         hidden: true
+//       }, //编辑管理员
 
-      //角色管理
-      {
-        path: "role",
-        component: () => import('@/views/system/role/index'),
-        meta: { title: "角色管理", icon: "el-icon-user" }
-      },
-      {
-        path: "role/add",
-        component: () => import('@/views/system/role/add'),
-        meta: { title: "添加角色" },
-        hidden: true
-      },
-      {
-        path: "role/edit/:id",
-        component: () => import('@/views/system/role/edit'),
-        meta: { title: "编辑角色" },
-        hidden: true
-      }
-    ]
-  }
-]
+//       //角色管理
+//       {
+//         path: "role",
+//         component: () => import('@/views/system/role/index'),
+//         meta: { title: "角色管理", icon: "el-icon-user" }
+//       },
+//       {
+//         path: "role/add",
+//         component: () => import('@/views/system/role/add'),
+//         meta: { title: "添加角色" },
+//         hidden: true
+//       },
+//       {
+//         path: "role/edit/:id",
+//         component: () => import('@/views/system/role/edit'),
+//         meta: { title: "编辑角色" },
+//         hidden: true
+//       }
+//     ]
+//   }
+// ]
 
 
-router.addRoutes(routerMenu);
+// router.addRoutes(routerMenu);
 
 
 
@@ -84,6 +84,10 @@ router.beforeEach(async (to, from, next) => {
       next({ path: '/' })
       NProgress.done()
     } else {
+      store.dispatch("accessMenu/list").then(data=>{
+        console.log("data---permission",data);
+        // router.addRoutes(data);
+      })
       next()
     }
   } else {
