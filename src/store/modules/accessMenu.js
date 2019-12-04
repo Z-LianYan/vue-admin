@@ -17,7 +17,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       requstTools.get(aipUrl.ACCESS_MENU_LIST, requestParams).then(res => {
         if (res.error == 0) {
-          commit("MENU_ROUTER",res.data.data);
+          // commit("MENU_ROUTER",res.data.data);
           resolve(res.data.data);
         } else {
           Message.error(res.message);
