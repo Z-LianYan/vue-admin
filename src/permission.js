@@ -31,13 +31,20 @@ router.beforeEach(async (to, from, next) => {
       NProgress.done()
     } else {
 
-      store.dispatch("accessMenu/list").then(data => {
-        // console.log("data---permission",data);
-        var accessRouter = routerMenuFilter(data);
-        router.addRoutes(accessRouter);
-        store.commit("accessMenu/MENU_ROUTER", accessRouter);
+      if(!store.state.accessMenu.routerMenu.length){
+        store.dispatch("accessMenu/list").then(data => {
+          // console.log("data---permission",data);
+          var accessRouter = routerMenuFilter(data);
+          router.addRoutes(accessRouter);
+          store.commit("accessMenu/MENU_ROUTER", accessRouter);
+          console.log("呵呵",store.state.accessMenu.routerMenu)
+          next()
+          
+        })
+      }else{
         next()
-      })
+      }
+      
 
 
 
