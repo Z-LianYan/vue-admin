@@ -1,11 +1,13 @@
-import router from './router'
-import store from './store'
+import router from '@/router'
+import store from '@/store'
 import { Message } from 'element-ui'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import getPageTitle from '@/utils/get-page-title'
+import { getToken, getUserInfo, routerMenuFilter } from '@/common/tools'
 
-import { getToken, getUserInfo } from '@/common/tools'
+
+
 
 
 
@@ -32,10 +34,21 @@ router.beforeEach(async (to, from, next) => {
       NProgress.done()
     } else {
 
-
-
-    
+      if(!store.state.accessMenu.routerMenu.length){
+        store.dispatch("accessMenu/list").then(data => {
+          // console.log("data---permission",data);
+          let accessRouter = routerMenuFilter(data);
+          router.addRoutes(accessRouter);
+          store.commit("accessMenu/MENU_ROUTER", accessRouter);
+          console.log("呵呵",store.state.accessMenu.routerMenu);
+        })
+      }
       next()
+      
+
+
+
+
     }
   } else {
     /* has no token*/

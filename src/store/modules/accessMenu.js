@@ -3,9 +3,13 @@ import * as aipUrl from "@/common/api";
 import { Message, Loading } from 'element-ui';
 
 const state = {
+  routerMenu:[]
 }
 
 const mutations = {
+  MENU_ROUTER:(state,data)=>{
+    state.routerMenu = data
+  }
 }
 
 const actions = {
@@ -13,7 +17,8 @@ const actions = {
     return new Promise((resolve, reject) => {
       requstTools.get(aipUrl.ACCESS_MENU_LIST, requestParams).then(res => {
         if (res.error == 0) {
-          resolve(res.data);
+          // commit("MENU_ROUTER",res.data.data);
+          resolve(res.data.data);
         } else {
           Message.error(res.message);
         }

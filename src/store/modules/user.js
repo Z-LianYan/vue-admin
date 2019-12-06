@@ -6,7 +6,7 @@ import { Message, Loading } from 'element-ui';
 
 const state = {
   token: getToken(),
-  name: getUserInfo(),
+  userInfo: getUserInfo(),
   avatar: ''
 }
 
@@ -15,7 +15,7 @@ const mutations = {
     state.token = token
   },
   SET_USERINFO: (state, userInfo) => {
-    state.name = userInfo
+    state.userInfo = userInfo
   }
 }
 
