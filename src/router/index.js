@@ -43,10 +43,26 @@ export const constantRoutes = [
   { path: '/login', component: Login, hidden: true },
   { path: '/404', component: Error_404, hidden: true },
   {
-    path: '/', component: Layout, redirect: '/dashboard', children: [
+    path: '/', component: ()=>import("@/layout"), redirect: '/dashboard', children: [
       { path: 'dashboard', name: 'Dashboard', component: Dashboard, meta: { title: '首页', icon: 'el-icon-s-home' } }
     ]
   },
+  
+  // {
+  //   path: '/system', component: ()=>import("@/layout"), redirect: '/system/manager', meta: { title: '系统设置', icon: 'el-icon-s-tools' }, children: [
+
+  //     //管理员
+  //     { path: 'manager', component: ()=>import("@/views/system/manager/index"), meta: { title: '管理员管理', icon: 'el-icon-s-management' } },//管理员
+      
+
+  //     //角色管理
+  //     { path: 'role', component: ()=>import("@/views/system/role/index"), meta: { title: '角色管理', icon: 'el-icon-user' } },
+   
+
+     
+
+  //   ]
+  // },
 
   {
     path: '/system', component: Layout, redirect: '/system/manager', meta: { title: '系统设置', icon: 'el-icon-s-tools' }, children: [
