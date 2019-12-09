@@ -101,12 +101,19 @@ export default {
     })
   },
   watch: {
-    $route: {
-      handler: function(route) {
-        this.redirect = route.query && route.query.redirect;
-      },
-      immediate: true
+    // $route: {
+    //   handler: function(route) {
+    //     this.redirect = route.query && route.query.redirect;
+    //   },
+    //   immediate: true
+    // }
+
+    $route (to, from, next) {
+      console.log("$route")
+      next()
     }
+
+
   },
   methods: {
     showPwd() {

@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">name: {{ name }}</div>
+    <div class="dashboard-text" @click="test">name: {{ name }}</div>
   </div>
 </template>
 
@@ -15,6 +15,9 @@ export default {
     ])
   },
   methods:{
+    test(){
+      this.$router.push({path:"/system/manager"});
+    }
   }
 }
 </script>

@@ -32,24 +32,6 @@ console.log("environment", process.env.NODE_ENV)
 //   mockXHR()
 // }
 
-// const addRoutes = [
-//   {
-//     path: '/system', component: () => import("@/layout"), redirect: '/system/manager', meta: { 'title': '系统设置', 'icon': 'el-icon-s-tools' }, children: [
-
-//       //管理员
-//       { path: 'manager', component: () => import("@/views/system/manager/index"), meta: { 'title': '管理员管理', icon: 'el-icon-s-management' } },//管理员
-
-//       //角色管理
-//       { path: 'role', component: () => import("@/views/system/role/index"), meta: { title: '角色管理', icon: 'el-icon-user' } },
-
-//     ]
-//   }
-// ]
-
-// router.addRoutes(addRoutes)
-// console.log("router----",router);
-
-
 
 
 
