@@ -1,9 +1,11 @@
 <template>
-  <el-card class="box-card">
-    <div slot="header" style="text-align:center;" class="clearfix">
+  <el-drawer
+  title="添加权限菜单"
+  :visible.sync="isDrawer"
+  size="45%">
+    <!-- <div slot="header" style="text-align:center;" class="clearfix">
       <el-page-header @back="goBack" title="返回" content="添加权限" center></el-page-header>
-    </div>
-
+    </div> -->
     <el-form
       :model="ruleForm"
       :rules="rules"
@@ -11,6 +13,21 @@
       label-width="100px"
       class="demo-ruleForm"
     >
+
+      <el-form-item label="所属模块" prop="module_id">
+        <el-select v-model="ruleForm.module_id" placeholder="请选择模块">
+          <el-option label="顶级模块" value="0"></el-option>
+          <el-option
+            v-for="(item,idx) in accessMenulist"
+            v-if="item.title"
+            :label="item.title"
+            :value="item._id"
+            :key="idx"
+          ></el-option>
+        </el-select>
+      </el-form-item>
+
+
       <el-form-item label="路径" prop="path">
         <el-input v-model="ruleForm.path"></el-input>
       </el-form-item>
@@ -35,29 +52,7 @@
         <el-input v-model="ruleForm.icon"></el-input>
       </el-form-item>
 
-      <!-- <el-form-item label="模块" prop="children">
-        <el-input v-model="ruleForm.children"></el-input>
-      </el-form-item> -->
-
-      <el-form-item label="所属模块" prop="children">
-        <el-select v-model="ruleForm.child" placeholder="请选择模块">
-          <el-option label="顶级模块" value="0"></el-option>
-          <el-option
-            v-for="(item,idx) in accessMenulist"
-            :label="item.title"
-            :value="item._id"
-            :key="idx"
-          ></el-option>
-        </el-select>
-      </el-form-item>
-
-
-
-      <!-- <el-form-item label="路径" prop="children">
-        <el-input v-model="ruleForm.children"></el-input>
-      </el-form-item> -->
-
-      <el-form-item label="完整路径" prop="url">
+      <el-form-item label="访问路径" prop="url">
         <el-input v-model="ruleForm.url"></el-input>
       </el-form-item>
 
@@ -73,26 +68,30 @@
         <el-button @click="resetForm('ruleForm')">重置</el-button>
       </el-form-item>
     </el-form>
-  </el-card>
+    
+  </el-drawer>
 </template>
 
 <script>
 export default {
   data() {
     return {
+      isDrawer:false,
       ruleForm: {
+        module_id: "",
         path: "",
         component: "",
         redirect: "",
         name: "",
         title: "",
         icon: "",
-        child: "",
         hidden: 1,
         url: ""
       },
       rules: {
-        // title: [{ required: true, message: "请输入角色名称", trigger: "blur" },]
+        module_id: [{ required: true, message: "请选择所属模块", trigger: "blur" }],
+        path: [{ required: true, message: "请输入路径", trigger: "blur" }],
+        component: [{ required: true, message: "请引入views下的组件", trigger: "blur" }]
       },
       accessMenulist:[]
     };
@@ -103,7 +102,7 @@ export default {
         limit: 20000
       }).then(res => {
         this.accessMenulist = res.data;
-        console.log("res", res);
+        console.log("resadd", res);
       });
   },
   methods: {
@@ -122,12 +121,15 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
-    goBack() {
-      history.go(-1);
+    open(){
+      this.isDrawer = true;
     }
   }
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+  .el-drawer__body {
+    padding-right: 10px;
+}
 </style>

@@ -1,9 +1,8 @@
 import Vue from 'vue'
 
+import 'default-passive-events' //(处理警告)Chrome51 版本以后，Chrome 增加了新的事件捕获机制－Passive Event Listeners；
+
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
-
-
-
 import '@/styles/index.scss' // global css
 
 import App from './App'
@@ -19,21 +18,6 @@ import '@/ElementUi'
 import '@/icons' // icon
 
 console.log("environment", process.env.NODE_ENV)
-/**
- * If you don't want to use mock-server
- * you want to use MockJs for mock api
- * you can execute: mockXHR()
- *
- * Currently MockJs will be used in the production environment,
- * please remove it before going online! ! !
- */
-// import { mockXHR } from '../mock'
-// if (process.env.NODE_ENV === 'production') {
-//   mockXHR()
-// }
-
-
-
 
 Vue.config.productionTip = false
 

@@ -6,10 +6,6 @@ import 'nprogress/nprogress.css' // progress bar style
 import getPageTitle from '@/utils/get-page-title'
 import { getToken, getUserInfo, routerMenuFilter } from '@/common/tools'
 
-import Layout from '@/layout'
-
-
-// console.log("router",router.selfaddRoutes())
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
@@ -31,30 +27,24 @@ router.beforeEach(async (to, from, next) => {
 
   if (hasToken) {
 
-    
-
     if (to.path === '/login') {
       // if is logged in, redirect to the home page
-      // next({ path: '/' })
-      next()
+      next({ path: '/' })
       NProgress.done()
 
     } else {
 
       if(!store.state.accessMenu.routerMenu.length) {
         store.dispatch("accessMenu/list").then(data => {
-          // console.log("data---permission",data);
-          let accessRouter = routerMenuFilter(data);
-          router.selfaddRoutes(accessRouter);
-          store.commit("accessMenu/MENU_ROUTER", accessRouter);
-          console.log("呵呵",store.state.accessMenu.routerMenu);
+          var error_404 = { path: '*', redirect: '/404', hidden: true }
+          var accessRouter = routerMenuFilter(data.data);
+          accessRouter.push(error_404)
+          var router_menu = router.options.routes.concat(accessRouter)
+          router.selfaddRoutes(router_menu);
+          store.commit("accessMenu/MENU_ROUTER", router_menu);
         })
       }
 
-
-
-
-      
       next()
 
     }

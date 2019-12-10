@@ -108,10 +108,6 @@ export default {
     //   immediate: true
     // }
 
-    $route (to, from, next) {
-      console.log("$route")
-      next()
-    }
 
 
   },

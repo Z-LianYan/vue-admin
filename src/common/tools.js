@@ -23,7 +23,6 @@ export function removeUserInfo(){
 }
 
 export function routerMenuFilter(routerData) { //遍历后台传来的路由字符串，转换为组件对象
-    console.log("routerMenuFilter-----");
     var accessedRouters = routerData.filter(route => {
       route.meta = {
         title:route.title

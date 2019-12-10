@@ -46,22 +46,7 @@ const actions = {
           removeToken();
           removeUserInfo();
           router.replace({path:"/login",query:{redirect:router.currentRoute.fullPath}})
-
-          // router.replace({path:"/login"})
-          // router.push({ path: '/login'})
-          
-          // router.push({path:"/login"});
-
-          console.log("user.js 退出系统")
-
-          router.go(0)
-
-          
-
           Message.success(res.message);
-
-
-          
         }else{
           Message.error(res.message);
         }

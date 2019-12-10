@@ -3,7 +3,7 @@
     <div slot="header" style="text-align:center;" class="clearfix">
       <span>权限管理</span>
       <el-button type="text" @click="doAdd" class="float-right">
-        <i class="el-icon-plus"></i>添加权限
+        <i class="el-icon-plus"></i>添加权限菜单
       </el-button>
     </div>
     <el-table
@@ -15,11 +15,12 @@
       style="width: 100%"
     >
       <el-table-column prop="path" label="路由"></el-table-column>
+      <el-table-column prop="name" label="路由名称"></el-table-column>
       <el-table-column prop="component" label="组件"></el-table-column>
       <el-table-column prop="redirect" label="重定向"></el-table-column>
       <el-table-column prop="title" label="菜单名称"></el-table-column>
       <el-table-column prop="icon" label="图标"></el-table-column>
-      <el-table-column prop="hidden" label="状态">
+      <el-table-column prop="hidden" label="是否隐藏">
         <template slot-scope="scope">
           <img src="@/assets/images/yes.gif" v-if="scope.row.hidden==1" alt />
           <img src="@/assets/images/no.gif" v-if="scope.row.hidden==0" alt />
@@ -47,15 +48,17 @@
         :currentPage="fetchOptions.page"
       />
     </el-row>
-
-
+    <menu-add ref="menu_add"/>
   </el-card>
 </template>
 
 <script>
-import dayjs from "dayjs";
+import MenuAdd from './add'
 export default {
   name: "accessMenu",
+  components:{
+    MenuAdd
+  },
   data() {
     return {
       loading: false,
@@ -74,7 +77,8 @@ export default {
   watch: {},
   methods: {
     doAdd() {
-      this.$router.push({ path: "/system/accessMenu/add" });
+      this.$refs.menu_add.open();
+      // this.$router.push({ path: "/system/accessMenu/add" });
     },
     getData() {
       this.loading = true;
@@ -86,6 +90,7 @@ export default {
       });
     },
     doEdit(rows) {
+      console.log("rows---",rows);
       this.$router.push({ path: "/system/accessMenu/edit/" + rows._id });
     },
     doDelete(rows) {

@@ -112,7 +112,6 @@ export default {
       this.$store.dispatch("manager/list", this.fetchOptions).then(res => {
         this.tableData = res.data;
         this.total = res.count;
-        console.log("res", res);
         this.loading = false;
       });
     },

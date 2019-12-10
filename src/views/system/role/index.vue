@@ -55,7 +55,6 @@ export default {
     getData() {
       this.$store.dispatch("role/list").then(res => {
         this.tableData = res;
-        console.log("res", res);
       });
     },
     doEdit(rows) {

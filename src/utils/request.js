@@ -26,9 +26,8 @@ service.interceptors.request.use(config => {
 service.interceptors.response.use(
   response => {
     if(response.data.error==403){
-      console.log("403---");
       removeToken();
-      // router.currentRoute.path!='/login'?router.replace({path:"/login",query:{redirect:router.currentRoute.fullPath}}):null;//去登录; 
+      router.currentRoute.path!='/login'?router.replace({path:"/login",query:{redirect:router.currentRoute.fullPath}}):null;//去登录; 
       response.data.data={};
       return response;
     }else{
