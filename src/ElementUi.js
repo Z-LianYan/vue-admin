@@ -80,6 +80,7 @@ Vue.use(ElementUI.TableColumn)
 Vue.use(ElementUI.Table)
 Vue.use(ElementUI.Loading.directive);
 Vue.use(ElementUI.PageHeader);
+Vue.use(ElementUI.Cascader);
 
 
 

@@ -1,7 +1,7 @@
 <template>
   <el-card class="box-card">
     <div slot="header" style="text-align:center;" class="clearfix">
-      <span>权限管理</span>
+      <span>权限菜单管理</span>
       <el-button type="text" @click="doAdd" class="float-right">
         <i class="el-icon-plus"></i>添加权限菜单
       </el-button>
@@ -48,16 +48,16 @@
         :currentPage="fetchOptions.page"
       />
     </el-row>
-    <menu-add ref="menu_add"/>
+    <add-edit ref="menu_add_edit" @on-getData="getData"/>
   </el-card>
 </template>
 
 <script>
-import MenuAdd from './add'
+import AddEdit from './addEdit'
 export default {
   name: "accessMenu",
   components:{
-    MenuAdd
+    AddEdit
   },
   data() {
     return {
@@ -77,7 +77,7 @@ export default {
   watch: {},
   methods: {
     doAdd() {
-      this.$refs.menu_add.open();
+      this.$refs.menu_add_edit.open();
       // this.$router.push({ path: "/system/accessMenu/add" });
     },
     getData() {
@@ -91,7 +91,8 @@ export default {
     },
     doEdit(rows) {
       console.log("rows---",rows);
-      this.$router.push({ path: "/system/accessMenu/edit/" + rows._id });
+      // this.$router.push({ path: "/system/accessMenu/edit/" + rows._id });
+      this.$refs.menu_add_edit.open(rows);
     },
     doDelete(rows) {
       const { _id } = rows;

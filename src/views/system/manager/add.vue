@@ -1,7 +1,7 @@
 <template>
   <el-card class="box-card">
     <div slot="header" style="text-align:center;" class="clearfix">
-      <el-page-header @back="goBack" title="返回" content="添加管理员" center></el-page-header>
+      添加管理员
     </div>
 
     <el-form
@@ -126,9 +126,9 @@ export default {
         console.log("data", data);
       });
     },
-    goBack() {
-      history.go(-1);
-    }
+    // goBack() {
+    //   history.go(-1);
+    // }
   }
 };
 </script>

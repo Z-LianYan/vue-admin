@@ -1,7 +1,7 @@
 <template>
   <el-card class="box-card">
     <div slot="header" style="text-align:center;" class="clearfix">
-      <el-page-header @back="goBack" title="返回" content="添加管理员" center></el-page-header>
+      添加角色
     </div>
 
     <el-form
@@ -11,7 +11,7 @@
       label-width="100px"
       class="demo-ruleForm"
     >
-      <el-form-item label="管理员名称" prop="title">
+      <el-form-item label="角色名称" prop="title">
         <el-input v-model="ruleForm.title"></el-input>
       </el-form-item>
 

@@ -49,6 +49,7 @@ export function routerMenuFilter(routerData) { //遍历后台传来的路由字�
       delete route.url
       delete route.module_id
       delete route._id
+      delete route.update_time
       return true
     })
   
