@@ -4,22 +4,22 @@
       <span>角色授权</span>
     </div>
 
-    <el-tabs v-model="activeName" @tab-click="handleClick">
+    <!-- <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane
         v-for="(item,idx) in roleData"
         :key="idx"
         :label="item.title"
         :name="item._id.toString()"
       />
-    </el-tabs>
+    </el-tabs> -->
 
-    <el-checkbox-group
+    <!-- <el-checkbox-group
       v-model="checkedAccess"
       v-for="(item,idx) in accessMenuData"
       :key="idx"
       @change="handleCheckedCitiesChange"
     >
-      <el-checkbox :label="item._id">{{item.module_name}}</el-checkbox>
+      <el-checkbox :label="item._id">{{item.title}}</el-checkbox>
 
       <div class="checkbox-separator">
         <el-checkbox
@@ -28,7 +28,23 @@
           :label="itm._id"
         >{{itm.title}}</el-checkbox>
       </div>
-    </el-checkbox-group>
+    </el-checkbox-group> -->
+
+
+    <el-tree
+    :data="accessMenuData"
+    :show-checkbox="true"
+    node-key="_id"
+    default-expand-all
+    ref="tree_menu"
+    @node-click='handleNodeClick'
+    @check-change="handleCheckChange"
+    :expand-on-click-node="false"
+    :props="defaultProps">
+    </el-tree>
+
+
+
 
     <el-button type="primary" @click="authorizationSubmit" size="small">提交</el-button>
   </el-card>
@@ -43,7 +59,11 @@ export default {
       roleData: [],
       accessMenuData: [],
       checkedAccess: [],
-      roleId: ""
+      roleId: "",
+      defaultProps: {
+        children: 'children',
+        label: 'title'
+      }
     };
   },
   computed: {},
@@ -68,6 +88,23 @@ export default {
         // this.roleAuth();
       });
     },
+    handleNodeClick(data){
+      console.log("handleNodeClick",data);
+    },
+    handleCheckChange(data,checked,node){
+      console.log("handleCheckChange---",data,checked,node);
+      if(checked){
+
+        // this.$refs.tree_menu.setCheckedKeys([data._id])
+
+        // this.checkedId = data.id;
+
+        // this.$refs.tree_menu.setCheckedNodes([data]);
+
+      }
+    },
+
+
 
     roleAuth(roleId) {
       const { _id } = this.$route.query;
