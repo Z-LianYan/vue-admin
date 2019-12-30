@@ -15,7 +15,7 @@
 
     <el-checkbox-group
       v-model="checkedAccess"
-      v-for="(item,idx) in accessData"
+      v-for="(item,idx) in accessMenuData"
       :key="idx"
       @change="handleCheckedCitiesChange"
     >
@@ -26,7 +26,7 @@
           v-for="(itm,ix) in item.children"
           :key="ix"
           :label="itm._id"
-        >{{itm.action_name}}</el-checkbox>
+        >{{itm.title}}</el-checkbox>
       </div>
     </el-checkbox-group>
 
@@ -41,15 +41,15 @@ export default {
     return {
       activeName: "",
       roleData: [],
-      accessData: [],
+      accessMenuData: [],
       checkedAccess: [],
       roleId: ""
     };
   },
   computed: {},
   mounted() {
-    this.getRoleData();
-    this.getAccessData();
+    // this.getRoleData();
+    this.getAccessMenuData();
   },
   watch: {},
   methods: {
@@ -61,10 +61,11 @@ export default {
       });
     },
 
-    getAccessData() {
-      this.$store.dispatch("access/list").then(res => {
-        this.accessData = res.data;
-        this.roleAuth();
+    getAccessMenuData() {
+      this.$store.dispatch("accessMenu/list").then(res => {
+        console.log("res-",res);
+        this.accessMenuData = res.data;
+        // this.roleAuth();
       });
     },
 

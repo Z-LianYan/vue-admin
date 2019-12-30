@@ -27,7 +27,7 @@
 
       </el-form-item>
 
-      <el-form-item label="路径" prop="path">
+      <el-form-item label="路由" prop="path">
         <el-input v-model="ruleForm.path"></el-input>
       </el-form-item>
 
