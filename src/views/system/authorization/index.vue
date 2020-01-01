@@ -6,9 +6,21 @@
       <span>角色授权管理</span>
     </div>
 
+    <el-row :gutter="20">
+      <el-col :span="6">
 
-    <el-tabs :tab-position="roleListPosition" v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane  :label="item.title" :name="item._id.toString()" v-for="item in roleList" :key="item._id">
+        <el-tabs tab-position="left" v-model="activeName" @tab-click="handleClick">
+          <el-tab-pane  
+          :label="item.title" 
+          :lazy="true"
+          :name="item._id.toString()"
+          v-for="item in roleList"
+          :key="item._id">
+          </el-tab-pane>
+        </el-tabs>
+
+      </el-col>
+      <el-col :span="18">
 
         <el-tree
         :data="accessMenuData"
@@ -23,14 +35,11 @@
         :props="defaultProps">
         </el-tree>
 
+      </el-col>
+    </el-row>
+    
 
-      </el-tab-pane>
-    </el-tabs>
-
-        
-
-
-
+    
 
     <br/>
 
@@ -74,14 +83,12 @@ export default {
       const { _id } = this.$route.query;
       this.activeName = _id.toString();
       this.$store.dispatch("role/list").then(res => {
-        console.log("role---",res);
         this.roleList = res;
       });
     },
 
     getAccessMenuData() {
       this.$store.dispatch("accessMenu/list").then(res => {
-        console.log("res-",res);
         this.accessMenuData = res.data;
         this.roleAuth();
       });
@@ -89,16 +96,14 @@ export default {
 
     checkClick(){
       this.checkedAccessId = this.$refs.tree_menu.getCheckedKeys().concat(this.$refs.tree_menu.getHalfCheckedKeys())
-      console.log("checkedAccessId",this.checkedAccessId);
     },
 
     roleAuth(roleId) {
-      console.log("+++",roleId);
       const { _id } = this.$route.query;
       this.roleId = roleId ? roleId : _id;
       this.$store.dispatch("authorization/roleAuth", { role_id: this.roleId }).then(res => {
         this.defaultAccessId = res.map(item=>item.access_id);
-        console.log("defaultAccessId",this.defaultAccessId);
+        this.$refs.tree_menu.setCheckedNodes(this.defaultAccessId)
       });
     },
 
@@ -106,12 +111,11 @@ export default {
       const { _id } = this.$route.query;
       this.$store.dispatch("authorization/roleAuthorizationEdit", {
         checkedAccess: this.checkedAccessId,
-        role_id: _id
+        role_id: this.roleId? this.roleId:_id
       })
     },
 
     handleClick(val){
-      console.log("val---",val);
       this.roleAuth(val.name);
     }
 
