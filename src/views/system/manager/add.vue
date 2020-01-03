@@ -108,7 +108,6 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           this.$store.dispatch("manager/doAdd", this.ruleForm).then(() => {
-            console.log("000");
             this.resetForm("ruleForm");
           });
         } else {
@@ -123,7 +122,6 @@ export default {
     getRoleList() {
       this.$store.dispatch("manager/getRoleList").then(data => {
         this.roleList = data;
-        console.log("data", data);
       });
     },
     // goBack() {

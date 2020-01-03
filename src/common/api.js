@@ -16,17 +16,19 @@ export const ROLE_DEL = '/API/admin/role/del';
 export const ROLE_GET_SINGLE = '/API/admin/role/getSingle';
 
 //权限管理
-export const ACCESS_LIST = '/API/admin/access/list';
-export const ACCESS_ADD = '/API/admin/access/add';
-export const ACCESS_EDIT = '/API/admin/access/edit';
-export const ACCESS_DEL = '/API/admin/access/del';
-export const ACCESS_GET_SINGLE = '/API/admin/access/getSingle';
+// export const ACCESS_LIST = '/API/admin/access/list';
+// export const ACCESS_ADD = '/API/admin/access/add';
+// export const ACCESS_EDIT = '/API/admin/access/edit';
+// export const ACCESS_DEL = '/API/admin/access/del';
+// export const ACCESS_GET_SINGLE = '/API/admin/access/getSingle';
 
 //菜单管理
 export const ACCESS_MENU_LIST = '/API/admin/accessMenu/list';
 export const ACCESS_MENU_ADD = '/API/admin/accessMenu/add';
 export const ACCESS_MENU_EDIT = '/API/admin/accessMenu/edit';
 export const ACCESS_MENU_DEL = '/API/admin/accessMenu/del';
+
+export const GET_ACCESS_MENU = '/API/admin/accessMenu/getAccessMenu';
 
 
 

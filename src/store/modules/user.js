@@ -40,7 +40,9 @@ const actions = {
   },
 
   doLogout({ commit, state }, requestParams) {
+    
     return new Promise((resolve, reject) => {
+      
       requstTools.post(aipUrl.DO_LOGOUT, requestParams).then(res => {
         if (res.error == 0) {
           removeToken();
