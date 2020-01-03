@@ -45,6 +45,7 @@ const actions = {
       
       requstTools.post(aipUrl.DO_LOGOUT, requestParams).then(res => {
         if (res.error == 0) {
+          resolve();
           removeToken();
           removeUserInfo();
           router.replace({path:"/login",query:{redirect:router.currentRoute.fullPath}})

@@ -47,13 +47,12 @@ router.beforeEach(async (to, from, next) => {
           var error_404 = { path: '*', redirect: '/404', hidden: true }
           var accessRouter = routerMenuFilter(data.data);
           accessRouter.push(error_404)
-          var router_menu = router.options.routes.concat(accessRouter)
+          var router_menu = router.options.routes.concat(accessRouter);
           router.selfaddRoutes(router_menu);
+          console.log("路由")
           store.commit("accessMenu/MENU_ROUTER", router_menu);
         })
       }
-
-
 
       next()
 
