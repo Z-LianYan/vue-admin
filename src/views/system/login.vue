@@ -107,9 +107,6 @@ export default {
     //   },
     //   immediate: true
     // }
-
-
-
   },
   methods: {
     showPwd() {
@@ -129,7 +126,7 @@ export default {
           this.$store.dispatch("user/doLogin", this.loginForm).then((res) => {
             this.loading = false;
             if(res.error==0){
-              this.$router.push({ path:"/" });
+              this.$router.push({ path:'/' });
             }
           }).catch(() => {
             this.loading = false;

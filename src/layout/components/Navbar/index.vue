@@ -7,13 +7,20 @@
     />
 
     <breadcrumb class="breadcrumb-container"/>
-
+    
     <div class="right-menu">
 
-      <el-color-picker size="mini" v-model="color"></el-color-picker>
+      <!-- <el-button style="background:#ccc" type="text">{{JSON.parse(userInfo).username}}</el-button> -->
+
+      <!-- <el-color-picker size="mini" v-model="color"></el-color-picker> -->
+      <!-- <div style="background:#ccc;display:inline-block;">123</div> -->
+
+      
 
       <el-dropdown class="avatar-container" trigger="click">
+        
         <div class="avatar-wrapper">
+          
           <img src="https://www.baidu.com/img/baidu_jgylogo3.gif" class="user-avatar">
           <i class="el-icon-caret-bottom"/>
         </div>
@@ -46,7 +53,7 @@ export default {
     Hamburger
   },
   computed: {
-    ...mapGetters(["sidebar", "avatar"])
+    ...mapGetters(["sidebar", "avatar","userInfo"])
   },
   methods: {
     toggleSideBar() {

@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text" @click="test">name: {{ name }}</div>
+    <div class="dashboard-text" @click="test">name: {{ userInfo }}</div>
   </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
   name: 'Dashboard',
   computed: {
     ...mapGetters([
-      'name'
+      'userInfo'
     ])
   },
   methods:{

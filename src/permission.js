@@ -31,31 +31,18 @@ router.beforeEach(async (to, from, next) => {
       NProgress.done()
 
     } else {
-      // if(!store.state.accessMenu.routerMenu.length) {
-      //   store.dispatch("accessMenu/list").then(data => {
-      //     var error_404 = { path: '*', redirect: '/404', hidden: true }
-      //     var accessRouter = routerMenuFilter(data.data);
-      //     accessRouter.push(error_404)
-      //     var router_menu = router.options.routes.concat(accessRouter)
-      //     router.selfaddRoutes(router_menu);
-      //     store.commit("accessMenu/MENU_ROUTER", router_menu);
-      //   })
-      // }
 
       if(!store.state.accessMenu.routerMenu.length) {
         store.dispatch("accessMenu/getAccessMenu").then(data => {
-          var error_404 = { path: '*', redirect: '/404', hidden: true }
+          var error_404 = { path: '*', redirect: '/404', hidden: true };
           var accessRouter = routerMenuFilter(data.data);
-          accessRouter.push(error_404)
+          accessRouter.push(error_404);
           var router_menu = router.options.routes.concat(accessRouter);
           router.selfaddRoutes(router_menu);
-          console.log("路由")
           store.commit("accessMenu/MENU_ROUTER", router_menu);
         })
       }
-
       next()
-
     }
   } else {
     console.log("to.path---",to.path);
