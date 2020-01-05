@@ -2,8 +2,11 @@
 
   <el-card class="box-card">
     <div slot="header" style="text-align:center;" class="clearfix">
-      <span>角色授权</span>
+      <el-page-header @back="goBack" title="返回" content="角色授权" center></el-page-header>
     </div>
+    <!-- <div slot="header" style="text-align:center;" class="clearfix">
+      <span>角色授权</span>
+    </div> -->
     <el-row :gutter="20">
       <el-col :span="6">
         <el-tabs tab-position="left" v-model="activeName" @tab-click="handleClick">
@@ -71,6 +74,7 @@ export default {
 
     getAccessMenuData() {
       this.$store.dispatch("accessMenu/list").then(res => {
+        // res.data.shift()
         this.accessMenuData = res.data;
         this.roleAuth();
       });
@@ -131,14 +135,12 @@ export default {
 
     handleClick(val){
       this.roleAuth(val.name);
-    }
+    },
+
+    goBack() {
+      history.go(-1);
+    },
 
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.checkbox-separator {
-  margin: 20px 0 20px 30px;
-}
-</style>

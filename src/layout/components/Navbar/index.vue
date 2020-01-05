@@ -10,7 +10,7 @@
     
     <div class="right-menu">
 
-      <!-- <el-button style="background:#ccc" type="text">{{JSON.parse(userInfo).username}}</el-button> -->
+      
 
       <!-- <el-color-picker size="mini" v-model="color"></el-color-picker> -->
       <!-- <div style="background:#ccc;display:inline-block;">123</div> -->
@@ -20,7 +20,7 @@
       <el-dropdown class="avatar-container" trigger="click">
         
         <div class="avatar-wrapper">
-          
+          <el-button type="text" v-if="userInfo.username">Hi！{{userInfo.username}}</el-button>
           <img src="https://www.baidu.com/img/baidu_jgylogo3.gif" class="user-avatar">
           <i class="el-icon-caret-bottom"/>
         </div>
@@ -65,7 +65,10 @@ export default {
         cancelButtonText: "取消",
         type: "warning"
       }).then(() => {
-        this.$store.dispatch("user/doLogout").then(() => this.$store.state.accessMenu.routerMenu = []);
+        this.$store.dispatch("user/doLogout").then(() => {
+          this.$store.state.accessMenu.routerMenu = [];
+          this.$store.state.accessMenu.login_success_go_def_route = '';
+        });
       }).catch(() => {
         this.$message({
           type: "info",
@@ -105,7 +108,7 @@ export default {
   .right-menu {
     float: right;
     height: 100%;
-    line-height: 50px;
+    // line-height: 50px;
 
     &:focus {
       outline: none;
