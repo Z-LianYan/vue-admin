@@ -36,9 +36,9 @@ export default {
   },
   mounted() {
     // this.$nextTick(()=>{
-      this.initChart();
+    this.initChart();
     // })
-    
+
     if (this.autoResize) {
       this.__resizeHanlder = debounce(() => {
         if (this.chart) {
@@ -50,8 +50,6 @@ export default {
     // 监听侧边栏的变化
     const sidebarElm = document.getElementsByClassName("sidebar-container")[0];
     sidebarElm.addEventListener("transitionend", this.__resizeHanlder);
-
-    
   },
   beforeDestroy() {
     if (!this.chart) {
@@ -82,7 +80,17 @@ export default {
           }
         },
         legend: {
-          data: [ "直接访问", "邮件营销", "联盟广告", "视频广告", "搜索引擎", "百度", "谷歌", "必应", "其他" ]
+          data: [
+            "直接访问",
+            "邮件营销",
+            "联盟广告",
+            "视频广告",
+            "搜索引擎",
+            "百度",
+            "谷歌",
+            "必应",
+            "其他"
+          ]
         },
         grid: {
           left: "3%",
@@ -101,11 +109,11 @@ export default {
             type: "value"
           }
         ],
-        // dataZoom: [
-        //   {
-        //     type: "inside"
-        //   }
-        // ],
+        dataZoom: [
+          {
+            type: "inside"
+          }
+        ],
         series: [
           {
             name: "直接访问",
@@ -180,6 +188,8 @@ export default {
   }
 };
 </script>
-<style lang='scss'>
-
+<style lang='scss' scoped>
+* {
+  touch-action: none;
+}
 </style>
