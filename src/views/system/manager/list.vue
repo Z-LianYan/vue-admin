@@ -45,6 +45,16 @@
       <el-table-column prop="mobile" label="电话"></el-table-column>
       <el-table-column prop="email" label="邮箱"></el-table-column>
       <el-table-column prop="title" label="角色"></el-table-column>
+      <el-table-column prop="img_head" label="头像">
+        <template slot-scope="scope">
+          <el-image 
+            v-if="scope.row.img_head"
+            style="width: 100px; height: 100px"
+            :src="scope.row.img_head" 
+            :preview-src-list="[scope.row.img_head]">
+          </el-image> 
+        </template>
+      </el-table-column>
       <el-table-column prop="status" label="状态">
         <template slot-scope="scope">
           <img src="@/assets/images/yes.gif" v-if="scope.row.status==1" alt>

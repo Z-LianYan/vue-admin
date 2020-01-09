@@ -109,11 +109,11 @@ export default {
             type: "value"
           }
         ],
-        dataZoom: [
-          {
-            type: "inside"
-          }
-        ],
+        // dataZoom: [
+        //   {
+        //     type: "inside"
+        //   }
+        // ],
         series: [
           {
             name: "直接访问",

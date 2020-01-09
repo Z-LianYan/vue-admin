@@ -21,7 +21,7 @@
         
         <div class="avatar-wrapper">
           <el-button type="text" v-if="userInfo.username">Hi！{{userInfo.username}}</el-button>
-          <img src="https://www.baidu.com/img/baidu_jgylogo3.gif" class="user-avatar">
+          <img :src="userInfo.img_head" class="user-avatar">
           <i class="el-icon-caret-bottom"/>
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">

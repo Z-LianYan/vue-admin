@@ -1,8 +1,6 @@
 <template>
   <div class="upload-container" :style="{height:setHeight,width:setWidth}">
     <el-upload
-      :style="{height:setHeight}"
-      class="upload-demo"
       ref="addupload"
       drag
       :action="upload_qiniu_url"
@@ -27,22 +25,22 @@
 </template>
 
 <script>
-import moment from "moment";
 import * as qiniu from "qiniu-js";
+import dayjs from 'dayjs';
 export default {
   name: "UploadImage",
   props: {
     setWidth:{
       type:String,
-      default:'180px'
+      default:'200px'
     },
     setHeight:{
       type:String,
-      default:'180px'
+      default:'200px'
     },
     setLineHeight:{
       type:String,
-      default:'180px'
+      default:'200px'
     },
     getImgUrl:{
       type:Function
@@ -66,7 +64,7 @@ export default {
     };
   },
   mounted() {
-    this.gotUploadToken();
+    this.getUploadQiNiuToken();
   },
   computed:{
     
@@ -77,41 +75,35 @@ export default {
     }
   },
   methods: {
-    gotUploadToken() {
-      this.$store.dispatch("GET_UPLOAD_TOKEN").then(res => {
+    getUploadQiNiuToken() {
+      this.$store.dispatch("sourceManager/getUploadQiNiuToken").then(res => {
         console.log("res---",res);
-        this.upload_qiniu_addr = res.site_static_host;
-        qiniu
-          .getUploadUrl(
-            { useCdnDomain: true, region: qiniu.region.z2 },
-            res.upload_token
-          )
-          .then(res => {
-            this.upload_qiniu_url = res;
-          }); // res 即为上传的 url
+        this.upload_qiniu_addr = res.static_host;
+        console.log("qiniu.region",qiniu)
+        qiniu.getUploadUrl({ useCdnDomain: true, region: qiniu.region.z2 },res.upload_token).then(res => {
+          console.log("upload_qiniu_url",res)
+          this.upload_qiniu_url = res;
+        }); // res 即为上传的 url
       });
     },
 
     beforeUpload(file) {
       return new Promise((resolve, reject) => {
-        qiniu
-          .compressImage(file, {
-            quality: 0.5,
-            maxWidth: 720
-          })
-          .then(compress_res => {
-            console.log(compress_res);
-            this.$store.dispatch("GET_UPLOAD_TOKEN").then(res => {
-              this.qiniuData.token = res.upload_token;
-              this.qiniuData.key =this.uploadPrefix+'-'+moment().format("YYYYMMDDHHmmss") +file.name;
-              this.upload_qiniu_addr = res.site_static_host;
-              resolve(compress_res.dist);
-            });
+        qiniu.compressImage(file, {quality: 0.5,maxWidth: 720}).then(compress_res => {
+          console.log(compress_res);
+          this.$store.dispatch("sourceManager/getUploadQiNiuToken").then(res => {
+            this.qiniuData.token = res.upload_token;
+            this.qiniuData.key =this.uploadPrefix+'-'+dayjs().format("YYYYMMDDHHmmss") +file.name;
+            this.upload_qiniu_addr = res.static_host;
+            resolve(compress_res.dist);
           });
+        });
       });
     },
     handleAddUploadSuccess(res, file) {
+      console.log("UploadSuccess",res)
       this.imgUrl = this.upload_qiniu_addr + res.key;
+      
       this.$emit("getImgUrl",this.imgUrl);
     },
     handleUploadError(err, file, fileList) {

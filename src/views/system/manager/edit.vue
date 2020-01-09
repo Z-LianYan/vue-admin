@@ -35,6 +35,13 @@
         </el-select>
       </el-form-item>
 
+      <el-form-item label="上传头像" prop="img_head">
+        <upload-image 
+        @getImgUrl="getImgUrl" 
+        uploadPrefix="avatar/header_phone" 
+        :staticImageUrl='ruleForm.img_head' />
+      </el-form-item>
+
       <el-form-item label="状态" prop="status">
         <el-radio-group v-model="ruleForm.status">
           <el-radio :label="1" checked="true">启用</el-radio>
@@ -76,7 +83,12 @@
 </template>
 
 <script>
+import UploadImage from "@/components/UploadImage"
 export default {
+  name:'manager_edit',
+  components:{
+    UploadImage
+  },
   data() {
     let validateMobile = (rule, value, callback) => {
       if (value === "") {
@@ -125,12 +137,16 @@ export default {
         password: "",
         confirmPassword: "",
         mobile: "",
+        img_head:"",
         email: "",
         role_id: "",
         status: 1
       },
       roleList: [],
       rules: {
+        img_head: [
+          { required: true, message: "请上传头像" },
+        ],
         username: [
           { required: true, message: "请输入管理员名称", trigger: "blur" },
           { min: 3, message: "长度在 3 个字符以上", trigger: "blur" }
@@ -201,6 +217,13 @@ export default {
       } else {
         this.newPasswordType = "password";
       }
+    },
+    getImgUrl(imgUrl){
+
+      console.log("上传的图片路径：",imgUrl);
+
+      this.ruleForm.img_head = imgUrl;
+      
     }
   }
 };

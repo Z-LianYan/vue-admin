@@ -36,4 +36,5 @@ export const GET_ACCESS_MENU = '/API/admin/accessMenu/getAccessMenu';
 export const AUTHORIZATION_ROLE_AUTH = '/API/admin/authorization/roleAuth';
 export const AUTHORIZATION_EDIT = '/API/admin/authorization/edit';
 
-
+//获取七牛token
+export const GET_QINIU_TOKEN = '/API/sourceManager/getQiNiuToken';
