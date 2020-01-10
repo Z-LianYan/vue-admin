@@ -76,35 +76,46 @@ export default {
   },
   methods: {
     getUploadQiNiuToken() {
+
       this.$store.dispatch("sourceManager/getUploadQiNiuToken").then(res => {
-        console.log("res---",res);
+
         this.upload_qiniu_addr = res.static_host;
-        console.log("qiniu.region",qiniu)
+
         qiniu.getUploadUrl({ useCdnDomain: true, region: qiniu.region.z2 },res.upload_token).then(res => {
-          console.log("upload_qiniu_url",res)
+
           this.upload_qiniu_url = res;
+
         }); // res 即为上传的 url
       });
     },
 
     beforeUpload(file) {
+
       return new Promise((resolve, reject) => {
+
         qiniu.compressImage(file, {quality: 0.5,maxWidth: 720}).then(compress_res => {
-          console.log(compress_res);
+
           this.$store.dispatch("sourceManager/getUploadQiNiuToken").then(res => {
+
             this.qiniuData.token = res.upload_token;
+
             this.qiniuData.key =this.uploadPrefix+'-'+dayjs().format("YYYYMMDDHHmmss") +file.name;
+
             this.upload_qiniu_addr = res.static_host;
+
             resolve(compress_res.dist);
+
           });
         });
       });
+      
     },
     handleAddUploadSuccess(res, file) {
-      console.log("UploadSuccess",res)
+
       this.imgUrl = this.upload_qiniu_addr + res.key;
       
       this.$emit("getImgUrl",this.imgUrl);
+
     },
     handleUploadError(err, file, fileList) {
       console.log("err", err);

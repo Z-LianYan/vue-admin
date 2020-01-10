@@ -20,7 +20,9 @@
       <el-dropdown class="avatar-container" trigger="click">
         
         <div class="avatar-wrapper">
-          <el-button type="text" v-if="userInfo.username">Hi！{{userInfo.username}}</el-button>
+          <!-- <el-button style="display:inlin-block;" type="text" v-if="userInfo.username">Hi！{{userInfo.username}}</el-button> -->
+          
+          <span class="showUserName" v-if="userInfo.username">Hi！{{userInfo.username}}</span>
           <img :src="userInfo.img_head" class="user-avatar">
           <i class="el-icon-caret-bottom"/>
         </div>
@@ -138,6 +140,11 @@ export default {
       .avatar-wrapper {
         margin-top: 5px;
         position: relative;
+
+        // .showUserName{
+        //   margin-bottom: 5px;
+        // }
+
 
         .user-avatar {
           cursor: pointer;
