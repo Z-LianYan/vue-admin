@@ -13,6 +13,9 @@
 
       <!-- <span class="showUserName" v-if="userInfo.username">Hi！{{userInfo.username}}</span> -->
 
+      <!-- <screenfull id="screenfull" class="right-menu-item hover-effect" /> -->
+
+
       <el-tooltip class="item" effect="dark" content="设置主题颜色" placement="top-start">
         <theme-picker style="height: 26px;margin: 0 8px 0 0;" @change="themeChange" />
       </el-tooltip>
@@ -55,6 +58,8 @@ import { mapGetters } from "vuex";
 import Breadcrumb from "./Breadcrumb";
 import Hamburger from "./Hamburger";
 
+import Screenfull from '@/components/Screenfull/index'
+
 import ThemePicker from '@/components/ThemePicker'
 
 export default {
@@ -64,7 +69,8 @@ export default {
   components: {
     Breadcrumb,
     Hamburger,
-    ThemePicker
+    ThemePicker,
+    Screenfull
   },
   computed: {
     ...mapGetters(["sidebar", "avatar","userInfo"])
