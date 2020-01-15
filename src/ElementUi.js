@@ -84,9 +84,5 @@ Vue.use(ElementUI.Cascader);
 
 
 
-
-
-
-
 Vue.prototype.$confirm = ElementUI.MessageBox.confirm;
 Vue.prototype.$message = ElementUI.Message;

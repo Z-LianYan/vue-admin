@@ -1,5 +1,6 @@
 <template>
   <div class="navbar">
+
     <hamburger
       :is-active="sidebar.opened"
       class="hamburger-container"
@@ -10,32 +11,42 @@
     
     <div class="right-menu">
 
-      
+      <!-- <span class="showUserName" v-if="userInfo.username">Hi！{{userInfo.username}}</span> -->
 
-      <!-- <el-color-picker size="mini" v-model="color"></el-color-picker> -->
-      <!-- <div style="background:#ccc;display:inline-block;">123</div> -->
-
-      
+      <el-tooltip class="item" effect="dark" content="设置主题颜色" placement="top-start">
+        <theme-picker style="height: 26px;margin: 0 8px 0 0;" @change="themeChange" />
+      </el-tooltip>
 
       <el-dropdown class="avatar-container" trigger="click">
         
         <div class="avatar-wrapper">
-          <!-- <el-button style="display:inlin-block;" type="text" v-if="userInfo.username">Hi！{{userInfo.username}}</el-button> -->
-          
-          <span class="showUserName" v-if="userInfo.username">Hi！{{userInfo.username}}</span>
+
           <img :src="userInfo.img_head" class="user-avatar">
+
           <i class="el-icon-caret-bottom"/>
+
         </div>
+
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
+
           <router-link to="/">
+
             <el-dropdown-item>首页</el-dropdown-item>
+
           </router-link>
+
           <el-dropdown-item divided>
+
             <span style="display:block;" @click="doLogout">退出系统</span>
+
           </el-dropdown-item>
+
         </el-dropdown-menu>
+
       </el-dropdown>
+
     </div>
+
   </div>
 </template>
 
@@ -44,20 +55,27 @@ import { mapGetters } from "vuex";
 import Breadcrumb from "./Breadcrumb";
 import Hamburger from "./Hamburger";
 
+import ThemePicker from '@/components/ThemePicker'
+
 export default {
   data(){
-    return {
-      color:'#58bc58'
-    }
+    return {}
   },
   components: {
     Breadcrumb,
-    Hamburger
+    Hamburger,
+    ThemePicker
   },
   computed: {
     ...mapGetters(["sidebar", "avatar","userInfo"])
   },
   methods: {
+    themeChange(val){
+      this.$store.dispatch("settings/changeSetting",{
+        key: 'theme',
+        value: val
+      })
+    },
     toggleSideBar() {
       this.$store.dispatch("app/toggleSideBar");
     },
@@ -72,10 +90,12 @@ export default {
           this.$store.state.accessMenu.login_success_go_def_route = '';
         });
       }).catch(() => {
+
         this.$message({
           type: "info",
           message: "已取消退出系统"
         });
+
       });
     }
   }

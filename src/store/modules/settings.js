@@ -1,8 +1,10 @@
+import variables from '@/styles/element-variables.scss'
 import defaultSettings from '@/settings'
 
 const { showSettings, fixedHeader, sidebarLogo } = defaultSettings
 
 const state = {
+  theme: variables.theme,
   showSettings: showSettings,
   fixedHeader: fixedHeader,
   sidebarLogo: sidebarLogo
@@ -10,8 +12,10 @@ const state = {
 
 const mutations = {
   CHANGE_SETTING: (state, { key, value }) => {
+    console.log("key",key,'value',value);
     if (state.hasOwnProperty(key)) {
       state[key] = value
+      console.log("store---",state.theme);
     }
   }
 }
