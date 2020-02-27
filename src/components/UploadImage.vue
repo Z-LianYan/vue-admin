@@ -113,6 +113,8 @@ export default {
     handleAddUploadSuccess(res, file) {
 
       this.imgUrl = this.upload_qiniu_addr + res.key;
+
+      console.log("res.key",res)
       
       this.$emit("getImgUrl",this.imgUrl);
 
