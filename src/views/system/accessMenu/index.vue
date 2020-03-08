@@ -21,10 +21,10 @@
       <el-table-column prop="title" label="菜单名称"></el-table-column>
       <el-table-column prop="icon" label="图标"></el-table-column>
       <el-table-column prop="url" label="访问路径"></el-table-column>
-      <el-table-column prop="hidden" label="是否隐藏">
+      <el-table-column prop="hidden" label="是否显示">
         <template slot-scope="scope">
-          <img src="@/assets/images/yes.gif" v-if="scope.row.hidden==1" alt />
-          <img src="@/assets/images/no.gif" v-if="scope.row.hidden==0" alt />
+          <img src="@/assets/images/yes.gif" v-if="scope.row.hidden==0" alt />
+          <img src="@/assets/images/no.gif" v-if="scope.row.hidden==1" alt />
         </template>
       </el-table-column>
 

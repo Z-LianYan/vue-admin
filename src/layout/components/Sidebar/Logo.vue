@@ -2,11 +2,11 @@
   <div class="sidebar-logo-container" :class="{'collapse':collapse}" :style="{'background':this.$store.state.settings.theme}">
     <transition name="sidebarLogoFade">
       <router-link v-if="collapse" key="collapse" class="sidebar-logo-link" to="">
-        <img v-if="logo" src="@/assets/images/icon.jpg" class="sidebar-logo">
+        <img v-if="logo" src="@/assets/images/logo.jpg" class="sidebar-logo">
         <h1 v-else class="sidebar-title">Hi！{{userInfo.username}}</h1>
       </router-link>
       <router-link v-else key="expand" class="sidebar-logo-link" to="">
-        <img v-if="logo" src="@/assets/images/icon.jpg" class="sidebar-logo">
+        <img v-if="logo" src="@/assets/images/logo.jpg" class="sidebar-logo">
         <h1 class="sidebar-title">Hi！{{userInfo.username}} </h1>
       </router-link>
     </transition>
@@ -28,8 +28,8 @@ export default {
   },
   data() {
     return {
-      title: 'Vue Admin Template',
-      logo: '@/assets/images/icon.jpg'
+      title: 'vue-admin',
+      logo: '@/assets/images/logo.jpg'
     }
   }
 }
