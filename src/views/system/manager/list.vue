@@ -1,163 +1,164 @@
 <template>
   <el-card class="box-card">
-    <div slot="header" style="text-align:center;" class="clearfix">
-      <span>管理员列表</span>
-      <!-- <el-button type="text" @click="doAdd" class="float-right">
-        <i class="el-icon-plus"></i>添加管理员
-      </el-button> -->
-    </div>
-
-    <el-form label-width="90px">
-      <el-form-item label="关键字搜索">
-        <el-input
-          v-model="fetchOptions.keywords"
-          width="200px"
-          @keyup.enter.native="getData()"
-          placeholder="请输入关键字"
-        ></el-input>
-      </el-form-item>
-      <el-form-item label="开始时间" style="display:inline-block">
-        <el-date-picker
-          @change="getData()"
-          v-model="fetchOptions.start_time"
-          type="date"
-          placeholder="选择日期"
-        ></el-date-picker>
-      </el-form-item>
-      <el-form-item label="结束时间" style="display:inline-block">
-        <el-date-picker
-          @change="getData()"
-          v-model="fetchOptions.end_time"
-          type="date"
-          placeholder="选择日期"
-        ></el-date-picker>
-      </el-form-item>
-    </el-form>
-
-    <el-table
-      v-loading="loading"
-      :data="tableData"
-      highlight-current-row
-      border
-      style="width: 100%"
-    >
-      <el-table-column prop="username" label="管理员名称"></el-table-column>
-      <el-table-column prop="mobile" label="电话"></el-table-column>
-      <el-table-column prop="email" label="邮箱"></el-table-column>
-      <el-table-column prop="title" label="角色"></el-table-column>
-      <el-table-column prop="img_head" label="头像">
-        <template slot-scope="scope">
-          <el-image 
-            v-if="scope.row.img_head"
-            style="width: 100px; height: 100px"
-            :src="scope.row.img_head" 
-            :preview-src-list="[scope.row.img_head]">
-          </el-image> 
-        </template>
-      </el-table-column>
-      <el-table-column prop="status" label="状态">
-        <template slot-scope="scope">
-          <img src="@/assets/images/yes.gif" v-if="scope.row.status==1" alt>
-          <img src="@/assets/images/no.gif" v-if="scope.row.status==0" alt>
-        </template>
-      </el-table-column>
-      <el-table-column prop="add_time" label="添加时间">
-        <template slot-scope="scope">{{scope.row.add_time|formatDate}}</template>
-      </el-table-column>
-
-      <el-table-column label="操作">
-        <template slot-scope="scope">
-          <el-button type="text" size="small" @click="doEdit(scope.row)">
-            <i class="el-icon-edit"></i>编辑
-          </el-button>
-          <el-button type="text" size="small" @click="doDelete(scope.row)">
-            <i class="el-icon-delete"></i>删除
-          </el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-
-    <br>
-    <el-row>
-      <mine-pagination
-        :total="total"
-        @sizeChange="handleSizeChange"
-        @currentChange="handleCurrentChange"
-        :pageSize="fetchOptions.limit"
-        :currentPage="fetchOptions.page"
-      />
-    </el-row>
+    <el-button type="text" @click="downloadExl(jsono)">导出Ecel</el-button>
+    <!-- <a href="" download="这里是下载的文件名.xlsx" id="hf"></a> -->
   </el-card>
 </template>
 
 <script>
+import XLSX from "xlsx-style";
+
+
+
+
+
+
+
 export default {
   name: "manager",
   data() {
     return {
-      loading: false,
-      tableData: [],
-      fetchOptions: {
-        page: 1,
-        limit: 20,
-        keywords: "",
-        start_time: "",
-        end_time: ""
-      },
-      total: 0
+      jsono:[{ //测试数据
+        "保质期临期预警(天)": "adventLifecycle",
+        "商品标题": "title",
+        "建议零售价": "defaultPrice",
+        "高(cm)": "height",
+        "商品描述": "Description",
+        "保质期禁售(天)": "lockupLifecycle",
+      }]
     };
   },
   components: {},
   computed: {},
-  mounted() {
-    this.getData();
-  },
+  mounted() {},
   watch: {},
   methods: {
-    // doAdd() {
-    //   this.$router.push({ path: "/system/manager/add" });
-    // },
-    getData() {
-      this.loading = true;
-      this.$store.dispatch("manager/list", this.fetchOptions).then(res => {
-        this.tableData = res.data;
-        this.total = res.count;
-        this.loading = false;
-      });
-    },
-    doEdit(rows) {
-      this.$router.push({ path: "/system/manager/edit/" + rows._id });
-    },
-    doDelete(rows) {
-      const { _id } = rows;
-      this.$confirm("此操作将永久删除该记录, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      })
-        .then(() => {
-          this.$store.dispatch("manager/doDelete", { _id }).then(() => {
-            this.getData();
-          });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消删除"
-          });
-        });
+
+    downloadExl(json, type) {
+      var tmpDown;
+      var tmpdata = json[0];
+      json.unshift({});
+      var keyMap = []; //获取keys
+      //keyMap =Object.keys(json[0]);
+      for (var k in tmpdata) {
+        keyMap.push(k);
+        json[0][k] = k;
+      }
+
+      console.log("json---",json);
+      console.log("keyMap---",keyMap);
+      // return;
+      var tmpdata = []; //用来保存转换好的json
+      // json.map((v, i) =>
+      //   keyMap.map((k, j) =>
+      //     Object.assign({},{
+      //       v: v[k],position:(j > 25 ? this.getCharCol(j) : String.fromCharCode(65 + j)) +(i + 1)
+      //     })
+      //   )
+      // ).reduce((prev, next) => prev.concat(next)).forEach((v, i) => tmpdata[v.position] = {v: v.v});
+
+      var handleJson = json.map((v, i) =>
+        keyMap.map((k, j) =>{
+          console.log("++",this.getCharCol(j))
+          return Object.assign({},{
+            v: v[k],position:(j > 25 ? this.getCharCol(j) : String.fromCharCode(65 + j)) +(i + 1)
+          })
+        }
+         
+        )
+      )
+      console.log("handleJson----",handleJson)
+
+      console.log("tmpdata",tmpdata);
+
+      var outputPos = Object.keys(tmpdata); //设置区域,比如表格从A1到D10
+
+      console.log("outputPos",outputPos);
+
+      return;
+
+      tmpdata["B1"].s = {
+        font: { sz: 14, bold: true, color: { rgb: "FFFFAA00" } },
+        fill: { bgColor: { indexed: 64 }, fgColor: { rgb: "FFFF00" } },
+        alignment: {vertical:"center",horizontal:"center"}
+      }; //<====设置xlsx单元格样式
+      tmpdata["!merges"] = [
+        {
+          s: { c: 1, r: 0 },
+          e: { c: 4, r: 0 }
+        }
+      ]; //<====合并单元格
+
+      var tmpWB = {
+        SheetNames: ["mySheet"], //保存的表标题
+        Sheets: {
+          mySheet: Object.assign(
+            {},
+            tmpdata, //内容
+            {
+              "!ref": outputPos[0] + ":" + outputPos[outputPos.length - 1] //设置填充区域
+            }
+          )
+        }
+      };
+
+      console.log("tmpDown",tmpWB);
+
+      return;
+
+      tmpDown = new Blob(
+        [
+          this.s2ab(
+            XLSX.write(
+              tmpWB,
+              {
+                bookType: type == undefined ? "xlsx" : type,
+                bookSST: false,
+                type: "binary"
+              } //这里的数据是用来定义导出的格式类型
+            )
+          )
+        ],
+        {
+          type: ""
+        }
+      ); //创建二进制对象写入转换好的字节流
+
+      // var href = URL.createObjectURL(tmpDown); //创建对象超链接
+      // document.getElementById("hf").href = href; //绑定a标签
+      // document.getElementById("hf").click(); //模拟点击实现下载
+
+      
+
+      var tmpa = document.createElement("a");
+      tmpa.download = "下载.xlsx";
+      tmpa.href = URL.createObjectURL(tmpDown);//创建对象超链接==>绑定到a标签
+      tmpa.click();//模拟点击实现下载
+      console.log("b--",tmpa)
+      setTimeout(function() {
+        //延时释放
+        URL.revokeObjectURL(tmpDown); //用URL.revokeObjectURL()来释放这个object URL
+      }, 100);
     },
 
-    handleSizeChange(limit) {
-      console.log("limit", limit);
-      this.fetchOptions.limit = limit;
-      this.getData();
+    s2ab(s) {
+      //字符串转字符流
+      var buf = new ArrayBuffer(s.length);
+      var view = new Uint8Array(buf);
+      for (var i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xff;
+      return buf;
     },
 
-    handleCurrentChange(page) {
-      console.log("page", page);
-      this.fetchOptions.page = page;
-      this.getData();
+    getCharCol(n) {
+      let temCol = "",
+        s = "",
+        m = 0;
+      while (n > 0) {
+        m = (n % 26) + 1;
+        s = String.fromCharCode(m + 64) + s;
+        n = (n - m) / 26;
+      }
+      return s;
     }
   }
 };
