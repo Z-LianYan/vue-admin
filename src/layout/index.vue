@@ -1,5 +1,5 @@
 <template>
-  <div :class="classObj" class="app-wrapper">
+  <div :class="classObj" class="app-wrapper" v-if="this.$store.state.accessMenu.initialize_system">
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
     <sidebar class="sidebar-container" />
     <div class="main-container">
@@ -9,6 +9,7 @@
       <app-main />
     </div>
   </div>
+  <div v-else>系统正在初始化。。。</div>
 </template>
 
 <script>
@@ -23,6 +24,7 @@ export default {
     AppMain
   },
   mixins: [ResizeMixin],
+  mounted(){},
   computed: {
     sidebar() {
       return this.$store.state.app.sidebar

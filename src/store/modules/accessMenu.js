@@ -2,8 +2,13 @@ import * as requstTools from "@/utils/request";
 import * as aipUrl from "@/common/api";
 import { Message, Loading } from 'element-ui';
 
+import store from '@/store';
+import { getToken, getUserInfo, routerMenuFilter } from '@/common/tools';
+import router from '@/router'
+
 const state = {
-  routerMenu:[]
+  routerMenu:[],
+  initialize_system:false
 }
 
 const mutations = {
@@ -75,11 +80,22 @@ const actions = {
       requstTools.get(aipUrl.GET_ACCESS_MENU, requestParams).then(res => {
         if (res.error == 0) {
           resolve(res.data);
+          var error_404 = { path: '*', redirect: '/404', hidden: true };
+          var accessRouter = routerMenuFilter(res.data.data);
+          // console.log("accessMenu----",accessRouter)
+
+          accessRouter.push(error_404);
+          var router_menu = router.options.routes.concat(accessRouter);
+          router.selfaddRoutes(router_menu);
+          store.commit("accessMenu/MENU_ROUTER", router_menu);
+          state.initialize_system = true;
         } else {
           Message.error(res.message);
+          state.initialize_system = true;
         }
       }).catch(error => {
         reject(error)
+        state.initialize_system = true;
       })
     })
   }
