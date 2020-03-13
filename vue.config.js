@@ -48,7 +48,8 @@ module.exports = {
       // },
       "/API": {
         // target: "http://908686.cn",
-        target: "http://62.234.71.57",
+        // target: "http://62.234.71.57",
+        target: "http://127.0.0.1:7001",
         changeOrigin: true,// 如果接口跨域，需要进行这个参数配置,默认值：false,如果为true将主机标头的原点更改为目标URL(target)
         // secure: false//默认情况下，不接受运行在 HTTPS 上,只要设置 secure: false 就行
       }

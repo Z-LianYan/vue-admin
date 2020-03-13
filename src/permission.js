@@ -11,7 +11,9 @@ NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 const whiteList = ['/login'] // no redirect whitelist
 
-router.beforeEach(async (to, from, next) => {
+
+let isLoadingMenu = true;//处理刷新页面请求两遍菜单
+router.beforeEach((to, from, next) => {
 
   NProgress.start()
 
@@ -25,7 +27,8 @@ router.beforeEach(async (to, from, next) => {
       next({ path: '/' })
       NProgress.done()
     } else {
-      if(!store.state.accessMenu.routerMenu.length) {
+      if(!store.state.accessMenu.routerMenu.length && isLoadingMenu) {
+        isLoadingMenu=false;
         store.dispatch("accessMenu/getAccessMenu")
       }
       next()

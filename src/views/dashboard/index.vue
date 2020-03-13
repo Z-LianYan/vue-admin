@@ -34,7 +34,13 @@ export default {
       chart: null
     };
   },
+  created(){
+    if(!this.$store.state.accessMenu.routerMenu.length) {
+      this.$store.dispatch("accessMenu/getAccessMenu")
+    }
+  },
   mounted() {
+
     // this.$nextTick(()=>{
     this.initChart();
     // })
