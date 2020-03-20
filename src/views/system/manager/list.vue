@@ -2,16 +2,16 @@
   <el-card class="box-card">
     <div slot="header" style="text-align:center;" class="clearfix">
       <span>管理员列表</span>
-      <!-- <el-button type="text" @click="doAdd" class="float-right">
-        <i class="el-icon-plus"></i>添加管理员
-      </el-button> -->
+      <el-button type="text" @click="getData" class="float-right">
+        <i class="el-icon-refresh"></i>刷新
+      </el-button>
     </div>
 
     <el-form label-width="90px">
-      <el-form-item label="关键字搜索">
+      <el-form-item label="关键字搜索" style="display:inline-block">
         <el-input
           v-model="fetchOptions.keywords"
-          width="200px"
+          style="width:200px;"
           @keyup.enter.native="getData()"
           placeholder="请输入关键字"
         ></el-input>
@@ -31,6 +31,9 @@
           type="date"
           placeholder="选择日期"
         ></el-date-picker>
+      </el-form-item>
+      <el-form-item label="">
+        <el-button @click="getData">筛选</el-button>
       </el-form-item>
     </el-form>
 

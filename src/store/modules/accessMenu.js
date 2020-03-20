@@ -78,6 +78,7 @@ const actions = {
   getAccessMenu({ commit, state },requestParams){
     return new Promise((resolve, reject) => {
       requstTools.get(aipUrl.GET_ACCESS_MENU, requestParams).then(res => {
+        console.log
         if (res.error == 0) {
           resolve(res.data);
           var error_404 = { path: '*', redirect: '/404', hidden: true };
@@ -85,6 +86,7 @@ const actions = {
           accessRouter.push(error_404);
           var router_menu = router.options.routes.concat(accessRouter);
           router.selfaddRoutes(router_menu);
+          console.log("路由",router_menu);
           store.commit("accessMenu/MENU_ROUTER", router_menu);
           state.initialize_system = true;
         } else {

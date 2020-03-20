@@ -21,7 +21,13 @@
       <el-table-column prop="title" label="菜单名称"></el-table-column>
       <el-table-column prop="icon" label="图标"></el-table-column>
       <el-table-column prop="url" label="访问路径"></el-table-column>
-      <el-table-column prop="hidden" label="是否显示">
+      <el-table-column prop="hidden" label="是否缓存页面">
+        <template slot-scope="scope">
+          <img src="@/assets/images/yes.gif" v-if="scope.row.keep_alive==1" alt />
+          <img src="@/assets/images/no.gif" v-if="scope.row.keep_alive==0" alt />
+        </template>
+      </el-table-column>
+      <el-table-column prop="hidden" label="是否显示菜单">
         <template slot-scope="scope">
           <img src="@/assets/images/yes.gif" v-if="scope.row.hidden==0" alt />
           <img src="@/assets/images/no.gif" v-if="scope.row.hidden==1" alt />
@@ -79,7 +85,6 @@ export default {
   methods: {
     doAdd() {
       this.$refs.menu_add_edit.open();
-      // this.$router.push({ path: "/system/accessMenu/add" });
     },
     getData() {
       this.loading = true;
@@ -91,8 +96,6 @@ export default {
       });
     },
     doEdit(rows) {
-      console.log("rows---",rows);
-      // this.$router.push({ path: "/system/accessMenu/edit/" + rows._id });
       this.$refs.menu_add_edit.open(rows);
     },
     doDelete(rows) {

@@ -9,7 +9,7 @@
       :model="ruleForm"
       :rules="rules"
       ref="ruleForm"
-      label-width="100px"
+      label-width="120px"
       class="demo-ruleForm"
     >
       <el-form-item label="所属模块" prop="module_id">
@@ -32,7 +32,7 @@
       </el-form-item>
 
       <el-form-item label="组件" prop="component">
-        <el-input v-model="ruleForm.component"></el-input>
+        <el-input v-model="ruleForm.component" placeholder="请引入views下的组件"></el-input>
       </el-form-item>
 
       <el-form-item label="重定向" prop="redirect">
@@ -51,14 +51,17 @@
         <el-input v-model="ruleForm.icon"></el-input>
       </el-form-item>
 
-      <el-form-item label="访问路径" prop="url">
-        <el-input v-model="ruleForm.url"></el-input>
+      <el-form-item label="是否缓存页面" prop="keep_alive">
+        <el-radio-group v-model="ruleForm.keep_alive">
+          <el-radio :label="1">是</el-radio>
+          <el-radio :label="0">否</el-radio>
+        </el-radio-group>
       </el-form-item>
 
-      <el-form-item label="是否隐藏" prop="hidden">
+      <el-form-item label="是否显示菜单" prop="hidden">
         <el-radio-group v-model="ruleForm.hidden">
-          <el-radio :label="0" checked="true">否</el-radio>
-          <el-radio :label="1">是</el-radio>
+          <el-radio :label="0">是</el-radio>
+          <el-radio :label="1">否</el-radio>
         </el-radio-group>
       </el-form-item>
 
@@ -81,8 +84,8 @@ function ruleForm() {
     name: "",
     title: "",
     icon: "",
-    hidden: 0,
-    url: ""
+    keep_alive:0,
+    hidden: 0,//0显示，1隐藏
   };
 }
 export default {
@@ -145,9 +148,9 @@ export default {
       if (val) {
         this.isAdd = false;
         var rows = _.clone(val);
-        console.log("val", rows);
-        this.ruleForm.module_id = Number(rows.module_id);
-        delete rows.module_id;
+        console.log("val哈哈哈哈😄", rows);
+        rows.module_id = Number(rows.module_id);
+        delete rows.children;
         this.ruleForm = {
           ...this.ruleForm,
           ...rows

@@ -27,9 +27,8 @@ export function routerMenuFilter(routerData) { //遍历后台传来的路由字�
     route.meta = {
       title: route.title
     }
-    if (route.icon) {
-      route.meta.icon = route.icon
-    }
+    if (route.icon) route.meta.icon = route.icon
+    if (route.keep_alive) route.meta.keep_alive = route.keep_alive==1?true:false;
 
     if (route.component) {
       if (route.component === 'Layout') { //Layout组件特殊处理
@@ -46,10 +45,8 @@ export function routerMenuFilter(routerData) { //遍历后台传来的路由字�
     }
     delete route.title
     delete route.icon
-    delete route.url
-    delete route.module_id
+    // delete route.module_id
     delete route._id
-    delete route.update_time
     return true
   })
 
