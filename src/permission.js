@@ -12,6 +12,7 @@ NProgress.configure({ showSpinner: false }) // NProgress Configuration
 const whiteList = ['/login'] // no redirect whitelist
 
 
+
 let isLoadingMenu = true;//处理刷新页面请求两遍菜单
 router.beforeEach((to, from, next) => {
 
@@ -42,6 +43,7 @@ router.beforeEach((to, from, next) => {
     }
   }
 })
+
 
 router.afterEach(() => {
   // finish progress bar

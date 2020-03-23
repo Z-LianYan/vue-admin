@@ -25,11 +25,10 @@ export function removeUserInfo() {
 export function routerMenuFilter(routerData) { //遍历后台传来的路由字符串，转换为组件对象
   var accessedRouters = routerData.filter(route => {
     route.meta = {
-      title: route.title
+      title: route.title,
+      icon: route.icon,
+      keep_alive: route.keep_alive==1?true:false
     }
-    if (route.icon) route.meta.icon = route.icon
-    if (route.keep_alive) route.meta.keep_alive = route.keep_alive==1?true:false;
-
     if (route.component) {
       if (route.component === 'Layout') { //Layout组件特殊处理
         route.component = Layout
@@ -45,7 +44,8 @@ export function routerMenuFilter(routerData) { //遍历后台传来的路由字�
     }
     delete route.title
     delete route.icon
-    // delete route.module_id
+    delete route.keep_alive
+    delete route.module_id
     delete route._id
     return true
   })

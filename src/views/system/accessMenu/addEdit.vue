@@ -148,7 +148,6 @@ export default {
       if (val) {
         this.isAdd = false;
         var rows = _.clone(val);
-        console.log("val哈哈哈哈😄", rows);
         rows.module_id = Number(rows.module_id);
         delete rows.children;
         this.ruleForm = {

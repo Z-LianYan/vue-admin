@@ -78,6 +78,7 @@
           </el-button>
         </template>
       </el-table-column>
+      
     </el-table>
 
     <br>
@@ -107,7 +108,8 @@ export default {
         start_time: "",
         end_time: ""
       },
-      total: 0
+      total: 0,
+      currentView:""
     };
   },
   components: {},
@@ -117,9 +119,6 @@ export default {
   },
   watch: {},
   methods: {
-    // doAdd() {
-    //   this.$router.push({ path: "/system/manager/add" });
-    // },
     getData() {
       this.loading = true;
       this.$store.dispatch("manager/list", this.fetchOptions).then(res => {
@@ -162,7 +161,15 @@ export default {
       this.fetchOptions.page = page;
       this.getData();
     }
-  }
+  },
+  beforeRouteLeave(to,from,next){
+    if(to.name == "ManagerAdd" || to.name == "ManagerEdit"){
+      this.$route.meta.keep_alive = true;
+    }else{
+      this.$route.meta.keep_alive = false;
+    }
+    next();
+  },
 };
 </script>
 

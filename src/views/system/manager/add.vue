@@ -147,10 +147,19 @@ export default {
 
       this.ruleForm.img_head = imgUrl;
 
-    }
-    // goBack() {
-    //   history.go(-1);
-    // }
+    },
+    activated(){
+      console.log("管理员添加activated");
+    },
+    deactivated(){
+      console.log("管理员添加activated");
+    },
+    destroyed(){
+      console.log("管理员添加destroyed");
+    },
+    beforeDestroy(){
+      console.log("管理员添加beforeDestroy");
+    },
   }
 };
 </script>
