@@ -1,9 +1,9 @@
 <template>
   <el-card class="box-card">
     <div slot="header" style="text-align:center;" class="clearfix">
-      <span>权限菜单管理</span>
+      <span>菜单管理</span>
       <el-button type="text" @click="doAdd" class="float-right">
-        <i class="el-icon-plus"></i>添加权限菜单
+        <i class="el-icon-plus"></i>添加菜单
       </el-button>
     </div>
     <el-table

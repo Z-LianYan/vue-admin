@@ -51,6 +51,7 @@ export default {
     AppMain
   },
   mixins: [ResizeMixin],
+  created(){},
   mounted() {},
   computed: {
     sidebar() {

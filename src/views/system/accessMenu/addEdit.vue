@@ -1,6 +1,6 @@
 <template>
   <el-drawer
-    :title="isAdd? '添加权限菜单': '编辑权限菜单'"
+    :title="isAdd? '添加菜单': '编辑菜单'"
     :visible.sync="isDrawer"
     size="45%"
     @close="drawerClose"

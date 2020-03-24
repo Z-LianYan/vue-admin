@@ -15,13 +15,6 @@ export const ROLE_EDIT = '/API/admin/role/edit';
 export const ROLE_DEL = '/API/admin/role/del';
 export const ROLE_GET_SINGLE = '/API/admin/role/getSingle';
 
-//权限管理
-// export const ACCESS_LIST = '/API/admin/access/list';
-// export const ACCESS_ADD = '/API/admin/access/add';
-// export const ACCESS_EDIT = '/API/admin/access/edit';
-// export const ACCESS_DEL = '/API/admin/access/del';
-// export const ACCESS_GET_SINGLE = '/API/admin/access/getSingle';
-
 //菜单管理
 export const ACCESS_MENU_LIST = '/API/admin/accessMenu/list';
 export const ACCESS_MENU_ADD = '/API/admin/accessMenu/add';
@@ -38,3 +31,7 @@ export const AUTHORIZATION_EDIT = '/API/admin/authorization/edit';
 
 //获取七牛token
 export const GET_QINIU_TOKEN = '/API/sourceManager/getQiNiuToken';
+
+//网站设置
+export const GET_SITE_SETTING_DATA = '/API/admin/getSiteData';
+export const EDIT_SITE_SITTING = '/API/admin/eidtSetting';

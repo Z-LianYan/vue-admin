@@ -99,7 +99,7 @@ export default {
 
             this.qiniuData.token = res.upload_token;
 
-            this.qiniuData.key =this.uploadPrefix+'-'+dayjs().format("YYYYMMDDHHmmss") +file.name;
+            this.qiniuData.key =this.uploadPrefix+dayjs().format("YYYYMMDDHHmmss") +file.name;
 
             this.upload_qiniu_addr = res.static_host;
 

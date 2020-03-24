@@ -36,7 +36,8 @@ export default {
   },
   created(){
     if(!this.$store.state.accessMenu.routerMenu.length) {
-      this.$store.dispatch("accessMenu/getAccessMenu")
+      this.$store.dispatch("accessMenu/getAccessMenu");
+      this.$store.dispatch("siteSetting/getSetData");
     }
   },
   mounted() {

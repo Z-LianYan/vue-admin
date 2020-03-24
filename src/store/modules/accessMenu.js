@@ -86,7 +86,6 @@ const actions = {
           accessRouter.push(error_404);
           var router_menu = router.options.routes.concat(accessRouter);
           router.selfaddRoutes(router_menu);
-          console.log("路由",router_menu);
           store.commit("accessMenu/MENU_ROUTER", router_menu);
           state.initialize_system = true;
         } else {

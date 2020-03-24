@@ -40,7 +40,7 @@
       <el-form-item label="上传头像" prop="img_head">
         <upload-image 
         @getImgUrl="getImgUrl" 
-        uploadPrefix="avatar/img_head"  
+        uploadPrefix="avatar/"  
         :staticImageUrl='ruleForm.img_head'
         />
       </el-form-item>
