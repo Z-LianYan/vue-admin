@@ -3,6 +3,7 @@ import Vue from 'vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
+
 // import zhLocale from 'ElementUI-ui/lib/locale/lang/zh-CN'
 // set ElementUIUI lang to EN
 // Vue.use(ElementUIUI, { zhLocale })
@@ -81,6 +82,7 @@ Vue.use(ElementUI.Table)
 Vue.use(ElementUI.Loading.directive);
 Vue.use(ElementUI.PageHeader);
 Vue.use(ElementUI.Cascader);
+Vue.use(ElementUI.Scrollbar);
 
 
 
