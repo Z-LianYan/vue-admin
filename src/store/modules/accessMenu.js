@@ -78,7 +78,6 @@ const actions = {
   getAccessMenu({ commit, state },requestParams){
     return new Promise((resolve, reject) => {
       requstTools.get(aipUrl.GET_ACCESS_MENU, requestParams).then(res => {
-        console.log
         if (res.error == 0) {
           resolve(res.data);
           var error_404 = { path: '*', redirect: '/404', hidden: true };
@@ -93,7 +92,7 @@ const actions = {
           state.initialize_system = true;
         }
       }).catch(error => {
-        reject(error)
+        reject(error);
         state.initialize_system = true;
       })
     })
