@@ -93,15 +93,15 @@ export default {
       })
       return tags
     },
-    initTags() {
-      const affixTags = this.affixTags = this.filterAffixTags(this.routes)
-      for (const tag of affixTags) {
-        // Must have tag name
-        if (tag.name) {
-          this.$store.dispatch('tagsView/addVisitedView', tag)
-        }
-      }
-    },
+    // initTags() {
+    //   const affixTags = this.affixTags = this.filterAffixTags(this.routes)
+    //   for (const tag of affixTags) {
+    //     // Must have tag name
+    //     if (tag.name) {
+    //       this.$store.dispatch('tagsView/addVisitedView', tag)
+    //     }
+    //   }
+    // },
     addTags() {
       const { name } = this.$route
       if (name) {
