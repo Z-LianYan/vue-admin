@@ -5,14 +5,16 @@ import { getToken,removeToken } from '@/common/tools';
 
 axios.defaults.withCredentials=true;
 const service = axios.create({
-  baseURL: process.env.BASE_API, // api的base_url
+  // baseURL: process.env.BASE_API, // api的base_url
+  baseURL: "http://127.0.0.1:7001", // api的base_url
   timeout: 5000*200, //1m request timeout
   headers:{
-    platform:'private'
+    platform:'private',
+    credentials: true//允许携带cookie 解决后端不同api session失效的问题
   },
   withCredentials: true,
-  crossDomain:true 
-
+  crossDomain:true,
+  
 });
 export default service
 service.interceptors.request.use(config => {
