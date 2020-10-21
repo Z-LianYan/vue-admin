@@ -3,18 +3,17 @@ import { Message,Loading } from 'element-ui'
 import router from '@/router/index';
 import { getToken,removeToken } from '@/common/tools';
 
-axios.defaults.withCredentials=true;
+axios.defaults.withCredentials=true;//携带cookies 
 const service = axios.create({
-  // baseURL: process.env.BASE_API, // api的base_url
-  baseURL: "http://127.0.0.1:7001", // api的base_url
+  baseURL: process.env.BASE_API, // api的base_url
   timeout: 5000*200, //1m request timeout
   headers:{
     platform:'private',
-    credentials: true//允许携带cookie 解决后端不同api session失效的问题
+    // credentials: true//允许携带cookie 解决后端不同api session失效的问题
+    // withCredentials: true,
   },
-  withCredentials: true,
-  crossDomain:true,
-  
+  // withCredentials: true,
+  crossDomain:true
 });
 export default service
 service.interceptors.request.use(config => {

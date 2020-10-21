@@ -36,25 +36,25 @@ module.exports = {
       warnings: false,
       errors: true
     },
-    // proxy: {
-    //   // change xxx-api/login => mock/login
-    //   // detail: https://cli.vuejs.org/config/#devserver-proxy
-    //   // [process.env.VUE_APP_BASE_API]: {
-    //   //   target: `http://127.0.0.1:${port}/mock`,
-    //   //   changeOrigin: true,
-    //   //   pathRewrite: {
-    //   //     ['^' + process.env.VUE_APP_BASE_API]: ''
-    //   //   }
-    //   // },
-    //   "/API": {
-    //     target: "http://127.0.0.1:7001",
-    //     changeOrigin: true,// 如果接口跨域，需要进行这个参数配置,默认值：false,如果为true将主机标头的原点更改为目标URL(target)
-    //     // secure: false//默认情况下，不接受运行在 HTTPS 上,只要设置 secure: false 就行
-    //   }
+    proxy: {
+      // change xxx-api/login => mock/login
+      // detail: https://cli.vuejs.org/config/#devserver-proxy
+      // [process.env.VUE_APP_BASE_API]: {
+      //   target: `http://127.0.0.1:${port}/mock`,
+      //   changeOrigin: true,
+      //   pathRewrite: {
+      //     ['^' + process.env.VUE_APP_BASE_API]: ''
+      //   }
+      // },
+      "/API": {
+        target: "http://127.0.0.1:7001",
+        changeOrigin: true,// 如果接口跨域，需要进行这个参数配置,默认值：false,如果为true将主机标头的原点更改为目标URL(target)
+        // secure: false//默认情况下，不接受运行在 HTTPS 上,只要设置 secure: false 就行
+      }
 
 
 
-    // },
+    },
     // after: require('./mock/mock-server.js')
   },
   configureWebpack: {
