@@ -3,7 +3,7 @@ import { Message,Loading } from 'element-ui'
 import router from '@/router/index';
 import { getToken,removeToken } from '@/common/tools';
 
-axios.defaults.withCredentials=true;//携带cookies 
+// axios.defaults.withCredentials=true;//携带cookies 
 const service = axios.create({
   baseURL: process.env.BASE_API, // api的base_url
   timeout: 5000*200, //1m request timeout

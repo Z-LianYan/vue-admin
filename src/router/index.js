@@ -13,7 +13,11 @@ export const constantRoutes = [
   { path: '/404',name:"error_404", component: Error_404, hidden: true },
   {
     path: '/', component: ()=>import("@/layout"), redirect: '/dashboard', children: [
-      { path: 'dashboard', name: 'Dashboard', component: ()=>import("@/views/dashboard/index"), meta: { title: '首页', icon: 'el-icon-s-home' } }
+      { path: 'dashboard', 
+        name: 'Dashboard', component: 
+        ()=>import("@/views/dashboard/index"), 
+        meta: { title: '首页', icon: 'el-icon-s-home',affix:true } 
+      }
     ]
   },
 ]

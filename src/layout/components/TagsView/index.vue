@@ -70,6 +70,7 @@ export default {
       return route.path === this.$route.path
     },
     isAffix(tag) {
+      console.log("tag---",tag);
       return tag.meta && tag.meta.affix
     },
     filterAffixTags(routes, basePath = '/') {

@@ -27,7 +27,8 @@ export function routerMenuFilter(routerData) { //遍历后台传来的路由字�
     route.meta = {
       title: route.title,
       icon: route.icon,
-      keep_alive: route.keep_alive==1?true:false
+      keep_alive: route.keep_alive==1?true:false,
+      affix: !route.affix? false:true
     }
     if (route.component) {
       if (route.component === 'Layout') { //Layout组件特殊处理
