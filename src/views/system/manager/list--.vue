@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import XLSX from "xlsx-style";
+// import XLSX from "xlsx-style";
 // import "@/assets/dist/xlsx";
 export default {
   data() {

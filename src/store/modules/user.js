@@ -21,6 +21,33 @@ export default {
   },
   actions: {
 
+    set({ commit, state }, requestParams) {
+      return new Promise((resolve, reject) => {
+        requstTools.post('/API/set', requestParams).then(res => {
+          resolve(res);
+          // if (res.error == 0) {
+            
+          //   // Message.success(res.message);
+          // } else {
+          //   Message.error(res.message);
+          // }
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+    get({ commit, state }, requestParams) {
+      return new Promise((resolve, reject) => {
+        requstTools.post('/API/get', requestParams).then(res => {
+          resolve(res);
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+
+
+
     doLogin({ commit, state }, requestParams) {
       return new Promise((resolve, reject) => {
         requstTools.post(aipUrl.DO_LOGIN, requestParams).then(res => {
