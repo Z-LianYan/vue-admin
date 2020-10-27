@@ -1,7 +1,7 @@
 # vue admin
 
 ```
-作者 zly
+author zly
 ```
 
 ## Build Setup
