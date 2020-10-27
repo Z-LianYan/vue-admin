@@ -36,5 +36,3 @@ npm run lint
 # code format check and auto fix
 npm run lint -- --fix
 ```
-# vue-admin-mongodb
-# vue-admin-mongodb
