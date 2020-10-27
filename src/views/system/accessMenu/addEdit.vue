@@ -29,6 +29,7 @@
 
       <el-form-item label="路由" prop="path">
         <el-input v-model="ruleForm.path"></el-input>
+        <div>注：如果是子路由 前面不得加 /  如：/test 错误</div>
       </el-form-item>
 
       <el-form-item label="组件" prop="component">
@@ -71,7 +72,7 @@
           <el-radio :label="0">否</el-radio>
         </el-radio-group>
         <div>
-          释：tagsView 预览历史菜单上没预览过的默认显示且不可关闭
+          释：tagsView 预览历史菜单上没预览过的菜单默认显示且不可关闭
         </div>
        
       </el-form-item>
