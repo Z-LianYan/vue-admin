@@ -28,6 +28,7 @@
 <script>
 import ScrollPane from './ScrollPane'
 import path from 'path'
+import router from '@/router'
 
 export default {
   components: { ScrollPane },
@@ -44,9 +45,12 @@ export default {
     visitedViews() {
       return this.$store.state.tagsView.visitedViews
     },
+    // routes() {
+    //   return this.$store.state.permission.routes
+    // },
     routes() {
-      return this.$store.state.permission.routes
-    }
+      return this.$store.state.accessMenu.routerMenu;
+    },
   },
   watch: {
     $route() {
@@ -62,7 +66,7 @@ export default {
     }
   },
   mounted() {
-    // this.initTags()
+    this.initTags()
     this.addTags()
   },
   methods: {
@@ -74,10 +78,12 @@ export default {
       return tag.meta && tag.meta.affix
     },
     filterAffixTags(routes, basePath = '/') {
+      console.log("哈哈哈哈哈哈哈😄",routes)
       let tags = []
       routes.forEach(route => {
         if (route.meta && route.meta.affix) {
-          const tagPath = path.resolve(basePath, route.path)
+          const tagPath = path.resolve(basePath, route.path);
+          console.log("哈哈哈哈哈---",basePath,route.path,tagPath,route);
           tags.push({
             fullPath: tagPath,
             path: tagPath,
@@ -94,17 +100,18 @@ export default {
       })
       return tags
     },
-    // initTags() {
-    //   const affixTags = this.affixTags = this.filterAffixTags(this.routes)
-    //   for (const tag of affixTags) {
-    //     // Must have tag name
-    //     if (tag.name) {
-    //       this.$store.dispatch('tagsView/addVisitedView', tag)
-    //     }
-    //   }
-    // },
+    initTags() {
+      const affixTags = this.affixTags = this.filterAffixTags(this.routes)
+      for (const tag of affixTags) {
+        // Must have tag name
+        if (tag.name) {
+          this.$store.dispatch('tagsView/addVisitedView', tag)
+        }
+      }
+    },
     addTags() {
-      const { name } = this.$route
+      const { name } = this.$route;
+      console.log("---a",this.$route);
       if (name) {
         this.$store.dispatch('tagsView/addView', this.$route)
       }

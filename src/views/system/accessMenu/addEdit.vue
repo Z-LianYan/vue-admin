@@ -65,6 +65,17 @@
         </el-radio-group>
       </el-form-item>
 
+      <el-form-item label="是否粘上" prop="affix">
+        <el-radio-group v-model="ruleForm.affix">
+          <el-radio :label="1">是</el-radio>
+          <el-radio :label="0">否</el-radio>
+        </el-radio-group>
+        <div>
+          释：tagsView 预览历史菜单上没预览过的默认显示且不可关闭
+        </div>
+       
+      </el-form-item>
+
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
         <el-button @click="resetForm('ruleForm')">重置</el-button>
@@ -86,6 +97,7 @@ function ruleForm() {
     icon: "",
     keep_alive:0,
     hidden: 0,//0显示，1隐藏
+    affix:0//0不粘上可关闭，1粘上不可关闭
   };
 }
 export default {

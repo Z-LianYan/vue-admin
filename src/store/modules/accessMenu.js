@@ -82,7 +82,6 @@ const actions = {
           resolve(res.data);
           var error_404 = { path: '*', redirect: '/404', hidden: true };
           var accessRouter = routerMenuFilter(res.data.data);
-          // console.log("11111111111",accessRouter)
           accessRouter.push(error_404);
           var router_menu = router.options.routes.concat(accessRouter);
           router.selfaddRoutes(router_menu);
