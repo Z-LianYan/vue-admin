@@ -48,6 +48,7 @@ export function routerMenuFilter(routerData) { //遍历后台传来的路由字�
     delete route.keep_alive
     delete route.module_id
     delete route._id
+    delete route.affix
     return true
   })
 

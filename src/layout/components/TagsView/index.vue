@@ -74,16 +74,14 @@ export default {
       return route.path === this.$route.path
     },
     isAffix(tag) {
-      console.log("tag---",tag);
       return tag.meta && tag.meta.affix
     },
     filterAffixTags(routes, basePath = '/') {
-      console.log("哈哈哈哈哈哈哈😄",routes)
       let tags = []
       routes.forEach(route => {
+        const tagPath = path.resolve(basePath, route.path);
         if (route.meta && route.meta.affix) {
-          const tagPath = path.resolve(basePath, route.path);
-          console.log("哈哈哈哈哈---",basePath,route.path,tagPath,route);
+          // const tagPath = path.resolve(basePath, route.path);
           tags.push({
             fullPath: tagPath,
             path: tagPath,
@@ -92,7 +90,7 @@ export default {
           })
         }
         if (route.children) {
-          const tempTags = this.filterAffixTags(route.children, route.path)
+          const tempTags = this.filterAffixTags(route.children, tagPath);
           if (tempTags.length >= 1) {
             tags = [...tags, ...tempTags]
           }

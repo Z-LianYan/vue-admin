@@ -5,83 +5,81 @@
     size="45%"
     @close="drawerClose"
   >
-    <el-form
-      :model="ruleForm"
-      :rules="rules"
-      ref="ruleForm"
-      label-width="120px"
-      class="demo-ruleForm"
-    >
-      <el-form-item label="所属模块" prop="module_id">
-        <el-cascader
-          :options="accessMenulist"
-          :props="{ 
+    <el-scrollbar wrap-class="scrollbar-wrapper">
+      <el-form
+        :model="ruleForm"
+        :rules="rules"
+        ref="ruleForm"
+        label-width="120px"
+        class="demo-ruleForm"
+      >
+        <el-form-item label="所属模块" prop="module_id">
+          <el-cascader
+            :options="accessMenulist"
+            :props="{ 
             checkStrictly: true,
             emitPath:false,
             value: '_id', 
             label: 'title',
           }"
-          v-model="ruleForm.module_id"
-          placeholder="请选择所属模块"
-        ></el-cascader>
+            v-model="ruleForm.module_id"
+            placeholder="请选择所属模块"
+          ></el-cascader>
+        </el-form-item>
 
-      </el-form-item>
+        <el-form-item label="路由" prop="path">
+          <el-input v-model="ruleForm.path"></el-input>
+          <div>注：如果是子路由 前面不得加 / 如：/childrenRouter 错误</div>
+        </el-form-item>
 
-      <el-form-item label="路由" prop="path">
-        <el-input v-model="ruleForm.path"></el-input>
-        <div>注：如果是子路由 前面不得加 /  如：/test 错误</div>
-      </el-form-item>
+        <el-form-item label="组件" prop="component">
+          <el-input v-model="ruleForm.component" placeholder="请引入views下的组件"></el-input>
+        </el-form-item>
 
-      <el-form-item label="组件" prop="component">
-        <el-input v-model="ruleForm.component" placeholder="请引入views下的组件"></el-input>
-      </el-form-item>
+        <el-form-item label="重定向" prop="redirect">
+          <el-input v-model="ruleForm.redirect"></el-input>
+        </el-form-item>
 
-      <el-form-item label="重定向" prop="redirect">
-        <el-input v-model="ruleForm.redirect"></el-input>
-      </el-form-item>
+        <el-form-item label="路由名称" prop="name">
+          <el-input v-model="ruleForm.name"></el-input>
+        </el-form-item>
 
-      <el-form-item label="路由名称" prop="name">
-        <el-input v-model="ruleForm.name"></el-input>
-      </el-form-item>
+        <el-form-item label="菜单名称" prop="title">
+          <el-input v-model="ruleForm.title"></el-input>
+        </el-form-item>
 
-      <el-form-item label="菜单名称" prop="title">
-        <el-input v-model="ruleForm.title"></el-input>
-      </el-form-item>
+        <el-form-item label="图标" prop="icon">
+          <el-input v-model="ruleForm.icon"></el-input>
+        </el-form-item>
 
-      <el-form-item label="图标" prop="icon">
-        <el-input v-model="ruleForm.icon"></el-input>
-      </el-form-item>
+        <el-form-item label="是否缓存页面" prop="keep_alive">
+          <el-radio-group v-model="ruleForm.keep_alive">
+            <el-radio :label="1">是</el-radio>
+            <el-radio :label="0">否</el-radio>
+          </el-radio-group>
+        </el-form-item>
 
-      <el-form-item label="是否缓存页面" prop="keep_alive">
-        <el-radio-group v-model="ruleForm.keep_alive">
-          <el-radio :label="1">是</el-radio>
-          <el-radio :label="0">否</el-radio>
-        </el-radio-group>
-      </el-form-item>
+        <el-form-item label="是否显示菜单" prop="hidden">
+          <el-radio-group v-model="ruleForm.hidden">
+            <el-radio :label="0">是</el-radio>
+            <el-radio :label="1">否</el-radio>
+          </el-radio-group>
+        </el-form-item>
 
-      <el-form-item label="是否显示菜单" prop="hidden">
-        <el-radio-group v-model="ruleForm.hidden">
-          <el-radio :label="0">是</el-radio>
-          <el-radio :label="1">否</el-radio>
-        </el-radio-group>
-      </el-form-item>
+        <el-form-item label="是否粘上" prop="affix">
+          <el-radio-group v-model="ruleForm.affix">
+            <el-radio :label="1">是</el-radio>
+            <el-radio :label="0">否</el-radio>
+          </el-radio-group>
+          <div>释：tagsView 预览历史菜单上没预览过的菜单默认显示且不可关闭</div>
+        </el-form-item>
 
-      <el-form-item label="是否粘上" prop="affix">
-        <el-radio-group v-model="ruleForm.affix">
-          <el-radio :label="1">是</el-radio>
-          <el-radio :label="0">否</el-radio>
-        </el-radio-group>
-        <div>
-          释：tagsView 预览历史菜单上没预览过的菜单默认显示且不可关闭
-        </div>
-       
-      </el-form-item>
-
-      <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
-        <el-button @click="resetForm('ruleForm')">重置</el-button>
-      </el-form-item>
-    </el-form>
+        <el-form-item>
+          <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+          <el-button @click="resetForm('ruleForm')">重置</el-button>
+        </el-form-item>
+      </el-form>
+    </el-scrollbar>
   </el-drawer>
 </template>
 
@@ -96,9 +94,9 @@ function ruleForm() {
     name: "",
     title: "",
     icon: "",
-    keep_alive:0,
-    hidden: 0,//0显示，1隐藏
-    affix:0//0不粘上可关闭，1粘上不可关闭
+    keep_alive: 0,
+    hidden: 0, //0显示，1隐藏
+    affix: 0 //0不粘上可关闭，1粘上不可关闭
   };
 }
 export default {
@@ -116,7 +114,7 @@ export default {
           { required: true, message: "请引入views下的组件", trigger: "blur" }
         ]
       },
-      accessMenulist: [],
+      accessMenulist: []
     };
   },
   mounted() {
@@ -126,8 +124,7 @@ export default {
         limit: 20000
       })
       .then(res => {
-
-        res.data.unshift({_id: "0",title: "顶级模块"});
+        res.data.unshift({ _id: "0", title: "顶级模块" });
 
         this.accessMenulist = res.data;
 
@@ -144,9 +141,11 @@ export default {
               this.resetForm("ruleForm");
             });
           } else {
-            this.$store.dispatch("accessMenu/doEdit", this.ruleForm).then(() => {
-              this.$emit("on-getData");
-            });
+            this.$store
+              .dispatch("accessMenu/doEdit", this.ruleForm)
+              .then(() => {
+                this.$emit("on-getData");
+              });
           }
         } else {
           console.log("error submit!!");
@@ -183,5 +182,8 @@ export default {
 <style lang="scss">
 .el-drawer__body {
   padding-right: 10px;
+}
+.scrollbar-wrapper{
+  height: calc(100vh - 60px);
 }
 </style>
