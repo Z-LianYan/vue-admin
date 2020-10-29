@@ -10,7 +10,7 @@
 <script>
 const version = require('element-ui/package.json').version // element-ui version from node_modules
 const ORIGINAL_THEME = '#409EFF' // default color
-
+import jsCookie from "js-cookie";
 export default {
   data() {
     return {
@@ -39,10 +39,11 @@ export default {
       const originalCluster = this.getThemeCluster(oldVal.replace('#', ''))
 
       const $message = this.$message({
-        message: '  Compiling the theme',
+        message: '编译主题',
+        // message: '  Compiling the theme',
         customClass: 'theme-message',
         type: 'success',
-        duration: 0,
+        duration: 1000,
         iconClass: 'el-icon-loading'
       })
 
@@ -82,8 +83,10 @@ export default {
       })
 
       this.$emit('change', val)
-
-      $message.close()
+      
+      
+      // $message.close()
+      
     }
   },
 

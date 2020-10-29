@@ -10,9 +10,13 @@
         :model="ruleForm"
         :rules="rules"
         ref="ruleForm"
-        label-width="120px"
+        label-width="130px"
         class="demo-ruleForm"
       >
+        <el-form-item label="菜单名称 title" prop="title">
+          <el-input v-model="ruleForm.title"></el-input>
+        </el-form-item>
+
         <el-form-item label="所属模块" prop="module_id">
           <el-cascader
             :options="accessMenulist"
@@ -27,25 +31,21 @@
           ></el-cascader>
         </el-form-item>
 
-        <el-form-item label="路由" prop="path">
+        <el-form-item label="路由 path" prop="path">
           <el-input v-model="ruleForm.path"></el-input>
           <div>注：如果是子路由 前面不得加 / 如：/childrenRouter 错误</div>
         </el-form-item>
 
-        <el-form-item label="组件" prop="component">
+        <el-form-item label="组件 component" prop="component">
           <el-input v-model="ruleForm.component" placeholder="请引入views下的组件"></el-input>
         </el-form-item>
 
-        <el-form-item label="重定向" prop="redirect">
+        <el-form-item label="重定向 redirect" prop="redirect">
           <el-input v-model="ruleForm.redirect"></el-input>
         </el-form-item>
 
-        <el-form-item label="路由名称" prop="name">
+        <el-form-item label="路由名称 name" prop="name">
           <el-input v-model="ruleForm.name"></el-input>
-        </el-form-item>
-
-        <el-form-item label="菜单名称" prop="title">
-          <el-input v-model="ruleForm.title"></el-input>
         </el-form-item>
 
         <el-form-item label="图标" prop="icon">
@@ -76,7 +76,7 @@
 
         <el-form-item>
           <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
-          <el-button @click="resetForm('ruleForm')">重置</el-button>
+          <el-button @click="resetForm">重置</el-button>
         </el-form-item>
       </el-form>
     </el-scrollbar>
@@ -109,9 +109,12 @@ export default {
         module_id: [
           { required: true, message: "请选择所属模块", trigger: "blur" }
         ],
-        path: [{ required: true, message: "请输入路径", trigger: "blur" }],
+        path: [{ required: true, message: "请输入路由", trigger: "change" }],
         component: [
           { required: true, message: "请引入views下的组件", trigger: "blur" }
+        ],
+        title: [
+          { required: true, message: "请输入菜单名称", trigger: "change" }
         ]
       },
       accessMenulist: []
@@ -138,7 +141,7 @@ export default {
           if (this.isAdd) {
             this.$store.dispatch("accessMenu/doAdd", this.ruleForm).then(() => {
               this.$emit("on-getData");
-              this.resetForm("ruleForm");
+              this.resetForm();
             });
           } else {
             this.$store
@@ -153,8 +156,8 @@ export default {
         }
       });
     },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
+    resetForm() {
+      this.$refs.ruleForm.resetFields();
     },
     open(val) {
       if (val) {
@@ -172,6 +175,7 @@ export default {
     drawerClose() {
       if (!this.isAdd) {
         this.ruleForm = ruleForm();
+        this.resetForm();
       }
       this.isAdd = true;
     }
