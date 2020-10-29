@@ -13,7 +13,7 @@
 
       <!-- <span class="showUserName" v-if="userInfo.username">Hi！{{userInfo.username}}</span> -->
 
-      <!-- <screenfull id="screenfull" class="right-menu-item hover-effect" /> -->
+      <screenfull id="screenfull" class="right-menu-item hover-effect" />
 
 
       <el-tooltip class="item" effect="dark" content="设置主题颜色" placement="top-start">

@@ -23,6 +23,12 @@ export default {
       return this.$store.state.settings.theme
     }
   },
+  mounted(){
+    const theme = jsCookie.get("theme");
+    if(theme){
+      this.theme = theme
+    }
+  },
   watch: {
     defaultTheme: {
       handler: function(val, oldVal) {

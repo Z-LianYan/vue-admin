@@ -6,6 +6,7 @@
         ref="tag"
         :key="tag.path"
         :class="isActive(tag)?'active':''"
+        :style="{'background':isActive(tag)?$store.state.settings.theme:''}"
         :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
         tag="span"
         class="tags-view-item"
@@ -228,9 +229,9 @@ export default {
         margin-right: 15px;
       }
       &.active {
-        background-color: $--color-primary;
+        // background-color: $--color-primary;
         color: #fff;
-        border-color: $--color-primary;
+        // border-color: $--color-primary;
         &::before {
           content: '';
           background: #fff;
