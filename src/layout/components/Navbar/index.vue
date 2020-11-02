@@ -9,6 +9,7 @@
 
     <breadcrumb class="breadcrumb-container"/>
     
+    
     <div class="right-menu">
 
       <!-- <span class="showUserName" v-if="userInfo.username">Hi！{{userInfo.username}}</span> -->
@@ -115,7 +116,6 @@ export default {
   position: relative;
   background: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-
   .hamburger-container {
     line-height: 46px;
     height: 100%;
@@ -135,8 +135,10 @@ export default {
 
   .right-menu {
     float: right;
-    height: 100%;
+    // height: 100%;
     // line-height: 50px;
+    display: flex;
+    align-items: center;
 
     &:focus {
       outline: none;
@@ -145,10 +147,12 @@ export default {
     .right-menu-item {
       display: inline-block;
       padding: 0 8px;
-      height: 100%;
+      // height: 100%;
       font-size: 18px;
       color: #5a5e66;
-      vertical-align: text-bottom;
+      margin-right: 10px;
+      // vertical-align: text-bottom;
+      // vertical-align: middle;
 
       &.hover-effect {
         cursor: pointer;
