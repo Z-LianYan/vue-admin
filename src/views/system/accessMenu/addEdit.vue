@@ -66,7 +66,7 @@
           </el-radio-group>
         </el-form-item>
 
-        <el-form-item label="是否粘上" prop="affix">
+        <el-form-item label="历史菜单上显示" prop="affix">
           <el-radio-group v-model="ruleForm.affix">
             <el-radio :label="1">是</el-radio>
             <el-radio :label="0">否</el-radio>
