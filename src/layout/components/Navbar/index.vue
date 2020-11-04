@@ -41,6 +41,12 @@
 
           <el-dropdown-item divided>
 
+            <span style="display:block;" @click="modifyPassword">修改密码</span>
+
+          </el-dropdown-item>
+
+          <el-dropdown-item divided>
+
             <span style="display:block;" @click="doLogout">退出系统</span>
 
           </el-dropdown-item>
@@ -50,7 +56,7 @@
       </el-dropdown>
 
     </div>
-
+    <ModifyPassword ref="modify_password"/>
   </div>
 </template>
 
@@ -59,9 +65,11 @@ import { mapGetters } from "vuex";
 import Breadcrumb from "./Breadcrumb";
 import Hamburger from "./Hamburger";
 
-import Screenfull from '@/components/Screenfull/index'
+import Screenfull from '@/components/Screenfull/index';
 
-import ThemePicker from '@/components/ThemePicker'
+import ThemePicker from '@/components/ThemePicker';
+
+import ModifyPassword from '@/views/system/modifyPassword';
 
 export default {
   data(){
@@ -71,12 +79,19 @@ export default {
     Breadcrumb,
     Hamburger,
     ThemePicker,
-    Screenfull
+    Screenfull,
+    ModifyPassword
   },
   computed: {
     ...mapGetters(["sidebar", "avatar","userInfo"])
   },
   methods: {
+
+    modifyPassword(){
+      this.$refs.modify_password.open();
+    },
+
+
     themeChange(val){
       this.$store.dispatch("settings/changeSetting",{
         key: 'theme',

@@ -72,9 +72,11 @@ export default {
       }
     };
     const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
+      if (value && value.length < 6) {
+        callback(new Error("请输入6位或以上的密码"));
+      } else if(!value){
         callback(new Error("请输入密码"));
-      } else {
+      }else{
         callback();
       }
     };
