@@ -80,12 +80,14 @@ const actions = {
       requstTools.get(aipUrl.GET_ACCESS_MENU, requestParams).then(res => {
         if (res.error == 0) {
           resolve(res.data);
-          var error_404 = { path: '*', redirect: '/404', hidden: true };
           var accessRouter = routerMenuFilter(res.data.data);
-          accessRouter.push(error_404);
           var router_menu = router.options.routes.concat(accessRouter);
-          router.selfaddRoutes(router_menu);
           store.commit("accessMenu/MENU_ROUTER", router_menu);
+
+          var error_404 = { path: '*', redirect: '/404', hidden: true };
+          router_menu.push(error_404);
+          router.selfaddRoutes(router_menu);//返回的数据，生成路由
+          
           state.initialize_system = true;
         } else {
           Message.error(res.message);

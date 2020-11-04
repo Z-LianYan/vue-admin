@@ -1,5 +1,6 @@
 export const DO_LOGIN = '/API/admin/login';//登录
 export const DO_LOGOUT = '/API/admin/doLogout';//退出登录
+export const DO_MODIFY_PASSWORD = '/API/admin/modifyPassword';//修改密码
 //管理员管理
 export const MANAGER_LIST = '/API/admin/manager/list';//退出登录
 export const GET_ROLE_LIST = '/API/admin/manager/getRoleList';//获取角色列表
@@ -35,3 +36,6 @@ export const GET_QINIU_TOKEN = '/API/sourceManager/getQiNiuToken';
 //网站设置
 export const GET_SITE_SETTING_DATA = '/API/admin/getSiteData';
 export const EDIT_SITE_SITTING = '/API/admin/eidtSetting';
+
+
+

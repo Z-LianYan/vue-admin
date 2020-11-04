@@ -87,6 +87,23 @@ export default {
         })
       })
     },
+
+    doModifyPassword({ commit, state }, requestParams) {
+      return new Promise((resolve, reject) => {
+        requstTools.post(aipUrl.DO_MODIFY_PASSWORD, requestParams).then(res => {
+          if (res.error == 0) {
+            resolve();
+            Message.success(res.message);
+          } else {
+            Message.error(res.message);
+          }
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+
+
   }
 }
 

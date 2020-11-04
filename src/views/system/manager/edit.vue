@@ -49,7 +49,7 @@
         </el-radio-group>
       </el-form-item>
 
-      <el-collapse>
+      <!-- <el-collapse>
         <el-collapse-item title="修改密码">
           <el-form-item label="原密码" prop="oldPassword">
             <el-input :type="oldPasswordType" ref="oldPassword" v-model="ruleForm.oldPassword"></el-input>
@@ -72,7 +72,7 @@
             </span>
           </el-form-item>
         </el-collapse-item>
-      </el-collapse>
+      </el-collapse> -->
 
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
@@ -108,34 +108,34 @@ export default {
       }
     };
 
-    let validatePassword = (rule, value, callback) => {
-      if (value) {
-        value.length < 6 ? callback(new Error("请输入6位以上的字符")) : callback();;
-      } else {
-        callback();
-      }
-    };
+    // let validatePassword = (rule, value, callback) => {
+    //   if (value) {
+    //     value.length < 6 ? callback(new Error("请输入6位以上的字符")) : callback();;
+    //   } else {
+    //     callback();
+    //   }
+    // };
 
-    let validateConfirmPassword = (rule, value, callback) => {
-      if (value) {
-        if (value.length < 6) {
-          callback(new Error("请输入6位以上的字符"));
-        } else if (value !== this.ruleForm.password) {
-          callback(new Error("两次输入密码不一致!"));
-        }else{
-          callback();
-        }
-      } else {
-        callback();
-      }
-    };
+    // let validateConfirmPassword = (rule, value, callback) => {
+    //   if (value) {
+    //     if (value.length < 6) {
+    //       callback(new Error("请输入6位以上的字符"));
+    //     } else if (value !== this.ruleForm.password) {
+    //       callback(new Error("两次输入密码不一致!"));
+    //     }else{
+    //       callback();
+    //     }
+    //   } else {
+    //     callback();
+    //   }
+    // };
     return {
       ruleForm: {
         _id:'',
         username: "",
-        oldPassword: "",
-        password: "",
-        confirmPassword: "",
+        // oldPassword: "",
+        // password: "",
+        // confirmPassword: "",
         mobile: "",
         img_head:"",
         email: "",
@@ -156,11 +156,11 @@ export default {
           { required: true, validator: validateMobile, trigger: "blur" }
         ],
         role_id: [{ required: true, message: "请选择角色", trigger: "change" }],
-        password: { validator: validatePassword, trigger: "blur" },
-        confirmPassword: { validator: validateConfirmPassword, trigger: "blur" }
+        // password: { validator: validatePassword, trigger: "blur" },
+        // confirmPassword: { validator: validateConfirmPassword, trigger: "blur" }
       },
-      oldPasswordType: "password",
-      newPasswordType: "password"
+      // oldPasswordType: "password",
+      // newPasswordType: "password"
     };
   },
   mounted() {
@@ -201,23 +201,23 @@ export default {
     goBack() {
       history.go(-1);
     },
-    showOldPwd() {
-      if (this.oldPasswordType === "password") {
-        this.oldPasswordType = "";
-      } else {
-        this.oldPasswordType = "password";
-      }
-      this.$nextTick(() => {
-        this.$refs.oldPassword.focus();
-      });
-    },
-    showPwd() {
-      if (this.newPasswordType === "password") {
-        this.newPasswordType = "";
-      } else {
-        this.newPasswordType = "password";
-      }
-    },
+    // showOldPwd() {
+    //   if (this.oldPasswordType === "password") {
+    //     this.oldPasswordType = "";
+    //   } else {
+    //     this.oldPasswordType = "password";
+    //   }
+    //   this.$nextTick(() => {
+    //     this.$refs.oldPassword.focus();
+    //   });
+    // },
+    // showPwd() {
+    //   if (this.newPasswordType === "password") {
+    //     this.newPasswordType = "";
+    //   } else {
+    //     this.newPasswordType = "password";
+    //   }
+    // },
     getImgUrl(imgUrl){
 
       console.log("上传的图片路径：",imgUrl);
