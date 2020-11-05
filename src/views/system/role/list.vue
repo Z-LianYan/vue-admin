@@ -19,6 +19,12 @@
         <template slot-scope="scope">{{scope.row.add_time|formatDate}}</template>
       </el-table-column>
 
+      <el-table-column prop="add_time" label="类型">
+        <template slot-scope="scope">
+          {{scope.row.type==1?'预览用户':'管理用户'}}
+        </template>
+      </el-table-column>
+
       <el-table-column label="操作" width="180">
         <template slot-scope="scope">
           <el-button type="text" size="small" @click="setAccredit(scope.row)">授权</el-button>
