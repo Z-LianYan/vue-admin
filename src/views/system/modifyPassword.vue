@@ -4,6 +4,7 @@
     :visible.sync="isDialogVisible"
     width="30%"
     :append-to-body="true"
+    :before-close="close"
   >
     <el-form
       ref="ruleForm"
@@ -135,6 +136,10 @@ export default {
   },
   watch: {},
   methods: {
+    close(){
+      this.isDialogVisible = false;
+      this.loading=false
+    },
     open() {
       this.isDialogVisible = true;
     },
