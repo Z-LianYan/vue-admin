@@ -66,6 +66,7 @@
 
 <script>
 import { mapState } from "vuex";
+import { removeToken } from "@/common/tools";
 function optionsParam(){
   return {
     oldPassword: "",
@@ -165,8 +166,11 @@ export default {
               this.loading = false;
               this.isDialogVisible = false;
               this.ruleForm = optionsParam();
-            })
-            .catch(() => {
+              removeToken();
+              setTimeout(() => {
+                this.$router.push("/login");
+              }, 2000);
+            }).catch(() => {
               this.loading = false;
             });
         } else {
