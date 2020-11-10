@@ -75,10 +75,21 @@ function optionsParam(){
 export default {
   name: "Login",
   data() {
+    let validateOldPassword = (rule, value, callback) => {
+      if (value) {
+        if (value.length < 6) {
+          callback(new Error("请输入6位以上的密码"));
+        }else{
+          callback();
+        }
+      } else {
+        callback();
+      }
+    };
     let validateNewPassword = (rule, value, callback) => {
       if (value) {
         if (value.length < 6) {
-          callback(new Error("请输入6位以上的字符"));
+          callback(new Error("请输入6位以上的密码"));
         } else if (this.ruleForm.confirmPassword && value !== this.ruleForm.confirmPassword) {
           callback(new Error("两次输入密码不一致!"));
         } else {
@@ -92,7 +103,7 @@ export default {
     let validateConfirmPassword = (rule, value, callback) => {
       if (value) {
         if (value.length < 6) {
-          callback(new Error("请输入6位以上的字符"));
+          callback(new Error("请输入6位以上的密码"));
         } else if (this.ruleForm.password && value !== this.ruleForm.password) {
           callback(new Error("两次输入密码不一致!"));
         } else {
@@ -106,8 +117,9 @@ export default {
       isDialogVisible: false,
       ruleForm: optionsParam(),
       rulesForm: {
-        password: { validator: validateNewPassword, trigger: "blur" },
-        confirmPassword: { validator: validateConfirmPassword, trigger: "blur"},
+        oldPassword: { validator: validateOldPassword, trigger: "blur",required: true },
+        password: { validator: validateNewPassword, trigger: "blur",required: true },
+        confirmPassword: { validator: validateConfirmPassword, trigger: "blur",required: true },
       },
       loading: false,
 
