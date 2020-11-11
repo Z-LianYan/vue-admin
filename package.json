@@ -49,7 +49,7 @@
     "babel-jest": "23.6.0",
     "chalk": "2.4.2",
     "connect": "3.6.6",
-    "eslint": "5.15.3",
+    "eslint": "^5.15.3",
     "eslint-plugin-vue": "5.2.2",
     "html-webpack-plugin": "3.2.0",
     "mockjs": "1.0.1-beta3",
@@ -70,5 +70,18 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+  "main": "babel.config.js",
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Z-LianYan/vue-admin.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/Z-LianYan/vue-admin/issues"
+  },
+  "homepage": "https://github.com/Z-LianYan/vue-admin#readme"
 }

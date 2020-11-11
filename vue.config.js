@@ -24,11 +24,11 @@ module.exports = {
    * In most cases please use '/' !!!
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
-  publicPath: '/',
-  outputDir: 'dist',
-  assetsDir: 'public/static',
-  lintOnSave: false,
-  productionSourceMap: false,
+  publicPath: '/',//根域上下文目录
+  outputDir: 'dist',//构建输出目录
+  assetsDir: 'public/static',//静态资源目录 (js, css, img, fonts)
+  lintOnSave: false, // 是否开启eslint保存检测，有效值：ture | false | 'error'
+  productionSourceMap: false,// 是否在构建生产包时生成 sourceMap 文件，false将提高构建速度
   devServer: {
     port: port,
     open: true,
@@ -57,7 +57,7 @@ module.exports = {
     },
     // after: require('./mock/mock-server.js')
   },
-  configureWebpack: {
+  configureWebpack: {// webpack配置，值位对象时会合并配置，为方法时会改写配置
     // provide the app's title in webpack's name field, so that
     // it can be accessed in index.html to inject the correct title.
     name: name,
@@ -67,7 +67,7 @@ module.exports = {
       }
     }
   },
-  chainWebpack(config) {
+  chainWebpack(config) {// webpack链接API，用于生成和修改webapck配置，https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
     config.plugins.delete('preload') // TODO: need test
     config.plugins.delete('prefetch') // TODO: need test
 
