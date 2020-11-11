@@ -3,12 +3,10 @@
     <transition name="fade-transform" mode="out-in">
       <div>
         <keep-alive>
-          <router-view v-if="$route.meta.keep_alive"></router-view>
+          <router-view v-if="$route.meta.keep_alive"/>
         </keep-alive>
-        <router-view v-if="!$route.meta.keep_alive"></router-view>
-        <!-- <router-view :key="key" /> -->
+        <router-view v-if="!$route.meta.keep_alive"/>
       </div>
-      
     </transition>
   </section>
 </template>
@@ -16,6 +14,9 @@
 <script>
 export default {
   name: 'AppMain',
+  mounted(){
+    console.log("---",this.$route)
+  },
   computed: {
     key() {
       return this.$route.path

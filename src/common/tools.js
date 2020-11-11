@@ -1,4 +1,5 @@
-import Layout from '@/layout'
+import Layout from '@/layout';
+import LayoutFollow from '@/layout/LayoutFollow';
 import router from '@/router';
 const _import = require('@/router/_import_' + process.env.NODE_ENV)
 
@@ -33,7 +34,9 @@ export function routerMenuFilter(routerData) { //遍历后台传来的路由字�
     if (route.component) {
       if (route.component === 'Layout') { //Layout组件特殊处理
         route.component = Layout
-      } else {
+      } else if(route.component === 'LayoutFollow'){
+        route.component = LayoutFollow
+      }else{
         route.component = _import(route.component)
       }
     }
@@ -41,6 +44,7 @@ export function routerMenuFilter(routerData) { //遍历后台传来的路由字�
       delete route.redirect
     }
     if (route.children && route.children.length) {
+
       route.children = routerMenuFilter(route.children)
     }
     delete route.title
