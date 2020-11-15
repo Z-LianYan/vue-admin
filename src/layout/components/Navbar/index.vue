@@ -25,9 +25,12 @@
         
         <div class="avatar-wrapper">
 
-          <img :src="userInfo.img_head" class="user-avatar">
+            
+            <img :src="userInfo.img_head" class="user-avatar">
 
-          <i class="el-icon-caret-bottom"/>
+            <div class="user-name">Hi！{{userInfo && userInfo.username}}</div>
+
+            <i class="el-icon-caret-bottom"/>
 
         </div>
 
@@ -81,6 +84,9 @@ export default {
     ThemePicker,
     Screenfull,
     ModifyPassword
+  },
+  mounted(){
+    console.log("用户信息",this.userInfo);
   },
   computed: {
     ...mapGetters(["sidebar", "avatar","userInfo"])
@@ -185,6 +191,8 @@ export default {
       .avatar-wrapper {
         margin-top: 5px;
         position: relative;
+        display: flex;
+        justify-items: center;
 
         // .showUserName{
         //   margin-bottom: 5px;
@@ -196,6 +204,10 @@ export default {
           width: 40px;
           height: 40px;
           border-radius: 10px;
+        }
+        .user-name{
+          height:45px;
+          line-height:50px;
         }
 
         .el-icon-caret-bottom {

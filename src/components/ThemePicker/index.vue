@@ -24,7 +24,8 @@ export default {
     }
   },
   mounted(){
-    const theme = jsCookie.get("theme");
+    // const theme = jsCookie.get("theme");
+    const theme = localStorage.getItem("theme");
     if(theme){
       this.theme = theme
     }

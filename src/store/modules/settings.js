@@ -15,7 +15,8 @@ const mutations = {
     console.log("key",key,'value',value);
     if (state.hasOwnProperty(key)) {
       state[key] = value;
-      jsCookie.set("theme",value);
+      // jsCookie.set("theme",value);
+      localStorage.setItem("theme",value);
       console.log("store---",state.theme);
     }
   }
