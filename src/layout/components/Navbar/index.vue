@@ -208,6 +208,7 @@ export default {
         .user-name{
           height:45px;
           line-height:50px;
+          margin-left: 5px;
         }
 
         .el-icon-caret-bottom {

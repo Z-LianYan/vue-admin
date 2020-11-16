@@ -21,7 +21,7 @@
 
       <el-table-column prop="add_time" label="类型">
         <template slot-scope="scope">
-          {{scope.row.type==1?'预览用户':'管理用户'}}
+          {{scope.row.type==1?'游客':'操作'}}
         </template>
       </el-table-column>
 
