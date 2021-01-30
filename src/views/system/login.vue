@@ -47,7 +47,7 @@
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
-      <div style="margin-bottom:15px;">用户名：view 密码：123456</div>
+      <div style="margin-bottom:15px;color:#fff;">用户名：view 密码：123456</div>
       <el-button
         :loading="loading"
         type="primary"
