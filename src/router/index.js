@@ -6,21 +6,25 @@ Vue.use(Router)
 import Login from '@/views/system/login';
 import Error_404 from '@/views/system/404';
 
+import Calendar from '@/views/calendar';
+
 
 
 export const constantRoutes = [
   { path: '/login',name:"login", component: Login, hidden: true },
   { path: '/404',name:"error_404", component: Error_404, hidden: true },
+  { path: '/calendar',name:"calendar", component: Calendar, hidden: true },
   {
     path: '/', component: ()=>import("@/layout"), redirect: '/dashboard', children: [
-      { path: 'dashboard', 
+      { 
+        path: 'dashboard', 
         name: 'Dashboard', 
-        component:()=>import("@/views/dashboard/index"), 
+        component: resolve => require(["@/views/dashboard/index"],resolve), 
         meta: { 
           title: '首页', icon: 'el-icon-s-home',
           affix:true,
           activeMenu: '/dashboard'
-        } 
+        }
       }
     ]
   },

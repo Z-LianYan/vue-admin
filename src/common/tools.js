@@ -1,6 +1,7 @@
 import Layout from '@/layout';
 import LayoutFollow from '@/layout/LayoutFollow';
 import router from '@/router';
+import { resolve } from 'upath';
 const _import = require('@/router/_import_' + process.env.NODE_ENV)
 
 export function setToken(token) {
@@ -33,9 +34,9 @@ export function routerMenuFilter(routerData) { //遍历后台传来的路由字�
     }
     if (route.component) {
       if (route.component === 'Layout') { //Layout组件特殊处理
-        route.component = Layout
+        route.component = resolve => require(["@/layout"],resolve)
       } else if(route.component === 'LayoutFollow'){
-        route.component = LayoutFollow
+        route.component = resolve => require(["@/layout/LayoutFollow"],resolve)
       }else{
         route.component = _import(route.component)
       }
