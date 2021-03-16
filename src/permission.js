@@ -27,9 +27,9 @@ router.beforeEach((to, from, next) => {
       next({ path: '/' })
       NProgress.done()
     } else {
-      if(!store.state.accessMenu.routerMenu.length && isLoadingMenu) {
+      if(!store.state.accessMenu.routerMenu.length && isLoadingMenu && to.path !== '/404') {
         isLoadingMenu=false;
-        store.dispatch("accessMenu/getAccessMenu")
+        store.dispatch("accessMenu/getAccessMenu");
         store.dispatch("siteSetting/getSetData");
       }
       next()

@@ -55,14 +55,20 @@
         @click.native.prevent="doLogin"
       >登录</el-button>
     </el-form>
+
+    <InitSystemModal v-if='is_init_system_modal'/>
   </div>
 </template>
 
 <script>
 import { validUsername } from "@/utils/validate";
 import { mapState } from "vuex";
+import InitSystemModal from "@/components/init-system-modal";
 export default {
   name: "Login",
+  components: {
+    InitSystemModal
+  },
   data() {
     const validateUsername = (rule, value, callback) => {
       if (!value) {
@@ -95,7 +101,9 @@ export default {
       },
       loading: false,
       passwordType: "password",
-      redirect: undefined
+      redirect: undefined,
+
+      is_init_system_modal:false
     };
   },
   computed: {
@@ -129,6 +137,7 @@ export default {
           this.$store.dispatch("user/doLogin", this.loginForm).then((res) => {
             this.loading = false;
             if(res.error==0){
+              this.is_init_system_modal = true;
               this.$router.push({ path:'/' });
             }
           }).catch(() => {
