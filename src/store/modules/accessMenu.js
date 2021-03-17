@@ -79,8 +79,11 @@ const actions = {
     return new Promise((resolve, reject) => {
       requstTools.get(aipUrl.GET_ACCESS_MENU, requestParams).then(res => {
         if (res.error == 0) {
+          console.log("菜---哈哈哈哈---单",res.data);
           resolve(res.data);
           var accessRouter = routerMenuFilter(res.data.data);
+
+          console.log("菜------单",accessRouter);
           var router_menu = router.options.routes.concat(accessRouter);
           store.commit("accessMenu/MENU_ROUTER", router_menu);
 

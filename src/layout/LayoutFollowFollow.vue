@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "LayoutFollow",
+  name: "LayoutFollowFollow",
   data() {
     return {};
   },

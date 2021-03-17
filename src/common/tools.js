@@ -1,7 +1,6 @@
 import Layout from '@/layout';
 import LayoutFollow from '@/layout/LayoutFollow';
 import router from '@/router';
-import { resolve } from 'upath';
 const _import = require('@/router/_import_' + process.env.NODE_ENV)
 
 export function setToken(token) {
@@ -25,6 +24,7 @@ export function removeUserInfo() {
 }
 
 export function routerMenuFilter(routerData) { //遍历后台传来的路由字符串，转换为组件对象
+  console.log("菜单",routerData);
   var accessedRouters = routerData.filter(route => {
     route.meta = {
       title: route.title,
@@ -33,12 +33,18 @@ export function routerMenuFilter(routerData) { //遍历后台传来的路由字�
       affix: !route.affix? false:true
     }
     if (route.component) {
-      if (route.component === 'Layout') { //Layout组件特殊处理
-        route.component = resolve => require(["@/layout"],resolve)
-      } else if(route.component === 'LayoutFollow'){
-        route.component = resolve => require(["@/layout/LayoutFollow"],resolve)
-      }else{
-        route.component = _import(route.component)
+      switch(route.component){
+        case 'Layout':
+          route.component = resolve => require(["@/layout"],resolve);
+          break;
+        case 'LayoutFollow':
+          route.component = resolve => require(["@/layout/LayoutFollow"],resolve);
+          break;
+        case 'LayoutFollowFollow':
+          route.component = resolve => require(["@/layout/LayoutFollowFollow"],resolve);
+          break;
+        default:
+          route.component = _import(route.component);
       }
     }
     if (!route.redirect) {
