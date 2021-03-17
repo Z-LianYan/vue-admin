@@ -96,6 +96,7 @@ export default {
             Message.success(res.message);
           } else {
             Message.error(res.message);
+            reject(error)
           }
         }).catch(error => {
           reject(error)

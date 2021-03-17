@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import echarts from "echarts";
-require("echarts/theme/macarons"); // echarts theme
+// import echarts from "echarts";
+// require("echarts/theme/macarons"); // echarts theme
 import { debounce } from "@/common/tools";
 
 export default {

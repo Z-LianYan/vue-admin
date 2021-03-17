@@ -65,7 +65,6 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 import { removeToken } from "@/common/tools";
 function optionsParam(){
   return {
@@ -131,9 +130,7 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      token: state => state.user.token
-    })
+    
   },
   watch: {},
   methods: {

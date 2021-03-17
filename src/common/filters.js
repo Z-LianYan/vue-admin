@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import dayjs from 'dayjs';
+// import dayjs from 'dayjs';
 // import currency from 'currency.js';
 
 

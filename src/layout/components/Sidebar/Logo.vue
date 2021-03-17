@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+// import { mapGetters } from "vuex";
 export default {
   name: 'SidebarLogo',
   props: {
@@ -24,7 +24,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["userInfo","site_data"])
+    ...Vuex.mapGetters(["userInfo","site_data"])
   },
   data() {
     return {}

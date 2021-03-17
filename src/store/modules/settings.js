@@ -1,6 +1,6 @@
 import variables from '@/styles/element-variables.scss'
 import defaultSettings from '@/utils/settings'
-import jsCookie from "js-cookie";
+// import jsCookie from "js-cookie";
 const { showSettings, fixedHeader, sidebarLogo } = defaultSettings
 
 const state = {

@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+// import { mapGetters } from "vuex";
 import Breadcrumb from "./Breadcrumb";
 import Hamburger from "./Hamburger";
 
@@ -89,7 +89,7 @@ export default {
     console.log("用户信息",this.userInfo);
   },
   computed: {
-    ...mapGetters(["sidebar", "avatar","userInfo"])
+    ...Vuex.mapGetters(["sidebar", "avatar","userInfo"])
   },
   methods: {
 

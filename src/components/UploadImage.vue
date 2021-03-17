@@ -26,7 +26,7 @@
 
 <script>
 import * as qiniu from "qiniu-js";
-import dayjs from 'dayjs';
+// import dayjs from 'dayjs';
 export default {
   name: "UploadImage",
   props: {

@@ -84,7 +84,7 @@
 </template>
 
 <script>
-import _ from "lodash";
+// import _ from "lodash";
 function ruleForm() {
   return {
     module_id: "",

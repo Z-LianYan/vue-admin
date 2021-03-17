@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+// import { mapGetters } from "vuex";
 import Logo from "./Logo";
 import SidebarItem from "./SidebarItem";
 import variables from "@/styles/variables.scss";
@@ -35,7 +35,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters(["sidebar"]),
+    ...Vuex.mapGetters(["sidebar"]),
     routes() {
       return this.$store.state.accessMenu.routerMenu;
     },

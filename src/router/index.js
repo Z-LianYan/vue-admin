@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import Router from 'vue-router'
-
-Vue.use(Router)
+// import VueRouter from 'vue-router'
+// Vue.use(VueRouter)
+Vue.use(VueRouter)//注册路由
 
 import Login from '@/views/system/login';
 import Error_404 from '@/views/system/404';
@@ -30,7 +30,7 @@ export const constantRoutes = [
   },
 ]
 
-const createRouter = () => new Router({
+const createRouter = () => new VueRouter({
   // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
@@ -45,7 +45,7 @@ const router = createRouter()
 // }
 
 router.selfaddRoutes = function (params){
-  router.matcher = new Router().matcher;
+  router.matcher = new VueRouter().matcher;
   router.addRoutes(params)
 }
 

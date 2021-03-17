@@ -8,6 +8,46 @@
   <!-- <link rel="icon" href="<%= BASE_URL %>favicon.ico"> --><!--根目录下的favicon.ico (BASE_URL->/)-->
   <link rel="icon" type="image/x-icon" href="./favicon.ico">
   <title><%= webpackConfig.name %></title>
+
+  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+  <style>
+    .loading-wrapper{
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 10000;
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #67C23A;
+      font-size: 40px;
+    }
+  </style>
+  
+  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css">
+  
+  <script src="https://cdn.bootcss.com/vuex/3.1.0/vuex.min.js"></script>
+  <script src="https://cdn.bootcss.com/vue-router/3.0.6/vue-router.min.js"></script>
+  <script src="https://cdn.bootcss.com/axios/0.18.1/axios.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/js-cookie/latest/js.cookie.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/dayjs/1.10.3/dayjs.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script><!-- _ -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/screenfull.js/5.0.2/screenfull.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/echarts/4.6.0/echarts.min.js"></script>
+
+
+  <script>
+    onload = function(){
+      document.getElementsByClassName('loading-wrapper')[0].remove()
+    }
+  </script>
+  
+  
 </head>
 
 <body>
@@ -16,7 +56,23 @@
       to continue.</strong>
   </noscript> -->
   <div id="app"></div>
+
+  <div class="loading-wrapper">
+    <i class="fa fa-spinner fa-pulse"></i>
+  </div>
   <!-- built files will be auto injected -->
+  
 </body>
 
+
 </html>
+
+
+
+
+
+
+
+
+
+

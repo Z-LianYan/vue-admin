@@ -61,8 +61,7 @@
 </template>
 
 <script>
-import { validUsername } from "@/utils/validate";
-import { mapState } from "vuex";
+// import { validUsername } from "@/utils/validate";
 import InitSystemModal from "@/components/init-system-modal";
 export default {
   name: "Login",
@@ -106,11 +105,7 @@ export default {
       is_init_system_modal:false
     };
   },
-  computed: {
-    ...mapState({
-      token: state => state.user.token
-    })
-  },
+  computed: {},
   watch: {
     // $route: {
     //   handler: function(route) {
@@ -135,6 +130,7 @@ export default {
         if (valid) {
           this.loading = true;
           this.$store.dispatch("user/doLogin", this.loginForm).then((res) => {
+            
             this.loading = false;
             if(res.error==0){
               this.is_init_system_modal = true;
