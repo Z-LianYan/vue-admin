@@ -24,12 +24,13 @@ module.exports = {
    * In most cases please use '/' !!!
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
-  publicPath: '/',//根域上下文目录
   outputDir: 'dist',//构建输出目录
+  publicPath: '/',//根域上下文目录
   assetsDir: 'public/static',//静态资源目录 (js, css, img, fonts)
   lintOnSave: false, // 是否开启eslint保存检测，有效值：ture | false | 'error'
   productionSourceMap: false,// 是否在构建生产包时生成 sourceMap 文件，false将提高构建速度
   devServer: {
+    // disableHostCheck: true,//解决Invalid Host header （webpack-dev-server出于安全考虑，默认检查hostname，如果hostname不是配置内的就不能访问。）
     port: port,
     open: true,
     overlay: {
